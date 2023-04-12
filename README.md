@@ -10,10 +10,10 @@
 
 ## Backend
 
--Express
--Nodemon
--Mongoose
--Dotenv
+- Express
+- Nodemon
+- Mongoose
+- Dotenv
 
 ## Frontend
 
