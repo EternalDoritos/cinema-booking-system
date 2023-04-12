@@ -10,6 +10,11 @@
 
 ## Backend
 
+-Express
+-Nodemon
+-Mongoose
+-Dotenv
+
 ## Frontend
 
 - React
@@ -20,5 +25,5 @@
 Cinema booking system for Users and System admin.
 
 ## Database
-
+MongoDB
 Postgres.
