@@ -24,6 +24,8 @@ exports.postMovies = asyncHandler(async (req, res) => {
     throw new Error("Movie already exist");
   }
 
+  console.log(req.body);
+
   const movie = await Movie.create({
     title: req.body.title,
     image: req.body.image,
