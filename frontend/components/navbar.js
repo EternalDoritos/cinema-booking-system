@@ -98,8 +98,8 @@ export default function Navbar() {
 
         <div className="hidden md:flex">
           <NavLink to="/GalleryScreen">GALLERY</NavLink>
-          <NavLink to="/UserLogInScreen">Log in</NavLink>
-          <NavLink to="/UserSignUpScreen">Sign up</NavLink>
+          <NavLink to="/UserLogInScreen">LOG IN</NavLink>
+          <NavLink to="/UserSignUpScreen">SIGN UP</NavLink>
         </div>
       </div>
     </nav>

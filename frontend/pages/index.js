@@ -1,16 +1,5 @@
-// const DisplayHome = () => {
-//   return (
-//     <div>
-//       This is the HomeScreen. Click on navbar to navigate around the different
-//       screens
-//     </div>
-//   );
-// };
-
-// export default DisplayHome;
-
-import React, { useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/movie");
@@ -33,47 +22,59 @@ const Slideshow = ({ images }) => {
     setCurrentSlide(currentSlide === totalSlides - 1 ? 0 : currentSlide + 1);
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((currentSlide) =>
+        currentSlide === totalSlides - 1 ? 0 : currentSlide + 1
+      );
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [totalSlides]);
+
   return (
     <div className="relative">
       <img
-        className="w-full h-auto"
+        className="w-full h-full object-cover"
         src={images[currentSlide]}
         alt="slideshow"
       />
       <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
         onClick={handlePrev}
       >
         &#10094;
       </button>
       <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
         onClick={handleNext}
       >
         &#10095;
       </button>
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-800 bg-opacity-50 text-white">
+        <p className="text-center">{`${currentSlide + 1} / ${totalSlides}`}</p>
+      </div>
     </div>
   );
 };
-
 
 const DisplayHome = ({ movies }) => {
   const movieImages = movies.map((movie) => movie.image);
 
   return (
-    
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-white text-center text-4xl pt-5" > Current Movies Screening</h1>
+      <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+        {" "}
+        Current Movies Screening
+      </h1>
       <div className="mt-6 h-70 w-96">
         <Slideshow images={movieImages} />
       </div>
-    <Link href = "/GalleryScreen">
-      <button class="mt-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                        View all Movies
-      </button>
-    </Link>
+      <Link href="/GalleryScreen">
+        <button class="mt-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+          View all Movies
+        </button>
+      </Link>
     </div>
-
   );
 };
 

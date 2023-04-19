@@ -13,26 +13,28 @@ export const getStaticProps = async () => {
 const DisplayGallery = ({ movies }) => {
   return (
     <div>
-      <h1 class="text-white text-center text-4xl pt-5"> Movie List</h1>
-      <div class="mt-8 grid grid-cols-3 gap-10 bg-black">
+      <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+        Movie List
+      </h1>
+      <div className="mt-8 grid grid-cols-3 gap-10 bg-black">
         {movies.map((movie) => (
-          <div key={movie.id} className="bg-gray rounded-lg p-4">
-            <Link href={'/SynopsisScreen'}>
-              <a>
-                <div class="card relative">
-                  <div className="bg-black-300">
-                    <img
-                      className="object-fill h-70 w-96"
-                      src={movie.image}
-                      alt={movie.title}
-                    />
-                  </div>
-                  <div class="m-4">
-                    <h3 class="text-lg font-bold mb-2">{movie.title}</h3>
-                    <span class="text-sm">{movie.description}</span>
-                  </div>
+          <div key={movie.id} className="bg-gray-800 rounded-lg p-4 ">
+            <Link href={"/SynopsisScreen"}>
+              <div className="card relative">
+                <div className="bg-black-300">
+                  <img
+                    className="object-cover h-70 w-96 "
+                    src={movie.image}
+                    alt={movie.title}
+                  />
                 </div>
-              </a>
+                <div className="m-4">
+                  <h3 className="text-lg font-bold mb-2 text-white">
+                    {movie.title}
+                  </h3>
+                  <p className="text-sm text-gray-400">{movie.description}</p>
+                </div>
+              </div>
             </Link>
           </div>
         ))}
