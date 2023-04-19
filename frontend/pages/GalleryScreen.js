@@ -1,4 +1,6 @@
-import Head from "next/head";
+import React from "react";
+import Link from "next/link";
+
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/movie");
   const data = await res.json();
@@ -13,23 +15,25 @@ const DisplayGallery = ({ movies }) => {
     <div>
       <h1 class="text-white text-center text-4xl pt-5"> Movie List</h1>
       <div class="mt-8 grid grid-cols-3 gap-10 bg-black">
-        {movies.map((movies) => (
-          <div key={movies.id} className="bg-gray rounded-lg p-4">
-            <a>
-              <div class="card">
-                <div className="bg-black-300">
-                  <img
-                    className="object-fill h-70 w-96"
-                    src={movies.image}
-                    alt={movies.title}
-                  />
+        {movies.map((movie) => (
+          <div key={movie.id} className="bg-gray rounded-lg p-4">
+            <Link href={'/SynopsisScreen'}>
+              <a>
+                <div class="card relative">
+                  <div className="bg-black-300">
+                    <img
+                      className="object-fill h-70 w-96"
+                      src={movie.image}
+                      alt={movie.title}
+                    />
+                  </div>
+                  <div class="m-4">
+                    <h3 class="text-lg font-bold mb-2">{movie.title}</h3>
+                    <span class="text-sm">{movie.description}</span>
+                  </div>
                 </div>
-                <div class="m-4">
-                  <h3 class="text-lg font-bold mb-2">{movies.title}</h3>
-                  <span class="text-sm">{movies.description}</span>
-                </div>
-              </div>
-            </a>
+              </a>
+            </Link>
           </div>
         ))}
       </div>
