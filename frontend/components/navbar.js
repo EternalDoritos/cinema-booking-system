@@ -34,7 +34,7 @@ function MobileNav({ open, setOpen }) {
         >
           Gallery
         </a>
-        <a
+        {/* <a
           className="text-xl font-medium my-4"
           href="/UserLogInScreen"
           onClick={() =>
@@ -44,17 +44,17 @@ function MobileNav({ open, setOpen }) {
           }
         >
           Log in
-        </a>
+        </a> */}
         <a
-          className="text-xl font-normal my-4"
-          href="/UserSignUpScreen"
+          className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
+          href="/UserLogInScreen"
           onClick={() =>
             setTimeout(() => {
               setOpen(!open);
             }, 100)
           }
         >
-          Sign up
+          Log in
         </a>
       </div>
     </div>
@@ -99,7 +99,6 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <NavLink to="/GalleryScreen">GALLERY</NavLink>
           <NavLink to="/UserLogInScreen">LOG IN</NavLink>
-          <NavLink to="/UserSignUpScreen">SIGN UP</NavLink>
         </div>
       </div>
     </nav>

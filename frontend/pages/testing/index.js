@@ -21,7 +21,7 @@ const DisplayGallery = ({ movies }) => {
           <div key={movie.id} className="bg-gray-800 rounded-lg p-4 ">
             <Link href={`/testing?id=${movie._id}`}>
               <div className="card relative">
-                <div className="bg-black-300">
+                <div className="bg-black-300 flex items-center justify-center">
                   <img
                     className="object-cover h-full w-full lg:h-70 xl:w-96"
                     src={movie.image}
