@@ -63,6 +63,12 @@ function MobileNav({ open, setOpen }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // function handleLogin() {
+  //   // perform login logic
+  //   setIsLoggedIn(true);
+  // }
   return (
     <nav className="flex filter drop-shadow-md bg-black px-4 py-4 h-20 items-center border-b-2 border-amber-300">
       <MobileNav open={open} setOpen={setOpen} />
@@ -98,6 +104,11 @@ export default function Navbar() {
 
         <div className="hidden md:flex">
           <NavLink to="/GalleryScreen">GALLERY</NavLink>
+          {/* {isLoggedIn ? (
+            <img src="/user-icon.png" alt="User Icon" />
+          ) : (
+            <button onClick={handleLogin}>Log In</button>
+          )} */}
           <NavLink to="/UserLogInScreen">LOG IN</NavLink>
         </div>
       </div>
