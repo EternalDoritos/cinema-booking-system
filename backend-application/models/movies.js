@@ -15,6 +15,10 @@ const movieSchema = new Schema({
     type: String,
     required: true,
   },
+  poster: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Movie", movieSchema);

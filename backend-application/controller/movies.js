@@ -30,6 +30,7 @@ exports.postMovies = asyncHandler(async (req, res) => {
     title: req.body.title,
     image: req.body.image,
     description: req.body.description,
+    poster: req.body.poster,
   });
 
   res.status(200).json(movie);
