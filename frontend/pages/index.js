@@ -114,7 +114,7 @@ const Slideshow = ({ images }) => {
   }, [totalSlides]);
 
   // Define a class to set the height and width of the images
-  const imageClass = "h-80 w-full object-cover";
+  const imageClass = "h-full w-full object-cover";
 
   return (
     <div className="relative">
@@ -151,11 +151,11 @@ const DisplayHome = ({ movies }) => {
         {" "}
         Current Movies Screening
       </h1>
-      <div className="mt-6 h-110 w-110 object-cover">
+      <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
         <Slideshow images={movieImages} />
       </div>
       <Link href="/GalleryScreen">
-        <button class="mt-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+        <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
           View all Movies
         </button>
       </Link>
