@@ -17,12 +17,13 @@ app.use(cors());
 app.get("/", function (req, res, next) {});
 //importing routes
 const movieRoute = require("./routes/movies");
-
+const cinemaRoute = require("./routes/cinema");
 //middleware to handle and catch errors
 app.use(errorHandler);
 
 //setting the route naming
 app.use("/movie", movieRoute);
+app.use("/cinema", cinemaRoute);
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);

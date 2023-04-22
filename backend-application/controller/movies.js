@@ -35,3 +35,13 @@ exports.postMovies = asyncHandler(async (req, res) => {
 
   res.status(200).json(movie);
 });
+
+//@desc   GET a single movie based on id
+//@route  POST /movie/:movieId
+//@access public
+
+exports.getMovieId = asyncHandler(async (req, res) => {
+  const movieId = req.params.movieId;
+  const movie = await Movie.find({ _id: movieId });
+  res.status(200).json(movie);
+});

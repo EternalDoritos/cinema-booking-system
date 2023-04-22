@@ -10,4 +10,6 @@ router.get("/", movieController.getMovies);
 //movie => POST
 router.post("/", movieController.postMovies);
 
+//movie/:movieId => GET
+router.get("/:movieId", movieController.getMovieId);
 module.exports = router;
