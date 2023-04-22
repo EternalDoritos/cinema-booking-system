@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import MovieBookingPage from "./LocationTiming";
 
 const DisplaySynopsis = () => {
   const router = useRouter();
@@ -41,12 +42,7 @@ const DisplaySynopsis = () => {
         </div>
       </div>
 
-      {/*Removing this next time after implementing Location/Timing to click  */}
-      <Link href = {'SeatingScreen'}>
-      <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-        Proceed to Seating Arrangement
-      </button>
-      </Link>
+      <MovieBookingPage/>
       </>
     );
   }
