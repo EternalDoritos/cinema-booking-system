@@ -273,6 +273,7 @@
 
 // another test
 import { useState } from "react";
+import Link from "next/link";
 
 export default function CinemaSeatingPlan() {
   const [seats, setSeats] = useState([
@@ -370,6 +371,11 @@ export default function CinemaSeatingPlan() {
               </p>
             </div>
           )}
+        <Link href = {'/PaymentScreen'}>
+        <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+        Make Payment
+        </button>
+        </Link>
         </div>
       </div>
     </main>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -26,7 +27,22 @@ const DisplaySynopsis = () => {
   else {
     return (
       <>
+      <div className = "bg-gray-800 grid grid-cols-2">
+        <div className = "ml-20 object-contain h-auto w-96">
         <img src={movie[0].image}></img>
+        </div>
+        <div>
+        <h1 className="text-sm text-gray-400">{movie[0].title}</h1>
+        <p className="text-sm text-gray-400">{movie[0].description}</p>
+        </div>
+      </div>
+
+      {/*Removing this next time after implementing Location/Timing to click  */}
+      <Link href = {'SeatingScreen'}>
+      <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+        Proceed to Seating Arrangement
+      </button>
+      </Link>
       </>
     );
   }
