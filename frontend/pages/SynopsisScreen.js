@@ -32,7 +32,7 @@ const DisplaySynopsis = () => {
         {/* <div className = "object-contain xl:h-4/6 xl:w-4/6 lg:h-auto lg:w-96 md:w-3/4">
         <img src={movie[0].image}></img>
         </div> */}
-        <div className="object-contain xl:h-auto xl:w-4/6 lg:h-auto lg:w-96 md:w-3/4 mx-auto my-auto">
+        <div className="object-contain xl:h-auto xl:w-3/6 lg:h-auto lg:w-96 md:w-3/4 mx-auto my-auto">
           <img src={movie[0].image} />
         </div>
         <div>
