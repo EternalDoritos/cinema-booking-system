@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
 
 const Listing = require("../models/listing");
+const Cinema = require("../models/cinema");
 
 //@desc     GET all the current listings of the movie
 //@route    GET/listing/:id
@@ -27,8 +28,13 @@ exports.postListing = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("There is already a movie screening at selected time slot");
   }
+  const maxSeat = await Cinema.find(
+    { _id: req.body.cinema },
+    { _id: 0, maxSeating: 1 }
+  );
 
-  const seating = new Array(15).fill(false);
+  console.log(maxSeat);
+  const seating = new Array(maxSeat[0].maxSeating).fill(false); //change 15 to cinema quantity
   const listing = await Listing.create({
     movie: req.body.movie,
     cinema: req.body.cinema,
