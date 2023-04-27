@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router"; // used for redirecting
 import Image from "next/image";
 
-const DisplayPaymentSuccess = () => {
+const DisplayPurchaseSuccess = () => {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => {
@@ -32,4 +32,4 @@ const DisplayPaymentSuccess = () => {
   );
 };
 
-export default DisplayPaymentSuccess;
+export default DisplayPurchaseSuccess;

@@ -369,14 +369,13 @@ export default function CinemaSeatingPlan() {
                 Total price: ${" "}
                 {seats.filter((seat) => seat.status === "selected").length * 10}
               </p>
-              <Link href = {'/PaymentScreen'}>
-              <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-              Make Payment
-              </button>
+              <Link href={"/PurchaseScreen"}>
+                <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                  Make Payment
+                </button>
               </Link>
             </div>
           )}
-
         </div>
       </div>
     </main>

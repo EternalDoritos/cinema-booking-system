@@ -18,7 +18,10 @@ const DisplayGallery = ({ movies }) => {
       </h1>
       <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
         {movies.map((movie) => (
-          <div key={movie.id} className="bg-gray-800 rounded-lg p-4">
+          <div
+            key={movie.id}
+            className="bg-gray-800 rounded-lg p-4 cursor-pointer"
+          >
             <Link href={`/SynopsisScreen?movieId=${movie._id}`}>
               <div className="card relative">
                 <div className="bg-black-300 flex items-center justify-center">

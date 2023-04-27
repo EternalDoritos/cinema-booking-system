@@ -16,11 +16,18 @@ const MovieBookingPage = () => {
           <table className="w-full divide-y">
             <thead>
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+                >
                   Locations
                 </th>
                 {timings.map((timing) => (
-                  <th key={timing} scope="col" className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                  <th
+                    key={timing}
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+                  >
                     {timing}
                   </th>
                 ))}
@@ -29,14 +36,16 @@ const MovieBookingPage = () => {
             <tbody>
               {locations.map((location) => (
                 <tr key={location}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{location}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    {location}
+                  </td>
                   {timings.map((timing) => (
                     <td key={timing} className="px-6 py-4 whitespace-nowrap">
-                    <Link href = {"/SeatingScreen"}>
-                      <button className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        Book Now
-                      </button>
-                     </Link>
+                      <Link href={"/SeatingScreen"}>
+                        <button className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                          Book Now
+                        </button>
+                      </Link>
                     </td>
                   ))}
                 </tr>
