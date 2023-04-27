@@ -385,3 +385,4 @@ export default function CinemaSeatingPlan() {
     </main>
   );
 }
+// missing food and drinks, ticket type (e.g student), photo id verification
