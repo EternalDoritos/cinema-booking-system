@@ -274,6 +274,7 @@
 // another test
 import { useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function CinemaSeatingPlan() {
   const [seats, setSeats] = useState([
@@ -310,6 +311,9 @@ export default function CinemaSeatingPlan() {
 
   return (
     <main className="container mx-auto mt-4">
+      <Head>
+        <title>Seating Plan</title>
+      </Head>
       <div className="flex flex-col items-center">
         <div className="h-20 w-full bg-gray-800 flex items-center justify-center text-white text-2xl font-bold mb-4">
           Screen

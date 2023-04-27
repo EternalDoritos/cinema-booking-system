@@ -5,7 +5,7 @@ export default function DisplayUserLogIn() {
   return (
     <div className=" bg-black flex flex-col justify-center py-6 sm:px-6 lg:px-8">
       <Head>
-        <title>Login</title>
+        <title>Log in</title>
       </Head>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

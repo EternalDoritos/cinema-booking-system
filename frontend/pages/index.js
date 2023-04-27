@@ -80,6 +80,7 @@
 
 // export default DisplayHome;
 
+import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -118,6 +119,9 @@ const Slideshow = ({ images }) => {
 
   return (
     <div className="relative">
+      <Head>
+        <title>Home</title>
+      </Head>
       <img
         className={imageClass} // Apply the class to the <img> tag
         src={images[currentSlide]}

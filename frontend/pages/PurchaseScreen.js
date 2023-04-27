@@ -41,7 +41,7 @@ export default function DisplayPurchase() {
   return (
     <div className="bg-black flex flex-col justify-center py-6 sm:px-6 lg:px-8">
       <Head>
-        <title>Purchase Page</title>
+        <title>Purchase</title>
       </Head>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="mt-6 text-center text-3xl font-extrabold text-white">

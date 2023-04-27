@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 import "tailwindcss/tailwind.css";
 import Link from "next/link";
@@ -8,6 +9,9 @@ const timings = ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"];
 const MovieBookingPage = () => {
   return (
     <div className="min-h-screen ">
+      <Head>
+        <title>Movie Booking</title>
+      </Head>
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold">Movie Showtimes</h1>
       </div>

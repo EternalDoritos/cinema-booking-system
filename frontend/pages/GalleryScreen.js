@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/movie");
@@ -13,6 +14,9 @@ export const getStaticProps = async () => {
 const DisplayGallery = ({ movies }) => {
   return (
     <div>
+      <Head>
+        <title>Movie List</title>
+      </Head>
       <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
         Movie List
       </h1>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/router"; // used for redirecting
 import Image from "next/image";
+import Head from "next/head";
 
 const DisplayPurchaseSuccess = () => {
   const router = useRouter();
@@ -15,6 +16,9 @@ const DisplayPurchaseSuccess = () => {
 
   return (
     <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <Head>
+        <title>Purchase Success</title>
+      </Head>
       <div className="flex flex-col items-center ">
         <Image src="/404-tick.png" width={128} height={94} />
         <h1 className="mt-6 text-center text-3xl font-extrabold text-white uppercase">
