@@ -45,3 +45,21 @@ exports.getMovieId = asyncHandler(async (req, res) => {
   const movie = await Movie.find({ _id: movieId });
   res.status(200).json(movie);
 });
+
+exports.postReview = asyncHandler(async (req, res) => {
+  const movie = await Movie.findByIdAndUpdate(
+    {
+      _id: req.body.movie,
+    },
+    {
+      $push: {
+        reviewsAndRatings: {
+          name: req.body.name,
+          reviews: req.body.reviews,
+          ratings: req.body.ratings,
+        },
+      },
+    }
+  );
+  res.status(200).json(movie);
+});

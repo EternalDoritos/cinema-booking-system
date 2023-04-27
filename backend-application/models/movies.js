@@ -19,6 +19,23 @@ const movieSchema = new Schema({
     type: String,
     required: true,
   },
+  reviewsAndRatings: [
+    {
+      name: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      reviews: {
+        type: String,
+        required: true,
+      },
+      ratings: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Movie", movieSchema);
