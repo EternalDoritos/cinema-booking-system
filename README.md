@@ -25,5 +25,5 @@
 Cinema booking system for Users and System admin.
 
 ## Database
-MongoDB
-Postgres.
+- MongoDB
+- Postgres.
