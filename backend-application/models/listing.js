@@ -19,7 +19,7 @@ const listingSchema = new Schema({
     },
   ],
   date: {
-    type: String,
+    type: Date,
     required: true,
   },
   time: {

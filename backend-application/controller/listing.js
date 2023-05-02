@@ -33,7 +33,6 @@ exports.postListing = asyncHandler(async (req, res) => {
     { _id: 0, maxSeating: 1 }
   );
 
-  console.log(maxSeat);
   const seating = new Array(maxSeat[0].maxSeating).fill(false); //change 15 to cinema quantity
   const listing = await Listing.create({
     movie: req.body.movie,

@@ -20,6 +20,7 @@ const movieRoute = require("./routes/movies");
 const cinemaRoute = require("./routes/cinema");
 const listingRoute = require("./routes/listing");
 const authRoute = require("./routes/auth");
+const adminRoute = require("./routes/admin");
 //middleware to handle and catch errors
 app.use(errorHandler);
 
@@ -28,6 +29,7 @@ app.use("/movie", movieRoute);
 app.use("/cinema", cinemaRoute);
 app.use("/listing", listingRoute);
 app.use("/auth", authRoute);
+app.use("/admin", adminRoute);
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
