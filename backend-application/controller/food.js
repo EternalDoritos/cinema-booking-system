@@ -26,9 +26,9 @@ exports.postFoods = asyncHandler(async (req, res) => {
 
     const food = await Food.create({
         name: req.body.name,
-        description: req.body.description,
+        //description: req.body.description,
         price: req.body.price,
-        image: req.body.image,
+        //image: req.body.image,
     });
 
     res.status(200).json(food);
