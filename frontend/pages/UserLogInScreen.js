@@ -85,6 +85,22 @@ export default function DisplayUserLogIn() {
             <div>
               <button
                 type="submit"
+                onClick={() => {
+                  //send a post request, inside body that holds username and pw,
+                  //send over, be does check and return result,
+                  //Declare context
+                  /*if(400){
+                    display error messgae on log in (either pw/email)
+                  }
+                  else if(200){
+                    -receive user object and save it as a context,
+                    -if null, redirect to log in, else
+                    -check userType from context,
+                    -route to home page.
+                    -route over to relevant user pages.
+                  }
+                  */
+                }}
                 className="w-full flex justify-center py-2 px-4 border border-transparent  shadow-sm text-sm  bg-amber-300 hover:bg-amber-500 text-black font-bold rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Log in
