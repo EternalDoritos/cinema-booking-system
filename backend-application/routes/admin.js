@@ -5,6 +5,7 @@ const router = express.Router();
 const adminController = require("../controller/admin");
 
 //admin -> POST
-router.post("/report", adminController.summaryReport);
+router.post("/reportMovie", adminController.summaryReportMovie);
+router.post("/reportDate", adminController.summaryReportDate);
 
 module.exports = router;
