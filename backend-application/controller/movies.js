@@ -9,7 +9,7 @@ const Movie = require("../models/movies");
 //@access   public
 exports.getMovies = asyncHandler(async (req, res) => {
   const movies = await Movie.find();
-  res.json(movies);
+  res.status(200).json(movies);
 });
 
 //@desc     POST a movie
@@ -37,7 +37,7 @@ exports.postMovies = asyncHandler(async (req, res) => {
 });
 
 //@desc   GET a single movie based on id
-//@route  POST /movie/:movieId
+//@route  GET /movie/:movieId
 //@access public
 
 exports.getMovieId = asyncHandler(async (req, res) => {
@@ -46,20 +46,48 @@ exports.getMovieId = asyncHandler(async (req, res) => {
   res.status(200).json(movie);
 });
 
+//@desc   PATCH a single movie
+//@route  PATCH /movie
+//@access private
+
+//not tested yet
+exports.patchMovie = asyncHandler(async (req, res) => {
+  const movie = await Movie.findByIdAndUpdate(
+    { _id: req.body.id },
+    {
+      title: req.body.title,
+      image: req.body.image,
+      description: req.body.description,
+      poster: req.body.poster,
+    }
+  );
+
+  res.status(200), json(movie);
+});
+
+//@desc   DELETE a single movie
+//@route  DELETE /movie
+//@access private
+
+//not tested yet
+exports.deleteMovie = asyncHandler(async (req, res) => {
+  const movie = await Movie.findByIdAndDelete({ _id: req.body.id });
+
+  res.status(200).json(movie);
+});
+
+//not tested yet
 exports.postReview = asyncHandler(async (req, res) => {
   const movie = await Movie.findByIdAndUpdate(
-    {
-      _id: req.body.movie,
-    },
+    { _id: req.body.id },
     {
       $push: {
         reviewsAndRatings: {
           name: req.body.name,
           reviews: req.body.reviews,
-          ratings: req.body.ratings,
+          rating: req.body.rating,
         },
       },
     }
   );
-  res.status(200).json(movie);
 });
