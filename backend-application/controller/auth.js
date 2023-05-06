@@ -4,6 +4,10 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find().select({ _id: 0, username: 1 });
+  res.status(200).json(users);
+};
 //@desc     Register a new user
 //@route    POST/register
 //@access   public
