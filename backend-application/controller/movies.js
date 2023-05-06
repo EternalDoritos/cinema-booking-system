@@ -52,7 +52,6 @@ exports.getMovieId = asyncHandler(async (req, res) => {
 //@route  PATCH /movie
 //@access private
 
-//not tested yet
 exports.patchMovie = asyncHandler(async (req, res) => {
   const movie = await Movie.findByIdAndUpdate(
     { _id: req.body.id },
@@ -64,14 +63,13 @@ exports.patchMovie = asyncHandler(async (req, res) => {
     }
   );
 
-  res.status(200), json(movie);
+  res.status(200).json(movie);
 });
 
 //@desc   DELETE a single movie
 //@route  DELETE /movie
 //@access private
 
-//not tested yet
 exports.deleteMovie = asyncHandler(async (req, res) => {
   const movie = await Movie.findByIdAndDelete({ _id: req.body.id });
 
