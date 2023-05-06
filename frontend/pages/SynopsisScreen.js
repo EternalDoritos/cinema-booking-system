@@ -50,25 +50,28 @@ const DisplaySynopsis = () => {
 
         <MovieBookingPage />
         <div className="mt-8 border-t-2 border-gray-600 pt-8">
-        <h2 className="text-2xl font-semibold text-gray-200">
-          Reviews and Ratings
-        </h2>
-        <div className="mt-4">
-          {movie[0].reviewsAndRatings.map((review) => (
-            <div key={review._id} className="border rounded-lg p-4 mt-4">
-              <p className="text-gray-200">
-                <span className="font-semibold">Name:</span> {review.name}
-              </p>
-              <p className="text-gray-200">
-                <span className="font-semibold">Review:</span> {review.reviews}
-              </p>
-              <p className="text-gray-200">
-                <span className="font-semibold">Rating:</span> {review.ratings}
-              </p>
-            </div>
-          ))}
+          <h2 className="text-2xl font-semibold text-gray-200">
+            Reviews and Ratings
+          </h2>
+          <div className="mt-4">
+            {movie[0].reviewsAndRatings.map((review) => (
+              <div key={review._id} className="border rounded-lg p-4 mt-4">
+                <p className="text-gray-200">
+                  <span className="font-semibold">Name:</span>{" "}
+                  {review.name.username}
+                </p>
+                <p className="text-gray-200">
+                  <span className="font-semibold">Review:</span>{" "}
+                  {review.reviews}
+                </p>
+                <p className="text-gray-200">
+                  <span className="font-semibold">Rating:</span>{" "}
+                  {review.ratings}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       </>
     );
   }

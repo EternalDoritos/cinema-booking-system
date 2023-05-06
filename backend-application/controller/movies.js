@@ -42,7 +42,9 @@ exports.postMovies = asyncHandler(async (req, res) => {
 
 exports.getMovieId = asyncHandler(async (req, res) => {
   const movieId = req.params.movieId;
-  const movie = await Movie.find({ _id: movieId });
+  const movie = await Movie.find({ _id: movieId }).populate(
+    "reviewsAndRatings.name"
+  );
   res.status(200).json(movie);
 });
 
