@@ -85,7 +85,7 @@ exports.postReview = asyncHandler(async (req, res) => {
         reviewsAndRatings: {
           name: req.body.name,
           reviews: req.body.reviews,
-          rating: req.body.rating,
+          ratings: req.body.ratings,
         },
       },
     }
