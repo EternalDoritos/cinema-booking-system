@@ -14,7 +14,7 @@ const ManagerScreen = () => {
       <div>
         <ul className="m-5 text-center ">
           <li>
-            <Link legacyBehavior href="/managerComponents/report">
+            <Link legacyBehavior href="/managerComponents/report/report">
               <a className="text-center font-bold text-2xl">
                 {" "}
                 Generate Sales Report{" "}
@@ -23,7 +23,7 @@ const ManagerScreen = () => {
           </li>
 
           <li>
-            <Link legacyBehavior href="/managerComponents/editMovie">
+            <Link legacyBehavior href="/managerComponents/movie/editMovie">
               <a className="text-center font-bold text-2xl  p-2 rounded">
                 {" "}
                 Edit Movie Details{" "}
@@ -31,7 +31,7 @@ const ManagerScreen = () => {
             </Link>
           </li>
           <li>
-            <Link legacyBehavior href="/managerComponents/editFood">
+            <Link legacyBehavior href="/managerComponents/food/editFood">
               <a className="text-center font-bold text-2xl  p-2 rounded">
                 {" "}
                 Edit Food Details{" "}
