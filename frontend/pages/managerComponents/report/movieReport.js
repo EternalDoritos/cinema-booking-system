@@ -11,7 +11,8 @@ function DisplayReport({ report }) {
         <div className="m-4 text-xl">
           {movies.map((ele) => (
             <p key={Math.random()} className="text-center">
-              Location: {ele.location}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Time:
+              Location: {ele.location}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date:
+              {ele.movieDate}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Time:
               {ele.movieTime}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Revenue:{ele.revenue}
             </p>
           ))}

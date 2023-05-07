@@ -25,9 +25,12 @@ exports.summaryReportMovie = async (req, res) => {
     });
     grandTotalMovie += revenue;
 
+    const updatedDate = `${movies.date.getDate()}-${
+      movies.date.getMonth() + 1
+    }-${movies.date.getFullYear()}`;
     const movieDetail = {
       movieName: movies.movie.name,
-      movieDate: movies.date,
+      movieDate: updatedDate,
       movieTime: movies.time,
       location: movies.cinema.location,
       revenue: revenue,
