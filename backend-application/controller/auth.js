@@ -4,21 +4,6 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
-//@desc     View all users
-//@route    GET/getUserList
-//@access   public
-
-exports.getAllUsers = async (req, res) => {
-  const users = await User.find().select({
-    _id: 1,
-    username: 1,
-    userType: 1,
-    isActive: 1,
-  });
-  // const users = await User.find().select({ _id: 0, username: 1 });
-  res.status(200).json(users);
-};
-
 //@desc     Register a new user
 //@route    POST/register
 //@access   public
@@ -56,10 +41,101 @@ exports.register = async (req, res) => {
       );
   });
 };
-//each controller, is tagged to something specific, anything users.
-//user.findbyId and update.
-//user.auth,
 
+//@desc     Get all users
+//@route    GET/getUsers
+//@access   public
+
+exports.getUsers = async (req, res) => {
+  const users = await User.find();
+  // const users = await User.find().select({ _id: 0, username: 1 });
+  res.status(200).json(users);
+};
+
+//@desc     Edit user
+//@route    GET/editUser
+//@access   public
+
+exports.editUser = async (req, res) => {
+  const { id } = req.params;
+  const { username, email, password } = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { username, email, password },
+      { new: true, runValidators: true, context: "query" }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
+
+//@desc     Get user by ID
+//@route    PUT/getUserById
+//@access   public
+
+exports.getUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+};
+
+//@desc     Suspend user access by ID
+//@route    PUT/suspendUserAccess
+//@access   public
+
+exports.suspendUserAccess = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { isActive: false },
+      { new: true, runValidators: true, context: "query" }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      message: "User access suspended successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
+
+//@desc     Grant user access by ID
+//@route    PUT/suspendUser
+//@access   public
+
+exports.grantUserAccess = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { isActive: true },
+      { new: true, runValidators: true, context: "query" }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "User access granted successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
 //@desc     Check user for log in credentials
 //@route    POST/login
 //@access   public
