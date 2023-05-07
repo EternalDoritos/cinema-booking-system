@@ -18,6 +18,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  customerType: {
+    type: String,
+  },
+  isActive: {
+    type: Boolean,
+    required: true,
+  },
   loyaltyPoints: Number,
 });
 

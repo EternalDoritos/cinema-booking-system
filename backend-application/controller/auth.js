@@ -4,10 +4,21 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
+//@desc     View all users
+//@route    GET/getUserList
+//@access   public
+
 exports.getAllUsers = async (req, res) => {
-  const users = await User.find().select({ _id: 0, username: 1 });
+  const users = await User.find().select({
+    _id: 1,
+    username: 1,
+    userType: 1,
+    isActive: 1,
+  });
+  // const users = await User.find().select({ _id: 0, username: 1 });
   res.status(200).json(users);
 };
+
 //@desc     Register a new user
 //@route    POST/register
 //@access   public
@@ -45,6 +56,9 @@ exports.register = async (req, res) => {
       );
   });
 };
+//each controller, is tagged to something specific, anything users.
+//user.findbyId and update.
+//user.auth,
 
 //@desc     Check user for log in credentials
 //@route    POST/login

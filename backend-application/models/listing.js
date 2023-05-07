@@ -26,6 +26,9 @@ const listingSchema = new Schema({
     type: Number,
     required: true,
   },
+  /*student:{
+    []
+  }*/
 });
 
 module.exports = mongoose.model("Listing", listingSchema);
