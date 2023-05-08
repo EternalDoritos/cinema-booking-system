@@ -30,7 +30,9 @@ const EditMove = ({ movies }) => {
   };
 
   const updateMovie = () => {
-    router.push(`/managerComponents/updateMovie?movieId=${movieIdUpdate}`);
+    router.push(
+      `/managerComponents/movie/updateMovie?movieId=${movieIdUpdate}`
+    );
   };
 
   const deleteMovie = async () => {
