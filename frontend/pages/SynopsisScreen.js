@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MovieBookingPage from "./LocationTiming";
+import EditReview from "./LeaveReview";
 
 const DisplaySynopsis = () => {
   const router = useRouter();
@@ -19,6 +20,8 @@ const DisplaySynopsis = () => {
         console.log(err);
       });
   }, [router.isReady, !movie]);
+
+
   if (!movie)
     return (
       <>
@@ -58,7 +61,7 @@ const DisplaySynopsis = () => {
               <div key={review._id} className="border rounded-lg p-4 mt-4">
                 <p className="text-gray-200">
                   <span className="font-semibold">Name:</span>{" "}
-                  {review.name.username}
+                  {/* {review.name.username} */}
                 </p>
                 <p className="text-gray-200">
                   <span className="font-semibold">Review:</span>{" "}
@@ -72,6 +75,8 @@ const DisplaySynopsis = () => {
             ))}
           </div>
         </div>
+        
+        <EditReview/>
       </>
     );
   }
