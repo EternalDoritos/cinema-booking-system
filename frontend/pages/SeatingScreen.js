@@ -373,11 +373,20 @@ export default function CinemaSeatingPlan() {
                 Total price: ${" "}
                 {seats.filter((seat) => seat.status === "selected").length * 10}
               </p>
-              <Link href={"/PurchaseScreen"}>
-                <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                  Make Payment
-                </button>
-              </Link>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                
+                <Link href={"/PurchaseScreen"}>
+                  <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                    Make Payment
+                  </button>
+                </Link>
+                {/* redirect to food purchasing page */}
+                <Link href={"/purchaseFood"}>
+                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
+                    add food and drink
+                  </button>
+                </Link>
+              </div>
             </div>
           )}
         </div>
