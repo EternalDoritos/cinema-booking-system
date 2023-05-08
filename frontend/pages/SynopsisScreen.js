@@ -19,8 +19,7 @@ const DisplaySynopsis = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [router.isReady, !movie]);
-
+  }, [router.isReady, !movie, movie]);
 
   if (!movie)
     return (
@@ -48,15 +47,44 @@ const DisplaySynopsis = () => {
             <p className="xl:text-4xl sm:text-2xl text-gray-200">
               {movie[0].description}
             </p>
+            <h1 className="mt-4 xl:text-4xl md:text-2xl underline underline-offset-1 text-gray-200">
+              Trailer
+            </h1>
+            <div
+              className="mt-2 relative h-0"
+              style={{ paddingBottom: "56.25%" }}
+            >
+              <iframe
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                src={movie[0].trailer}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+
+            {/* <iframe
+              width="900"
+              height="500"
+              src={movie[0].trailer}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>  */}
           </div>
         </div>
 
         <MovieBookingPage />
+
         <div className="mt-8 border-t-2 border-gray-600 pt-8">
-          <h2 className="text-2xl font-semibold text-gray-200">
-            Reviews and Ratings
-          </h2>
-          <div className="mt-4">
+          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold">
+              GoldenRizz Club Member's Reviews
+            </h1>
+          </div>
+          <EditReview />
+          <div className="mt-4 w-full md:w-3/4 mx-auto">
             {movie[0].reviewsAndRatings.map((review) => (
               <div key={review._id} className="border rounded-lg p-4 mt-4">
                 <p className="text-gray-200">
@@ -75,8 +103,6 @@ const DisplaySynopsis = () => {
             ))}
           </div>
         </div>
-        
-        <EditReview/>
       </>
     );
   }

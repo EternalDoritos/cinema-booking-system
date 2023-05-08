@@ -8,7 +8,8 @@ const timings = ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"];
 
 const MovieBookingPage = () => {
   return (
-    <div className="min-h-screen ">
+    // <div className="min-h-screen ">
+    <div>
       <Head>
         <title>Movie Booking</title>
       </Head>
