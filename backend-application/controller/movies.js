@@ -31,6 +31,7 @@ exports.postMovies = asyncHandler(async (req, res) => {
     image: req.body.image,
     description: req.body.description,
     poster: req.body.poster,
+    trailer: req.body.trailer,
   });
 
   res.status(200).json(movie);
@@ -60,6 +61,7 @@ exports.patchMovie = asyncHandler(async (req, res) => {
       image: req.body.image,
       description: req.body.description,
       poster: req.body.poster,
+      trailer: req.body.trailer,
     }
   );
 
@@ -76,7 +78,9 @@ exports.deleteMovie = asyncHandler(async (req, res) => {
   res.status(200).json(movie);
 });
 
-//not tested yet
+//@desc   PATCH comments into the movie
+//@route  /reviews
+//@access private
 exports.postReview = asyncHandler(async (req, res) => {
   const movie = await Movie.findByIdAndUpdate(
     { _id: req.body.id },

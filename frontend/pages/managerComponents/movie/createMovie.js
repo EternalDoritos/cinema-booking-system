@@ -7,6 +7,7 @@ const CreateMovie = () => {
   const [image, setImage] = useState("");
   const [desc, setDesc] = useState("");
   const [poster, setPoster] = useState("");
+  const [trailer, setTrailer] = useState("");
   const router = useRouter();
 
   const titleChange = (e) => {
@@ -24,6 +25,10 @@ const CreateMovie = () => {
     setPoster(e.target.value);
   };
 
+  const trailerChange = (e) => {
+    setTrailer(e.target.value);
+  };
+
   const createMovie = async () => {
     //title, image, description,poster
     const createMovie = await fetch("http://localhost:5000/movie", {
@@ -37,6 +42,7 @@ const CreateMovie = () => {
         image: image,
         description: desc,
         poster: poster,
+        trailer: trailer,
       }),
     });
     if (createMovie.status === 200) {
@@ -97,6 +103,16 @@ const CreateMovie = () => {
               value={poster}
               className="text-black"
               onChange={posterChange}
+            ></input>
+          </div>
+          <div className="m-4 text-xl ">
+            <label for="trailer">Movie Trailer: </label>
+            <input
+              type="text"
+              size={40}
+              value={trailer}
+              className="text-black"
+              onChange={trailerChange}
             ></input>
           </div>
         </form>
