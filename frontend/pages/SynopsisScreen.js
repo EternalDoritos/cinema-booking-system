@@ -38,16 +38,16 @@ const DisplaySynopsis = () => {
             <img src={movie[0].image} />
           </div>
           <div>
-            <h1 className="xl:text-5xl sm:text-4xl font-semibold text-gray-200">
+            <h1 className="mb-5 xl:text-5xl sm:text-4xl font-semibold text-gray-200">
               {movie[0].title}
             </h1>
-            <p className="mt-2 xl:text-4xl md:text-2xl underline underline-offset-1 text-gray-200">
+            <p className="mb-2 mt-2 xl:text-4xl md:text-2xl underline underline-offset-1 text-gray-200">
               Synopsis
             </p>
-            <p className="xl:text-4xl sm:text-2xl text-gray-200">
+            <p className="xl:text-3xl sm:text-2xl text-gray-200">
               {movie[0].description}
             </p>
-            <h1 className="mt-4 xl:text-4xl md:text-2xl underline underline-offset-1 text-gray-200">
+            <h1 className="mt-16 xl:text-4xl md:text-2xl underline underline-offset-1 text-gray-200">
               Trailer
             </h1>
             <div
