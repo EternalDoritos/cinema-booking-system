@@ -1,60 +1,3 @@
-// // REVIEW
-// import React, { useState } from "react";
-
-// const postReview = async (movieId, reviewData) => {
-//   try {
-//     const res = await fetch(`http://localhost:5000/movie/${movieId}/reviews`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(reviewData),
-//     });
-//     const result = await res.json();
-//     console.log(result);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// const Review = (props) => {
-//   const [review, setReview] = useState({reviews: "", rating: 0 });
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     postReview(props.movieId, review);
-//     setReview({reviews: "", rating: 0 });
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       {/* <input
-//         type="text"
-//         placeholder="Your name"
-//         value={review.name}
-//         onChange={(e) => setReview({ ...review, name: e.target.value })}
-//       /> */}
-//       <input
-//         type="text"
-//         placeholder="Your review"
-//         value={review.reviews}
-//         onChange={(e) => setReview({ ...review, reviews: e.target.value })}
-//       />
-//       <input
-//         type="number"
-//         placeholder="Your rating"
-//         value={review.rating}
-//         onChange={(e) => setReview({ ...review, rating: parseInt(e.target.value) })}
-//       />
-//       <button type="submit">Submit</button>
-//     </form>
-//   );
-// };
-
-// export default Review;
-
-// // REVIEW
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -63,27 +6,9 @@ const EditReview = () => {
   const [name, setName] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState();
-  // const [isSubmitted, setIsSubmitted] = useState(false);
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const movieId = router.query.movieId;
-  //   fetch(`http://localhost:5000/movie/reviews`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setName(data[0].name)
-  //       setReview(data[0].review);
-  //       setRating(data[0].rating);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [router.isReady]);
-
-  const addName = (e) => {
-    setName(e.target.value);
-  };
 
   const addReview = (e) => {
     setReview(e.target.value);
@@ -107,7 +32,7 @@ const EditReview = () => {
         },
         body: JSON.stringify({
           id: router.query.movieId,
-          name: name,
+          name: router.query.getUserById, //Could be wrong
           reviews: review,
           ratings: rating,
         }),
@@ -136,23 +61,7 @@ const EditReview = () => {
       {/* {isSubmitted && <p>Your review has been submitted!</p>} */}
 
       <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-400"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={addName}
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-            required
-          />
-        </div>
+      
         <div className="mb-4">
           <label
             htmlFor="review"
