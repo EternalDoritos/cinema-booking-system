@@ -30,10 +30,25 @@ const EditFood = ({ food }) => {
   };
 
   const updateFood = () => {
-    router.push(`/managerComponents/updateFood?foodId=${foodIdUpdate}`);
+    router.push(`/managerComponents/food/updateFood?foodId=${foodIdUpdate}`);
   };
 
-  const deleteFood = async () => {};
+  const deleteFood = async () => {
+    const deleteFood = await fetch("http://localhost:5000/food", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "applications.json",
+      },
+      body: JSON.stringify({
+        id: foodIdDelete,
+      }),
+    });
+    if (deleteFood.status === 200) {
+      window.alert("Food has been deleted");
+      router.push("/");
+    } else window.alert("Error deleting food");
+  };
 
   return (
     <>
@@ -62,7 +77,7 @@ const EditFood = ({ food }) => {
           {update && (
             <div>
               <label for="food" className="m-2 text-2xl">
-                Choose movie:{" "}
+                Choose Food:{" "}
               </label>
               <select
                 name="food"
@@ -101,7 +116,7 @@ const EditFood = ({ food }) => {
           {deleteEle && (
             <div>
               <label for="food" className="m-2 text-2xl">
-                Choose movie:{" "}
+                Choose Food:{" "}
               </label>
               <select
                 name="food"
@@ -116,7 +131,7 @@ const EditFood = ({ food }) => {
                 </option>
                 {food.map((food) => (
                   <option key={Math.random()} value={food._id}>
-                    {food.title}
+                    {food.name}
                   </option>
                 ))}
               </select>

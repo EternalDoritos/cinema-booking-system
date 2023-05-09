@@ -6,6 +6,7 @@ const UpdateMovie = () => {
   const [image, setImage] = useState(null);
   const [desc, setDesc] = useState(null);
   const [poster, setPoster] = useState(null);
+  const [trailer, setTrailer] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const UpdateMovie = () => {
         setImage(data[0].image);
         setDesc(data[0].description);
         setPoster(data[0].poster);
+        setTrailer(data[0].trailer);
       })
       .catch((err) => {
         console.log(err);
@@ -40,6 +42,10 @@ const UpdateMovie = () => {
     setPoster(e.target.value);
   };
 
+  const trailerChange = (e) => {
+    setTrailer(e.target.value);
+  };
+
   const updateMovie = async () => {
     const updateMovie = await fetch("http://localhost:5000/movie", {
       method: "PATCH",
@@ -53,6 +59,7 @@ const UpdateMovie = () => {
         description: desc,
         poster: poster,
         id: router.query.movieId,
+        trailer: trailer,
       }),
     });
     if (updateMovie.status === 200) {
@@ -116,6 +123,16 @@ const UpdateMovie = () => {
                 value={poster}
                 className="text-black"
                 onChange={posterChange}
+              ></input>
+            </div>
+            <div className="m-4 text-xl ">
+              <label for="trailer">Movie Trailer: </label>
+              <input
+                type="text"
+                size={40}
+                value={trailer}
+                className="text-black"
+                onChange={trailerChange}
               ></input>
             </div>
           </form>

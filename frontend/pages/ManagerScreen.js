@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 
+//have yet to add functionality on CRUD of cinema and add movie listing
 const ManagerScreen = () => {
   return (
     <div>
