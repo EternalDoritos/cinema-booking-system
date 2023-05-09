@@ -1,3 +1,4 @@
+// import Head from "next/head";
 // import Link from "next/link";
 // import { useEffect, useState } from "react";
 
@@ -31,10 +32,16 @@
 //     return () => clearInterval(timer);
 //   }, [totalSlides]);
 
+//   // Define a class to set the height and width of the images
+//   const imageClass = "h-full w-full object-cover";
+
 //   return (
 //     <div className="relative">
+//       <Head>
+//         <title>Home</title>
+//       </Head>
 //       <img
-//         className="w-full h-full object-cover"
+//         className={imageClass} // Apply the class to the <img> tag
 //         src={images[currentSlide]}
 //         alt="slideshow"
 //       />
@@ -66,11 +73,11 @@
 //         {" "}
 //         Current Movies Screening
 //       </h1>
-//       <div className="mt-6 h-110 w-110 object-cover">
+//       <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
 //         <Slideshow images={movieImages} />
 //       </div>
 //       <Link href="/GalleryScreen">
-//         <button class="mt-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+//         <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
 //           View all Movies
 //         </button>
 //       </Link>
@@ -80,6 +87,8 @@
 
 // export default DisplayHome;
 
+// PREVIOUS DRAFT is the above commented out code
+// Below is the current changes:
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -146,23 +155,43 @@ const Slideshow = ({ images }) => {
   );
 };
 
+// this is the latest addition
+const VideoBackground = () => {
+  return (
+    <div className="relative h-screen">
+      <video
+        src="/lights.mp4"
+        autoPlay
+        muted
+        loop
+        className="absolute top-0 left-0 h-full w-full object-cover"
+      ></video>
+      {/* <div className="absolute inset-0 bg-gray-900 opacity-20"></div> */}
+    </div>
+  );
+};
+
 const DisplayHome = ({ movies }) => {
   const movieImages = movies.map((movie) => movie.poster);
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
-        {" "}
-        Current Movies Screening
-      </h1>
-      <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
-        <Slideshow images={movieImages} />
+    <div className="relative">
+      <VideoBackground />
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="flex flex-col items-center justify-center h-full">
+          <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+            Current Movies Screening
+          </h1>
+          <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
+            <Slideshow images={movieImages} />
+          </div>
+          <Link href="/GalleryScreen">
+            <button className="z-10 mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+              View all Movies
+            </button>
+          </Link>
+        </div>
       </div>
-      <Link href="/GalleryScreen">
-        <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-          View all Movies
-        </button>
-      </Link>
     </div>
   );
 };
