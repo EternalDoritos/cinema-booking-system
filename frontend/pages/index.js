@@ -131,11 +131,13 @@ const Slideshow = ({ images }) => {
       <Head>
         <title>Home</title>
       </Head>
+      <div className = "border-4 border-amber-300">
       <img
         className={imageClass} // Apply the class to the <img> tag
         src={images[currentSlide]}
         alt="slideshow"
       />
+      </div>
       <button
         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
         onClick={handlePrev}
@@ -182,11 +184,11 @@ const DisplayHome = ({ movies }) => {
           <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
             Current Movies Screening
           </h1>
-          <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
+          <div className="mt-6 2xl:h-5/8 2xl:w-4/6 3xl:w-4/6 xl:w-6/6  sm:w-full object-cover uppercase tracking-wider">
             <Slideshow images={movieImages} />
           </div>
           <Link href="/GalleryScreen">
-            <button className="z-10 mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+            <button className="sm:mt-12 md:mt-12 lg:mt-12 xl:mt-18 2xl:mt-22 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
               View all Movies
             </button>
           </Link>

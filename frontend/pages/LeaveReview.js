@@ -23,6 +23,7 @@ const EditReview = () => {
     console.log(review);
     console.log(rating);
     console.log(router.query.movieId);
+    console.log(router.query.getUserById)
     try {
       const response = await fetch(`http://localhost:5000/movie/reviews`, {
         method: "POST",
@@ -44,7 +45,7 @@ const EditReview = () => {
       // Check if the update was successful
       if (response.ok) {
         console.log("Review updated successfully!");
-        setName("");
+        setName(router.query.getUserById);
         setReview("");
         setRating("");
         alert("Your review has been submitted!");
