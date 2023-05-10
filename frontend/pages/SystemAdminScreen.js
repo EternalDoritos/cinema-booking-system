@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 import { useMemo } from "react";
 import "babel-polyfill";
 import {
@@ -257,35 +260,13 @@ const UserAccountTable = ({ columns, data }) => {
     useSortBy,
     usePagination
   );
+  const [open, setOpen] = useState(false);
+  const [openModalIndex, setOpenModalIndex] = useState(null);
+  const onCloseModal = () => setOpen(false);
+  const onOpenModal = () => setOpen(true);
+
   return (
     <>
-      {/* <div class="mb-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <form class="space-y-6" action="#" method="POST">
-          <div>
-            <label
-              htmlFor="email"
-              class="block text-sm font-medium text-gray-400"
-            >
-              Search User by Email
-            </label>
-            <div class="mt-1">
-              <input
-                id="userName"
-                required
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-              />
-            </div>
-          </div>
-          <div>
-            <button
-              type="submit"
-              class="w-full flex justify-center py-2 px-4 border border-transparent  shadow-sm text-sm  bg-amber-300 hover:bg-amber-500 text-black font-bold rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Search User
-            </button>
-          </div>
-        </form>
-      </div> */}
       <table class="table w-full" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -324,26 +305,69 @@ const UserAccountTable = ({ columns, data }) => {
           </tr>
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row, index) => {
             prepareRow(row);
+            console.log(row.original);
+            const name = row.original.col1;
+            const userType = row.original.col2;
+            const email = row.original.col3;
+            const phoneNum = row.original.col4;
+            const activityStatus = row.original.col5;
+            const suspendedStatus = row.original.col6;
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: "10px",
-                        border: "solid 1px gray",
-                        background: "papayawhip",
-                      }}
-                      class="text-slate-800"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
+              <React.Fragment key={index}>
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => {
+                    setOpenModalIndex(index);
+                  }}
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        style={{
+                          padding: "10px",
+                          border: "solid 1px gray",
+                          background: "papayawhip",
+                        }}
+                        class="text-slate-800"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+                {openModalIndex === index && (
+                  <Modal
+                    open={openModalIndex !== null}
+                    onClose={() => setOpenModalIndex(null)}
+                    center
+                  >
+                    <h2 class="font-bold text-xl text-slate-800">
+                      Cinema Booking User
+                    </h2>
+                    <p class="font-bold text-slate-600">User name: </p>
+                    <p class="text-slate-600">{name}</p>
+                    <p class="font-bold text-slate-600">Employee type: </p>
+                    <p class="text-slate-600">{userType}</p>
+                    <p class="font-bold text-slate-600">Email: </p>
+                    <p class="text-slate-600">{email}</p>
+                    <p class="font-bold text-slate-600">Phone: </p>
+                    <p class="text-slate-600">{phoneNum}</p>
+                    <p class="font-bold text-slate-600">Active: </p>
+                    <p class="text-slate-600">{activityStatus}</p>
+                    <p class="font-bold text-slate-600">Suspended: </p>
+                    <p class="text-slate-600">{suspendedStatus}</p>
+                    <p class="font-bold text-slate-600">Short info: </p>
+                    <p class="text-slate-600">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Nullam pulvinar risus non risus hendrerit venenatis.
+                      Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                    </p>
+                  </Modal>
+                )}
+              </React.Fragment>
             );
           })}
         </tbody>
