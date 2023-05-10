@@ -178,17 +178,17 @@ const DisplayHome = ({ movies }) => {
 
   return (
     <div className="relative">
-      <VideoBackground />
+      <VideoBackground/>
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="flex flex-col items-center justify-center h-full">
-          <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+          <h1 className="text-white lg:mt-16 text-center text-4xl py-10 font-bold uppercase tracking-wider">
             Current Movies Screening
           </h1>
-          <div className="mt-6 2xl:h-5/8 2xl:w-4/6 3xl:w-4/6 xl:w-6/6  sm:w-full object-cover uppercase tracking-wider">
+          <div className="mt-6 2xl:h-5/8 2xl:w-4/6 3xl:w-4/6 xl:w-6/6 lg:w-5/6 sm:w-full object-cover uppercase tracking-wider">
             <Slideshow images={movieImages} />
           </div>
           <Link href="/GalleryScreen">
-            <button className="sm:mt-12 md:mt-12 lg:mt-12 xl:mt-18 2xl:mt-22 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+            <button className="sm:mt-6 md:mt-12 lg:mb-20 xl:mt-18 2xl:mt-22 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
               View all Movies
             </button>
           </Link>
