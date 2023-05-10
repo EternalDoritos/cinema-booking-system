@@ -89,7 +89,7 @@ const DisplaySynopsis = () => {
               <div key={review._id} className="border rounded-lg p-4 mt-4">
                 <p className="text-gray-200">
                   <span className="font-semibold">Name:</span>{" "}
-                  {/* {review.name.username} */}
+                  {review.name ? review.name.username : "Deleted User"}
                 </p>
                 <p className="text-gray-200">
                   <span className="font-semibold">Review:</span>{" "}

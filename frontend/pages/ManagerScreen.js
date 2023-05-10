@@ -39,6 +39,14 @@ const ManagerScreen = () => {
               </a>
             </Link>
           </li>
+          <li>
+            <Link legacyBehavior href="/managerComponents/food/editCinema">
+              <a className="text-center font-bold text-2xl  p-2 rounded">
+                {" "}
+                Edit Cinema Details{" "}
+              </a>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
