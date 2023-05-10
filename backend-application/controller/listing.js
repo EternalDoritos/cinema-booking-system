@@ -23,6 +23,7 @@ exports.getListing = asyncHandler(async (req, res) => {
       seating: ele.seating,
       date: newDate,
       time: ele.time,
+      listId: ele._id,
     });
   }
   res.status(200).json(arr);

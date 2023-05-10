@@ -9,9 +9,6 @@ const MovieBookingPage = ({ id }) => {
   const router = useRouter();
   const [timing, setTiming] = useState([]);
 
-  const purchaseTicket = () => {
-    router.push("./SeatingScreen");
-  };
   useEffect(() => {
     async function getData() {
       const id = router.query.movieId;
@@ -60,12 +57,12 @@ const MovieBookingPage = ({ id }) => {
                 <div>
                   <h4>{ele.time}</h4>
                 </div>
-                <button
-                  className="rounded-full bg-cyan-900"
-                  onClick={purchaseTicket}
+                <Link
+                  href={`/SeatingScreen?listId=${ele.listId}`}
+                  className="bg-cyan-900"
                 >
                   Book Now
-                </button>
+                </Link>
               </div>
             );
           })}
