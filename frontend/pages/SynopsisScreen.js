@@ -7,6 +7,13 @@ import EditReview from "./LeaveReview";
 const DisplaySynopsis = () => {
   const router = useRouter();
   let [movie, setMovie] = useState(null);
+  const [timing, setTiming] = useState(null);
+
+  // async function getData() {
+  //   const id = router.query.movieId;
+  //   const res = await fetch(`http://localhost:5000/listing/${id}`);
+  //   setTiming(await res.json());
+  // }
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -19,7 +26,7 @@ const DisplaySynopsis = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [router.isReady, !movie, movie]);
+  }, [router.isReady, router.query.movieId]);
 
   if (!movie)
     return (
@@ -75,7 +82,7 @@ const DisplaySynopsis = () => {
           </div>
         </div>
 
-        <MovieBookingPage />
+        <MovieBookingPage id={router.query.movieId} />
 
         <div className="mt-8 border-t-2 border-gray-600 pt-8">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

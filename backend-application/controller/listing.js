@@ -8,10 +8,24 @@ const Cinema = require("../models/cinema");
 //@route    GET/listing/:id
 //@access   private
 exports.getListing = asyncHandler(async (req, res) => {
+  arr = [];
   const listing = await Listing.find({ movie: req.params.id })
     .populate("cinema")
     .populate("movie");
-  res.status(200).json(listing);
+  for (ele of listing) {
+    const day = ele.date.getDate();
+    const month = ele.date.getMonth() + 1;
+    const year = ele.date.getFullYear();
+    newDate = `${day} - ${month} - ${year}`;
+    arr.push({
+      movie: ele.movie,
+      cinema: ele.cinema,
+      seating: ele.seating,
+      date: newDate,
+      time: ele.time,
+    });
+  }
+  res.status(200).json(arr);
 });
 
 //@desc     POST a new listing of a movie

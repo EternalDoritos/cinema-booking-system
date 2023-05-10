@@ -131,12 +131,12 @@ const Slideshow = ({ images }) => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className = "border-4 border-amber-300">
-      <img
-        className={imageClass} // Apply the class to the <img> tag
-        src={images[currentSlide]}
-        alt="slideshow"
-      />
+      <div className="border-4 border-amber-300">
+        <img
+          className={imageClass} // Apply the class to the <img> tag
+          src={images[currentSlide]}
+          alt="slideshow"
+        />
       </div>
       <button
         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
