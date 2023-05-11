@@ -27,22 +27,49 @@ const EditCinema = ({ cinema }) => {
   };
 
   const createCinema = () => {
-    router.push("/createCinema");
+    router.push("./createCinema");
   };
 
   const updateCinema = () => {
-    router.push(`/updateCinema?cinemaId=${cinemaIdUpdate}`);
+    router.push(`./updateCinema?cinemaId=${cinemaIdUpdate}`);
   };
 
-  const deleteCinema = async () => {};
+  const viewCinema = () => {
+    router.push("./viewCinema");
+  };
+
+  const deleteCinema = async () => {
+    const deleteCinema = await fetch("http://localhost:5000/cinema", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: cinemaIdDelete,
+      }),
+    });
+    if (deleteCinema.status === 200) {
+      window.alert("Cinema has been deleted");
+      router.push("/");
+    } else window.alert("Error deleting cinema");
+  };
 
   return (
     <>
       <Head>
         <title>Edit Cinema Details</title>
       </Head>
-      <h1 className="text-center m-4 text-bold text-4xl">Edit Movie Page</h1>
+      <h1 className="text-center m-4 text-bold text-4xl">Edit Cinema Page</h1>
       <div className="text-center flex flex-col m-4">
+        <div>
+          <button
+            className="m-4 text-xl font-bold rounded-full bg-cyan-900 p-5 m-4"
+            onClick={viewCinema}
+          >
+            View Cinema
+          </button>
+        </div>
         <div>
           <button
             className="m-4 text-xl font-bold rounded-full bg-cyan-900 p-5 m-4"

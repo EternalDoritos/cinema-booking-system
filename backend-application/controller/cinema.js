@@ -12,6 +12,14 @@ exports.getCinema = asyncHandler(async (req, res) => {
   res.json(cinema);
 });
 
+//@desc   GET specific details of cinema
+//@route  GET/cinema/:id
+//@access private
+exports.getOneCinema = asyncHandler(async (req, res) => {
+  const cinema = await Cinema.findOne({ _id: req.params.cinemaId });
+  res.json(cinema);
+});
+
 // //@desc     GET all cinema details of movie based off movie id
 // //@route    POST/cinema/detail
 // //@access   private
