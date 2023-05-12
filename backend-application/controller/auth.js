@@ -26,6 +26,7 @@ exports.register = async (req, res) => {
       password: hash,
       userType: req.body.userType,
       loyaltyPoints: 0,
+      isActive: true,
     })
       .then((user) =>
         res.status(200).json({
@@ -142,7 +143,7 @@ exports.grantUserAccess = async (req, res) => {
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: username });
     if (!user) {
       res.status(400).json({
         message: "Login not successful",

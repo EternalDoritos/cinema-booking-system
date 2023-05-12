@@ -47,6 +47,14 @@ const ManagerScreen = () => {
               </a>
             </Link>
           </li>
+          <li>
+            <Link legacyBehavior href="/managerComponents/cinema/addListing">
+              <a className="text-center font-bold text-2xl  p-2 rounded">
+                {" "}
+                Add Movie Listing{" "}
+              </a>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

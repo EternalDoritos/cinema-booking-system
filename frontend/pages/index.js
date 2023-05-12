@@ -104,6 +104,7 @@ export const getStaticProps = async () => {
 
 const Slideshow = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+
   const totalSlides = images.length;
 
   const handlePrev = () => {
@@ -178,7 +179,7 @@ const DisplayHome = ({ movies }) => {
 
   return (
     <div className="relative">
-      <VideoBackground/>
+      <VideoBackground />
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="flex flex-col items-center justify-center h-full">
           <h1 className="text-white lg:mt-16 text-center text-4xl py-10 font-bold uppercase tracking-wider">

@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { useContext } from "react";
+import { Context } from "../store/context";
+//import useGlobalStore from "../store/store";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/movie");
@@ -12,6 +15,8 @@ export const getStaticProps = async () => {
 };
 
 const DisplayGallery = ({ movies }) => {
+  const { currentUser } = useContext(Context);
+  //const user = useGlobalStore((state) => state.userProfile);
   return (
     <div>
       <Head>
@@ -19,6 +24,7 @@ const DisplayGallery = ({ movies }) => {
       </Head>
       <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
         Movie List
+        {console.log(currentUser)}
       </h1>
       <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
         {movies.map((movie) => (

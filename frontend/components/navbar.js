@@ -1,5 +1,8 @@
 import { useState } from "react";
-
+import { useContext } from "react";
+import { Context } from "../store/context";
+import UserProfile from "../pages/UserProfileScreen";
+import { useRouter } from "next/router";
 function NavLink({ to, children }) {
   return (
     <a href={to} className={`mx-4`}>
@@ -63,19 +66,32 @@ function MobileNav({ open, setOpen }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [currentUser] = useContext(Context);
+  const router = useRouter();
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  //const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   // function handleLogin() {
   //   // perform login logic
   //   setIsLoggedIn(true);
   // }
+  const userProfile = () => {
+    router.push("/UserProfileScreen");
+  };
+
+  const gallery = () => {
+    router.push("/GalleryScreen");
+  };
+
+  const index = () => {
+    router.push("/");
+  };
   return (
     <nav className="flex filter drop-shadow-md bg-black px-4 py-4 h-20 items-center border-b-2 border-amber-300">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
-        <a className="text-2xl font-semibold" href="/">
+        <button className="text-2xl font-semibold" onClick={index}>
           GOLDENRIZZ
-        </a>
+        </button>
       </div>
       <div className="w-9/12 flex justify-end items-center">
         <div
@@ -103,13 +119,20 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex">
-          <NavLink to="/GalleryScreen">GALLERY</NavLink>
+          <button onClick={gallery} className="m-2">
+            GALLERY
+          </button>
           {/* {isLoggedIn ? (
             <img src="/user-icon.png" alt="User Icon" />
           ) : (
             <button onClick={handleLogin}>Log In</button>
           )} */}
-          <NavLink to="/UserLogInScreen">LOG IN</NavLink>
+          {currentUser && (
+            <button onClick={userProfile} className="m-2">
+              PROFILE
+            </button>
+          )}
+          {!currentUser && <NavLink to="/UserLogInScreen">LOG IN</NavLink>}
         </div>
       </div>
     </nav>
