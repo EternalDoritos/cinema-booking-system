@@ -5,9 +5,10 @@ const router = express.Router();
 const listingController = require("../controller/listing");
 
 //listing -> GET
-router.get("/:id", listingController.getListing);
+router.get("/", listingController.getListing);
+router.get("/:id", listingController.getListingByID);
 
-//listing -> POST
+//listing -> POST 
 router.post("/", listingController.postListing);
 
 //listing -> PATCH

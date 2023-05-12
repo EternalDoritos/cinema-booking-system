@@ -4,10 +4,15 @@ const asyncHandler = require("express-async-handler");
 const Listing = require("../models/listing");
 const Cinema = require("../models/cinema");
 
+exports.getListing = asyncHandler(async (req, res) => {
+  const listings = await Listing.find();
+  res.status(200).json(listings);
+});
+
 //@desc     GET all the current listings of the movie
 //@route    GET/listing/:id
 //@access   private
-exports.getListing = asyncHandler(async (req, res) => {
+exports.getListingByID = asyncHandler(async (req, res) => {
   arr = [];
   const listing = await Listing.find({ movie: req.params.id })
     .populate("cinema")
@@ -36,7 +41,7 @@ exports.postListing = asyncHandler(async (req, res) => {
   const exist = await Listing.findOne({
     cinema: req.body.cinema,
     time: req.body.time,
-    date: req.body.date,
+    date: req.body.date, 
   });
 
   if (exist) {
