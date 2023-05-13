@@ -9,7 +9,7 @@ const DisplayUserProfile = () => {
       <Head>
         <title>User Profile</title>
       </Head>
-      {currentUser.userType === "manager" && <ManagerScreen />}
+      {currentUser && currentUser.userType === "manager" && <ManagerScreen />}
     </div>
   );
 };
