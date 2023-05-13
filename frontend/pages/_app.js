@@ -14,7 +14,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <Context.Provider value={[currentUser, setCurrentUser]}>
       <Layout>
-        {console.log(currentUser)}
         <Component {...pageProps} />
       </Layout>
     </Context.Provider>
