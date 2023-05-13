@@ -36,6 +36,7 @@ export default function DisplayUserLogIn() {
     });
     const data = await login.json();
     if (login.status === 200) {
+      sessionStorage.setItem("userId", JSON.stringify(data.user));
       setCurrentUser(data.user);
       router.push("/");
     } else window.alert("Invalid");

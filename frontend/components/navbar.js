@@ -85,6 +85,10 @@ export default function Navbar() {
   const index = () => {
     router.push("/");
   };
+
+  const login = () => {
+    router.push("/UserLogInScreen");
+  };
   return (
     <nav className="flex filter drop-shadow-md bg-black px-4 py-4 h-20 items-center border-b-2 border-amber-300">
       <MobileNav open={open} setOpen={setOpen} />
@@ -132,7 +136,11 @@ export default function Navbar() {
               PROFILE
             </button>
           )}
-          {!currentUser && <NavLink to="/UserLogInScreen">LOG IN</NavLink>}
+          {!currentUser && (
+            <button onClick={login} className="m-2">
+              LOG IN
+            </button>
+          )}
         </div>
       </div>
     </nav>
