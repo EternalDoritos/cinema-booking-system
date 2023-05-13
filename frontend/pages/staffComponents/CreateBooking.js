@@ -53,28 +53,30 @@ const CreateBooking = ({movies, cinemas}) => {
   }
 
   const handleCreation= async () => {
-    const createBooking = await fetch("http://localhost:5000/listing", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cinema: selectedCinema,
-        time: selectedTime,
-        date: selectedDate,
-        movie: selectedMovie,
-      }),
-    });
-    console.log(createBooking.status);
-    const router = useRouter();
-    if (createBooking.status == 200) {
-        router.push("/");
-    } else {
-        window.alert("This booking cannot be placed");
+    try {
+      const response = await fetch("http://localhost:5000/listing", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cinema: selectedCinema,
+          time: selectedTime,
+          date: selectedDate,
+          movie: selectedMovie,
+        }),
+      });
+
+      if (response.status == 200) {
+        window.alert("Booking created successfully");
+      } else {
+        window.alert("Failed to create booking. Please try again later.");
+      }
+    } catch (error) {
+      //console.error(error);
+      window.alert("An error occurred while creating the booking.");
     }
-    //console.log(`Cancelled booking with ID ${selectedBooking}`);
-    //router.push("/staffComponents/CancelConfirmation");
   }
 
   return (

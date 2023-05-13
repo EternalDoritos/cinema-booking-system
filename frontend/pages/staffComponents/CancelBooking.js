@@ -33,25 +33,26 @@ const CancelBooking = ({movies, bookings}) => {
   }
 
   const handleCancel = async (e) => {
-    const handleCancel = await fetch("http://localhost:5000/listing", {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: selectedBooking,
-      }),
-    });
-    //console.log(handleCancel);
-    //e.preventDefault();
-    //router.push("/purchaseFood");
-    
-    if (handleCancel.status == 200) {
-      //e.preventDefault();
-      router.push("/");
-    } else {
-      window.alert("This booking cannot be cancelled");
+    try {
+      const response = await fetch("http://localhost:5000/listing", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: selectedBooking,
+        }),
+      });
+  
+      if (response.status == 200) {
+        window.alert("Booking cancelled successfully");
+      } else {
+        window.alert("Failed to cancel booking. Please try again later.");
+      }
+    } catch (error) {
+      //console.error(error);
+      window.alert("An error occurred while cancelling the booking.");
     }
   }
 
