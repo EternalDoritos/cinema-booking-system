@@ -18,7 +18,6 @@ export default function DisplayUserSignUp() {
 
   const handleCustomerChange = (e) => {
     setCustomer(e.target.value);
-    console.log(customer);
   };
 
   const createUser = async (e) => {
