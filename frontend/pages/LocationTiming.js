@@ -3,10 +3,12 @@ import React from "react";
 import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../store/context";
 
 const MovieBookingPage = ({ id }) => {
   const router = useRouter();
+  const [currentUser, setCurrentUser] = useContext(Context);
   const [timing, setTiming] = useState([]);
 
   useEffect(() => {
@@ -57,12 +59,19 @@ const MovieBookingPage = ({ id }) => {
                 <div>
                   <h4>{ele.time}</h4>
                 </div>
-                <Link
-                  href={`/SeatingScreen?listId=${ele.listId}`}
-                  className="bg-cyan-900"
-                >
-                  Book Now
-                </Link>
+                {!currentUser && (
+                  <Link href={`/UserLogInScreen`} className="bg-cyan-900">
+                    Log In to book
+                  </Link>
+                )}
+                {currentUser && (
+                  <Link
+                    href={`/SeatingScreen?listId=${ele.listId}`}
+                    className="bg-cyan-900"
+                  >
+                    Book Now
+                  </Link>
+                )}
               </div>
             );
           })}
