@@ -25,6 +25,7 @@ exports.register = async (req, res) => {
       username: userName,
       password: hash,
       userType: req.body.userType,
+      customerType: req.body.customerType,
       loyaltyPoints: 0,
       isActive: true,
     })
