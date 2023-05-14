@@ -3,6 +3,7 @@ import { Context } from "../store/context";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import ManagerScreen from "./ManagerScreen";
+import CustomerScreen from "./CustomerScreen";
 const DisplayUserProfile = () => {
   const [currentUser, setCurrentUser] = useContext(Context);
   const router = useRouter();
@@ -17,6 +18,7 @@ const DisplayUserProfile = () => {
         <title>User Profile</title>
       </Head>
       {currentUser && currentUser.userType === "manager" && <ManagerScreen />}
+      {currentUser && currentUser.userType === "customer" && <CustomerScreen />}
       <div className="text-right m-4">
         <button className="m-4 p-2 bg-cyan-900" onClick={logOut}>
           Log Out
