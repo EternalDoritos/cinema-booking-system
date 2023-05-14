@@ -41,7 +41,7 @@ const EditReview = () => {
       // Check if the update was successful
       if (response.ok) {
         console.log("Review updated successfully!");
-        setName(router.query.getUserById);
+        setName("");
         setReview("");
         setRating("");
         alert("Your review has been submitted!");
