@@ -35,7 +35,7 @@ const SystemAdminScreen = ({ users }) => {
         </ul>
         <ul className="m-5 text-center">
           <li>
-            <Link legacyBehavior href="/sysAdmnComponents/users/ViewUsers">
+            <Link legacyBehavior href="/sysAdmnComponents/users/CreateUser">
               <a className="text-center font-bold text-2xl p-2 rounded">
                 Create New Users
               </a>
