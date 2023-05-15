@@ -60,12 +60,12 @@ exports.getUsers = async (req, res) => {
 
 exports.editUser = async (req, res) => {
   const { id } = req.params;
-  const { username, email, password } = req.body;
+  const { username, userType, customerType, email } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { username, email, password },
+      { username, userType, customerType, email },
       { new: true, runValidators: true, context: "query" }
     );
     if (!updatedUser) {
