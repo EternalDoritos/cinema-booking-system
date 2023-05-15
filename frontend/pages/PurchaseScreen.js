@@ -7,6 +7,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import AddLoyaltyPoints from "./addLoyaltyPts";
 
 export default function DisplayPurchase() {
   const [cardNumber, setCardNumber] = useState("");
@@ -127,12 +128,8 @@ export default function DisplayPurchase() {
               </div>
               <div className="mb-4">
                 {/* <Link href="/PurchaseSuccessScreen"> */}
-                <button
-                  type="submit"
-                  className=" px-4 py-2 rounded-md  bg-amber-300 hover:bg-amber-500 text-black font-bold focus:outline-none"
-                >
-                  Submit Payment
-                </button>
+
+                <AddLoyaltyPoints/>
                 {/* </Link> */}
               </div>
             </form>

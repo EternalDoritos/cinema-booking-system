@@ -60,12 +60,12 @@ exports.getUsers = async (req, res) => {
 
 exports.editUser = async (req, res) => {
   const { id } = req.params;
-  const { username, userType, customerType, email } = req.body;
+  const { username, userType, customerType, email, loyaltyPoints} = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { username, userType, customerType, email },
+      { username, userType, customerType, email, loyaltyPoints},
       { new: true, runValidators: true, context: "query" }
     );
     if (!updatedUser) {
@@ -78,6 +78,7 @@ exports.editUser = async (req, res) => {
     res.status(500).json({ message: "Error updating user", error });
   }
 };
+
 
 //@desc     Get user by ID
 //@route    PUT/getUserById
