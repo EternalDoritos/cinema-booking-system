@@ -25,6 +25,10 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  hasAccess: {
+    type: Boolean,
+    required: true,
+  },
   loyaltyPoints: Number,
 });
 

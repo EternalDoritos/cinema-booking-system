@@ -11,5 +11,6 @@ router.get("/getUsers", authController.getUsers);
 router.put("/editUser/:id", authController.editUser);
 router.get("/getUserById/:id", authController.getUserById);
 router.put("/suspendUserAccess/:id", authController.suspendUserAccess);
+router.put("/resumeUserAccess/:id", authController.resumeUserAccess);
 router.put("/grantUserAccess/:id", authController.grantUserAccess);
 module.exports = router;

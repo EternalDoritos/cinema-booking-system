@@ -101,7 +101,7 @@ exports.suspendUserAccess = async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { isActive: false },
+      { hasAccess: false },
       { new: true, runValidators: true, context: "query" }
     );
     if (!updatedUser) {
@@ -109,6 +109,30 @@ exports.suspendUserAccess = async (req, res) => {
     }
     res.status(200).json({
       message: "User access suspended successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
+
+//@desc     Resume user access by ID
+//@route    PUT/resumeUserAccess
+//@access   public
+
+exports.resumeUserAccess = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { hasAccess: true },
+      { new: true, runValidators: true, context: "query" }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      message: "User access resume successfully",
       user: updatedUser,
     });
   } catch (error) {
