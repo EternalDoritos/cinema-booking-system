@@ -275,6 +275,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { Context } from "../store/context";
 
 export default function CinemaSeatingPlan() {
   const [seats, setSeats] = useState([
@@ -295,6 +298,7 @@ export default function CinemaSeatingPlan() {
     { id: "3E", status: "available", type: "wheelchair" },
     // ...
   ]);
+  const router = useRouter();
 
   const handleClick = (seatId) => {
     const newSeats = seats.map((seat) => {
@@ -307,6 +311,19 @@ export default function CinemaSeatingPlan() {
       return seat;
     });
     setSeats(newSeats);
+  };
+
+  const handleWalkin = (e) => {
+    e.preventDefault();
+    if (currentUser == null) {
+      router.push("/PurchaseScreen")
+    }
+    else if (currentUser.userType == "staff") {
+      router.push("/staffComponents/ChoosePayment");
+    }
+    else {
+      router.push("/PurchaseScreen")
+    }
   };
 
   return (
@@ -374,12 +391,10 @@ export default function CinemaSeatingPlan() {
                 {seats.filter((seat) => seat.status === "selected").length * 10}
               </p>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                
-                <Link href={"/PurchaseScreen"}>
-                  <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                    Make Payment
-                  </button>
-                </Link>
+                <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                  onClick={handleWalkin}>
+                  Make Payment
+                </button>
                 {/* redirect to food purchasing page */}
                 <Link href={"/purchaseFood"}>
                   <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >

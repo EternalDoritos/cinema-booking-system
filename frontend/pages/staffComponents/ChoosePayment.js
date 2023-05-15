@@ -5,7 +5,7 @@ const ChoosePayment = () => {
     const router = useRouter();
     const handleQR = (e) => {
         e.preventDefault();
-        router.push("/Paynow");
+        router.push("/staffComponents/Paynow");
     };
 
     const handleCash = (e) => {

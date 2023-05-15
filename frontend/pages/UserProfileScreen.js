@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import ManagerScreen from "./ManagerScreen";
 import CustomerScreen from "./CustomerScreen";
 import SystemAdminScreen from "./SystemAdminScreen";
+import StaffScreen from "./StaffScreen";
 
 const DisplayUserProfile = () => {
   const [currentUser, setCurrentUser] = useContext(Context);

@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Context } from "../store/context";
 //import Counter from '../components/Counter';
 
 export const getStaticProps = async () => {
