@@ -35,7 +35,15 @@ const purchaseFood = ({ foods }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push("/PurchaseScreen");
+        if (currentUser == null) {
+          router.push("/PurchaseScreen")
+        }
+        else if (currentUser.userType == "staff") {
+          router.push("/staffComponents/ChoosePayment");
+        }
+        else {
+          router.push("/PurchaseScreen")
+        }
     };
   
     return (

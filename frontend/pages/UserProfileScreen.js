@@ -21,6 +21,7 @@ const DisplayUserProfile = () => {
       </Head>
       {currentUser && currentUser.userType === "manager" && <ManagerScreen />}
       {currentUser && currentUser.userType === "customer" && <CustomerScreen />}
+      {currentUser && currentUser.userType === "staff" && <StaffScreen />}
       {currentUser && currentUser.userType === "systemAdmin" && (
         <SystemAdminScreen />
       )}
