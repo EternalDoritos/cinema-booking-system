@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Context } from "../store/context";
 //import Counter from '../components/Counter';
 
 export const getStaticProps = async () => {
@@ -35,7 +37,15 @@ const purchaseFood = ({ foods }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push("/PurchaseScreen");
+        if (currentUser == null) {
+          router.push("/PurchaseScreen")
+        }
+        else if (currentUser.userType == "staff") {
+          router.push("/staffComponents/ChoosePayment");
+        }
+        else {
+          router.push("/PurchaseScreen")
+        }
     };
   
     return (
