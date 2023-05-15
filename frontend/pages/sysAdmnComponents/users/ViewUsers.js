@@ -229,7 +229,7 @@ const ViewUsers = ({ users }) => {
                     <p class="font-bold text-slate-600">Suspended: </p>
                     <p class="text-slate-600">{suspendedStatus}</p>
                     <Link
-                      href={`/sysAdmnComponents/users/EditUser?id=${id}`}
+                      href={`/sysAdmnComponents/users/EditUser/${id}`}
                       //   href={`/EditUser?id=u64574dc5f132becf123ddcf7`}
                       legacyBehavior
                     >
