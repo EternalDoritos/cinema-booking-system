@@ -17,15 +17,12 @@ import { MdArrowDropDown } from "react-icons/md";
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/auth/getUsers");
   const data = await res.json();
-  //   console.log(data);
   return {
     props: { users: data },
   };
 };
-
 const ViewUsers = ({ users }) => {
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const mappedData = users.map((user) => ({
       col1: user.username ? user.username : "",
@@ -36,11 +33,8 @@ const ViewUsers = ({ users }) => {
       col6: user.hasAccess ? "not suspended" : "suspended",
       id: user._id,
     }));
-
     setData(mappedData);
   }, [users]);
-
-  //   console.log(data);
   const columns = React.useMemo(
     () => [
       {
@@ -85,7 +79,6 @@ const ViewUsers = ({ users }) => {
     }),
     []
   );
-
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -166,7 +159,6 @@ const ViewUsers = ({ users }) => {
             >
               <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
-                // globalFilter={state.globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
             </th>
@@ -182,6 +174,37 @@ const ViewUsers = ({ users }) => {
             const activityStatus = row.original.col5;
             const suspendedStatus = row.original.col6;
             const id = row.original.id;
+            const SuspendUser = async (id) => {
+              const suspendUser = await fetch(
+                `http://localhost:5000/auth/suspendUserAccess/${id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+              if (suspendUser.status === 200) {
+                window.alert("User suspended successfully. Refreshing page.");
+              } else window.alert("Error suspending user.");
+            };
+
+            const ResumeUserAccess = async (id) => {
+              const resumeUser = await fetch(
+                `http://localhost:5000/auth/resumeUserAccess/${id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+              if (resumeUser.status === 200) {
+                window.alert("User unsuspended successfully. Refreshing page.");
+              } else window.alert("Error resuming user access.");
+            };
             return (
               <React.Fragment key={index}>
                 <tr
@@ -240,14 +263,26 @@ const ViewUsers = ({ users }) => {
 
                     {suspendedStatus === "not suspended" ? (
                       <button
-                        onClick={() => {}}
+                        onClick={() => {
+                          if (confirm("Confirmation to suspend user?")) {
+                            SuspendUser(id);
+                            setOpenModalIndex(false);
+                            window.location.reload();
+                          }
+                        }}
                         class="mt-6 mb-6 mr-2 bg-red-400 hover:bg-red-500 text-black font-bold py-2 px-4 rounded"
                       >
                         Suspend User
                       </button>
                     ) : (
                       <button
-                        onClick={() => {}}
+                        onClick={() => {
+                          if (confirm("Confirmation to resume user access?")) {
+                            ResumeUserAccess(id);
+                            setOpenModalIndex(false);
+                            window.location.reload();
+                          }
+                        }}
                         class="mt-6 mb-6 mr-2 bg-green-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded"
                       >
                         Un-suspend User

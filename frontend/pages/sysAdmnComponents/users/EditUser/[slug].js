@@ -55,9 +55,11 @@ const EditUser = ({ user }) => {
       }
     );
     if (updatedUser.status === 200) {
-      window.alert("User created successfully, redirecting to log in page");
+      window.alert(
+        "User updated successfully, redirecting to system admin home page."
+      );
       router.push("/UserProfileScreen");
-    } else window.alert("Error creating account");
+    } else window.alert("Error updating account");
   };
 
   return (
