@@ -23,14 +23,16 @@ export const getStaticProps = async () => {
 };
 const ViewUsers = ({ users }) => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     const mappedData = users.map((user) => ({
       col1: user.username ? user.username : "",
       col2: user.userType ? user.userType : "",
       col3: user.email ? user.email : "",
       col4: user.phoneNum ? user.phoneNum : "87654321",
-      col5: user.isActive ? "active" : "not active",
-      col6: user.hasAccess ? "not suspended" : "suspended",
+      col5: user.isValidated ? "validated" : "not validated",
+      col6: user.isActive ? "active" : "not active",
+      col7: user.hasAccess ? "not suspended" : "suspended",
       id: user._id,
     }));
     setData(mappedData);
@@ -54,12 +56,16 @@ const ViewUsers = ({ users }) => {
         accessor: "col4",
       },
       {
-        Header: "Active",
+        Header: "Valid",
         accessor: "col5", // accessor is the "key" in the data
       },
       {
+        Header: "Active",
+        accessor: "col6", // accessor is the "key" in the data
+      },
+      {
         Header: "Suspended",
-        accessor: "col6",
+        accessor: "col7",
       },
     ],
     []
@@ -171,8 +177,9 @@ const ViewUsers = ({ users }) => {
             const userType = row.original.col2;
             const email = row.original.col3;
             const phoneNum = row.original.col4;
-            const activityStatus = row.original.col5;
-            const suspendedStatus = row.original.col6;
+            const validStatus = row.original.col5;
+            const activityStatus = row.original.col6;
+            const suspendedStatus = row.original.col7;
             const id = row.original.id;
             const SuspendUser = async (id) => {
               const suspendUser = await fetch(

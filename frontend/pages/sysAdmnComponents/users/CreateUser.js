@@ -1,7 +1,17 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Head from "next/head";
+// Configure dotenv to load environment variables from .env file
+// require("dotenv").config();
+// console.log(process.env);
 
+// Retrieve environment variables
+// const userId = process.env.USER_ID;
+// const serviceId = process.env.SERVICE_ID;
+// const templateId = process.env.TEMPLATE_ID;
+// console.log("userId", userId);
+// console.log("serviceId", serviceId);
+// console.log("templateId", templateId);
 const CreateUser = () => {
   const form = useRef();
   const [name, setName] = useState("");
@@ -24,24 +34,28 @@ const CreateUser = () => {
   const handleCustomerTypeChange = (e) => {
     setCustomerType(e.target.value);
   };
-  const createUser = async (e) => {
+  const createUnvalidatedUser = async (e) => {
     e.preventDefault();
-    const createUser = await fetch("http://localhost:5000/auth/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: userName,
-        email: email,
-        userType: userType,
-        customerType: customerType ? customerType : "",
-      }),
-    });
+    const createUser = await fetch(
+      "http://localhost:5000/auth/createUnvalidatedUser",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: userName,
+          email: email,
+          userType: userType,
+          customerType: customerType ? customerType : "",
+        }),
+      }
+    );
     if (createUser.status === 200) {
-      window.alert("User created successfully, redirecting to log in page");
-      router.push("/UserLogInScreen");
+      window.alert("User created successfully. Email sent to user");
+      // router.push("/UserLogInScreen");
+      // sendEmail();
     } else window.alert("Error creating account");
   };
   const sendEmail = (e) => {
@@ -81,11 +95,8 @@ const CreateUser = () => {
               ref={form}
               className="space-y-6"
               action="#"
-              method="PUT"
-              onSubmit={
-                sendEmail
-                // createUser();
-              }
+              method="POST"
+              onSubmit={createUnvalidatedUser}
             >
               <div>
                 <label
