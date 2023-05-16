@@ -21,7 +21,10 @@ const CinemaSeatingPlan = ({ id }) => {
         booked: selectedSeats,
         id: router.query.listId,
         discountedPriceBooked:
-          currentUser.userType === "adult" ? 0 : selectedSeats.length,
+          currentUser.userType === "student" ||
+          currentUser.userType === "senior"
+            ? selectedSeats.length
+            : 0,
         userId: currentUser._id,
       }),
     });
