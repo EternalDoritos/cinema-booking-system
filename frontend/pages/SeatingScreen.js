@@ -13,7 +13,7 @@ const CinemaSeatingPlan = ({ id }) => {
   useEffect(() => {
     const id = router.query.listId;
 
-    console.log('id', id);
+    console.log("id", id);
     fetch(`http://localhost:5000/listing/listingById/${id}`)
       .then((response) => response.json())
       .then((data) => {
@@ -28,7 +28,9 @@ const CinemaSeatingPlan = ({ id }) => {
   const handleSeatClick = (index) => {
     if (!seats[index]) {
       if (selectedSeats.includes(index)) {
-        setSelectedSeats(selectedSeats.filter((seatIndex) => seatIndex !== index));
+        setSelectedSeats(
+          selectedSeats.filter((seatIndex) => seatIndex !== index)
+        );
       } else {
         setSelectedSeats([...selectedSeats, index]);
       }
@@ -36,7 +38,7 @@ const CinemaSeatingPlan = ({ id }) => {
   };
 
   const calculatePrice = () => {
-    const pricePerSeat = currentUser.customerType === 'adult' ? 10 : 12;
+    const pricePerSeat = currentUser.customerType === "adult" ? 10 : 12;
     return selectedSeats.length * pricePerSeat;
   };
 
@@ -86,28 +88,29 @@ const CinemaSeatingPlan = ({ id }) => {
         {selectedSeats.length > 0 && (
           <div className="mt-4">
             <p>
-              You have selected: {selectedSeats.map((seatIndex) => getSeatLabel(seatIndex)).join(", ")}
+              You have selected:{" "}
+              {selectedSeats
+                .map((seatIndex) => getSeatLabel(seatIndex))
+                .join(", ")}
             </p>
-            <p>
-              Price: ${calculatePrice()}
-            </p>
+            <p>Price: ${calculatePrice()}</p>
+            <span>
+              <Link href="/PurchaseScreen">
+                <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                  Make Payment
+                </button>
+              </Link>
+              <Link href="/purchaseFood">
+                <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                  Add Food and Drink
+                </button>
+              </Link>
+            </span>
           </div>
         )}
-        <span>
-          <Link href="/PurchaseScreen">
-            <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-            Make Payment
-            </button>
-            </Link>
-            <Link href="/purchaseFood">
-            <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-            Add Food and Drink
-            </button>
-            </Link>
-            </span>
-            </div>
-            </main>
-          ); 
-          };
+      </div>
+    </main>
+  );
+};
 
 export default CinemaSeatingPlan;
