@@ -18,7 +18,7 @@ const CreateUser = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [userType, setUserType] = useState("");
-  const [customerType, setCustomerType] = useState("");
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -31,13 +31,13 @@ const CreateUser = () => {
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
   };
-  const handleCustomerTypeChange = (e) => {
-    setCustomerType(e.target.value);
-  };
-  const createUnvalidatedUser = async (e) => {
+  // const handleCustomerTypeChange = (e) => {
+  //   setCustomerType(e.target.value);
+  // };
+  const createInvalidatedUser = async (e) => {
     e.preventDefault();
     const createUser = await fetch(
-      "http://localhost:5000/auth/createUnvalidatedUser",
+      "http://localhost:5000/auth/createInvalidatedUser",
       {
         method: "POST",
         headers: {
@@ -45,15 +45,15 @@ const CreateUser = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          fullName: name,
           userName: userName,
           email: email,
           userType: userType,
-          customerType: customerType ? customerType : "",
         }),
       }
     );
     if (createUser.status === 200) {
-      window.alert("User created successfully. Email sent to user");
+      window.alert("User created successfully.");
       // router.push("/UserLogInScreen");
       // sendEmail();
     } else window.alert("Error creating account");
@@ -96,7 +96,7 @@ const CreateUser = () => {
               className="space-y-6"
               action="#"
               method="POST"
-              onSubmit={createUnvalidatedUser}
+              onSubmit={createInvalidatedUser}
             >
               <div>
                 <label
@@ -176,26 +176,6 @@ const CreateUser = () => {
                 </div>
               </div>
 
-              {userType?.toLowerCase() === "customer" ? (
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-400"
-                  >
-                    Customer Type
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="customerType"
-                      name="customerType"
-                      type="customerType"
-                      onChange={handleCustomerTypeChange}
-                      placeholder="Senior / Regular / Student"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-                    />
-                  </div>
-                </div>
-              ) : null}
               <div>
                 <button
                   type="submit"

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
 
 const User = require("../models/user");
+const InvalidatedUser = require("../models/invalidatedUser");
 const bcrypt = require("bcryptjs");
 
 //@desc     Register a new user
@@ -47,23 +48,23 @@ exports.register = async (req, res) => {
   });
 };
 //@desc     Create unvalidated user
-//@Route   POST/createUnvalidatedUser
+//@Route   POST/createInvalidatedUser
 //@access   public
-exports.createUnvalidatedUser = async (req, res) => {
+exports.createInvalidatedUser = async (req, res) => {
   const userName = req.body.userName;
   //check if user exist
-  const userExist = await User.findOne({ username: userName });
-  if (userExist)
+  const userExist = await User.findOne({ userName: userName });
+  const invalidatedUserExists = await InvalidatedUser.findOne({
+    userName: userName,
+  });
+  if (userExist || invalidatedUserExists)
     return res.status(400).json({ message: "Username already taken" });
-  await User.create({
-    username: userName,
+  await InvalidatedUser.create({
+    fullName: req.body.fullName,
+    userName: req.body.userName,
     email: req.body.email,
-    password: "P@$$w0rd1234",
     userType: req.body.userType,
-    customerType: req.body.customerType,
     isValidated: false,
-    hasAccess: false,
-    isActive: false,
   })
     .then((user) =>
       res.status(200).json({
@@ -80,47 +81,50 @@ exports.createUnvalidatedUser = async (req, res) => {
 };
 
 //@desc     Validate user account
-//@Route   POST/validateUserAccount
+//@Route    POST/validateUserAccount
 //@access   public
-exports.userValidateAccount = async (req, res) => {
-  const userName = req.body.userName;
+exports.validateUserAccount = async (req, res) => {
+  const username = req.body.userName;
 
   //check if user exist
-  if (req.body.password.length < 6)
-    return res.status(400).json({ message: "Password less than 6 characters" });
-
-  const userExist = await User.findOne({ username: userName });
-
-  if (userExist)
-    return res.status(400).json({ message: "Username already taken" });
-
-  bcrypt.hash(req.body.password, 10).then(async (hash) => {
-    await User.create({
-      username: userName,
-      password: hash,
-      userType: req.body.userType,
-      customerType: req.body.customerType,
-      loyaltyPoints: 0,
-      isActive: true,
-      isValidated: true,
-    })
-      .then((user) =>
-        res.status(200).json({
-          message: "User created successfully",
-          user,
-        })
-      )
-      .catch((err) =>
-        res.status(400).json({
-          message: "User not created",
-          error: err.message,
-        })
-      );
-  });
+  // if (req.body.password.length < 6)
+  //   return res.status(400).json({ message: "Password less than 6 characters" });
+  const user = await InvalidatedUser.findOne({ userName: username }).exec();
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+  // if (user) {
+  //   bcrypt.hash(req.body.password, 10).then(async (hash) => {
+  //     await User.create({
+  //       username: user.userName,
+  //       password: hash,
+  //       userType: user.userType,
+  //       isActive: true,
+  //       isValidated: true,
+  //       hasAccess: true,
+  //     })
+  //       .then((user) =>
+  //         res.status(200).json({
+  //           message: "User created successfully",
+  //           user,
+  //         })
+  //       )
+  //       .catch((err) =>
+  //         res.status(400).json({
+  //           message: "User not created",
+  //           error: err.message,
+  //         })
+  //       );
+  //   });
+  //   //remove user from invalidated user
+  //   InvalidatedUser.findOneAndDelete({ userName: username }).exec();
+  // } else {
+  //   res.status(404).json({ message: "User not found" });
+  // }
 };
-
 //@desc     Get user by username
-//@route    PUT/getUserByUsername
+//@route    GET/getUserByUsername
 //@access   public
 
 exports.getUserByUsername = async (req, res) => {
@@ -131,13 +135,34 @@ exports.getUserByUsername = async (req, res) => {
   }
   res.status(200).json(user);
 };
+//@desc     Get user by username
+//@route    GET/getInvalidatedUserByUsername
+//@access   public
 
+exports.getInvalidatedUserByUsername = async (req, res) => {
+  const { username } = req.params;
+  const user = await InvalidatedUser.findOne({ userName: username }).exec();
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+};
 //@desc     Get all users
 //@route    GET/getUsers
 //@access   public
 
 exports.getUsers = async (req, res) => {
   const users = await User.find();
+  // const users = await User.find().select({ _id: 0, username: 1 });
+  res.status(200).json(users);
+};
+
+//@desc     Get all invalid users
+//@route    GET/getInvalidUsers
+//@access   public
+
+exports.getInvalidUsers = async (req, res) => {
+  const users = await InvalidatedUser.find();
   // const users = await User.find().select({ _id: 0, username: 1 });
   res.status(200).json(users);
 };
