@@ -13,11 +13,15 @@ function Footer() {
             <ul>
               <li>
                 {" "}
-                <Link href="/footerComponents/aboutUs">About Us</Link>
+                <Link href="/footerComponents/aboutUs">
+                  <a className="text-amber-300">About Us</a>
+                </Link>
               </li>
               <li>
                 {" "}
-                <Link href="/footerComponents/faq"> FAQ</Link>
+                <Link href="/footerComponents/faq">
+                  <a className="text-amber-300">FAQ</a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -26,11 +30,15 @@ function Footer() {
             <ul>
               <li>
                 {" "}
-                <Link href="/footerComponents/contactUs">Contact Us</Link>
+                <Link href="/footerComponents/contactUs">
+                  <a className="text-amber-300">Contact Us</a>
+                </Link>
               </li>
               <li>
                 {" "}
-                <Link href="/footerComponents/feedback">Feedback</Link>
+                <Link href="/footerComponents/feedback">
+                  <a className="text-amber-300">Feedback</a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -40,13 +48,13 @@ function Footer() {
               <li>
                 {" "}
                 <Link href="https://www.instagram.com/gvmovieclub/">
-                  Instagram
+                  <a className="text-amber-300">Instagram</a>
                 </Link>
               </li>
               <li>
                 {" "}
                 <Link href="https://www.facebook.com/gvmovieclub">
-                  Facebook
+                  <a className="text-amber-300">Facebook</a>
                 </Link>
               </li>
             </ul>
@@ -56,12 +64,14 @@ function Footer() {
             <ul>
               <li>
                 {" "}
-                <Link href="/footerComponents/termsOfUse">Terms of Use</Link>
+                <Link href="/footerComponents/termsOfUse">
+                  <a className="text-amber-300">Terms of Use</a>
+                </Link>
               </li>
               <li>
                 {" "}
                 <Link href="/footerComponents/privacyPolicy">
-                  Privacy Policy
+                  <a className="text-amber-300">Privacy Policy</a>
                 </Link>
               </li>
             </ul>
