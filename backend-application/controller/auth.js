@@ -29,6 +29,8 @@ exports.register = async (req, res) => {
       loyaltyPoints: 0,
       isActive: true,
       isValidated: true,
+      hasAccess: false,
+      seatsBooked: [],
     })
       .then((user) =>
         res.status(200).json({

@@ -10,6 +10,24 @@ const CinemaSeatingPlan = ({ id }) => {
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
+  const purchaseTicket = async () => {
+    const bookTicket = await fetch("http://localhost:5000/listing/seat", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booked: selectedSeats,
+        id: router.query.listId,
+        discountedPriceBooked:
+          currentUser.userType === "adult" ? 0 : selectedSeats.length,
+        userId: currentUser._id,
+      }),
+    });
+    if (bookTicket.status === 200) window.alert("Booking successful");
+    else window.alert("Error");
+  };
   useEffect(() => {
     const id = router.query.listId;
 

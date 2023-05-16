@@ -22,6 +22,9 @@ export default function DisplayUserSignUp() {
 
   const createUser = async (e) => {
     e.preventDefault();
+    console.log(username);
+    console.log(password);
+    console.log(customer);
     const createUser = await fetch("http://localhost:5000/auth/register", {
       method: "POST",
       headers: {

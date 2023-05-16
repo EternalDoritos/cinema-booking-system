@@ -34,6 +34,19 @@ const userSchema = new Schema({
     required: true,
   },
   loyaltyPoints: Number,
+  seatsBooked: [
+    {
+      movieList: {
+        type: mongoose.Types.ObjectId,
+        ref: "Listing",
+      },
+      seating: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

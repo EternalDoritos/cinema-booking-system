@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const Listing = require("../models/listing");
 const Cinema = require("../models/cinema");
-
+const User = require("../models/user");
 exports.getListing = asyncHandler(async (req, res) => {
   const listings = await Listing.find();
   res.status(200).json(listings);
@@ -104,11 +104,28 @@ exports.patchListing = asyncHandler(async (req, res) => {
     existingSeat.seating[ele] = true;
   }
 
+  const prevValue = await Listing.find({ _id: req.body.id }).select({
+    _id: 0,
+    discountedPriceBooked: 1,
+  });
+  console.log(prevValue[0].discountedPriceBooked);
   const listing = await Listing.findByIdAndUpdate(
     { _id: req.body.id },
     {
       seating: existingSeat.seating,
-      discountedPriceBooked: req.body.discountedPriceBooked,
+      discountedPriceBooked:
+        prevValue[0].discountedPriceBooked + req.body.discountedPriceBooked,
+    }
+  );
+  const user = await User.findByIdAndUpdate(
+    { _id: req.body.userId },
+    {
+      $push: {
+        seatsBooked: {
+          movieList: req.body.id,
+          seating: req.body.booked,
+        },
+      },
     }
   );
   res.status(200).json(listing);
