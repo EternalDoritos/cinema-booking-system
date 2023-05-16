@@ -23,7 +23,7 @@ const CinemaSeatingPlan = ({ id }) => {
       .catch((error) => {
         console.error(error);
       });
-  }, [id]);
+  }, [router.query.listId, id]);
 
   const handleSeatClick = (index) => {
     if (!seats[index]) {
@@ -52,13 +52,11 @@ const CinemaSeatingPlan = ({ id }) => {
   const handleWalkin = (e) => {
     e.preventDefault();
     if (currentUser == null) {
-      router.push("/PurchaseScreen")
-    }
-    else if (currentUser.userType == "staff") {
+      router.push("/PurchaseScreen");
+    } else if (currentUser.userType == "staff") {
       router.push("/staffComponents/ChoosePayment");
-    }
-    else {
-      router.push("/PurchaseScreen")
+    } else {
+      router.push("/PurchaseScreen");
     }
   };
 
@@ -108,8 +106,10 @@ const CinemaSeatingPlan = ({ id }) => {
             </p>
             <p>Price: ${calculatePrice()}</p>
             <span>
-              <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-                onClick={handleWalkin}>
+              <button
+                class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                onClick={handleWalkin}
+              >
                 Make Payment
               </button>
               <Link href="/purchaseFood">
