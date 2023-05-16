@@ -59,7 +59,11 @@ const CinemaSeatingPlan = ({ id }) => {
   };
 
   const calculatePrice = () => {
-    const pricePerSeat = currentUser.customerType === "adult" ? 10 : 12;
+    const pricePerSeat =
+      currentUser.customerType === "student" ||
+      currentUser.customerType === "senior"
+        ? 10
+        : 12;
     return selectedSeats.length * pricePerSeat;
   };
 
