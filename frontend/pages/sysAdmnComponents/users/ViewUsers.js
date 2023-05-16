@@ -134,7 +134,7 @@ const ViewUsers = ({ users }) => {
       <p class="text-white text-center text-base pt-2 pb-10  tracking-wider">
         Functions: View Users, Search Users, Update Users
       </p>
-      <table class="table w-full" {...getTableProps()}>
+      <table class="table w-full overflow-hidden" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -221,15 +221,26 @@ const ViewUsers = ({ users }) => {
                   }}
                 >
                   {row.cells.map((cell) => {
+                    console.log(cell.value);
                     return (
                       <td
                         {...cell.getCellProps()}
                         style={{
+                          color:
+                            cell.value === "not validated" ||
+                            cell.value === "not active" ||
+                            cell.value === "suspended"
+                              ? "rgb(220 38 38)"
+                              : cell.value === "validated" ||
+                                cell.value === "active" ||
+                                cell.value === "not suspended"
+                              ? "rgb(74 222 128)"
+                              : "rgb(30 41 59)",
                           padding: "10px",
                           border: "solid 1px gray",
-                          background: "papayawhip",
+                          background: "#FFF7D4",
                         }}
-                        class="text-slate-800"
+                        class="font-normal "
                       >
                         {cell.render("Cell")}
                       </td>
@@ -246,18 +257,41 @@ const ViewUsers = ({ users }) => {
                     <h2 class="font-bold text-xl text-slate-800 uppercase">
                       {userType}
                     </h2>
-                    <p class="font-bold text-slate-600">User name: </p>
+                    <p class="font-extrabold text-slate-700">User name: </p>
                     <p class="text-slate-600">{name}</p>
-                    <p class="font-bold text-slate-600">Employee type: </p>
+                    <p class="font-extrabold text-slate-700">Employee type: </p>
                     <p class="text-slate-600">{userType}</p>
-                    <p class="font-bold text-slate-600">Email: </p>
-                    <p class="text-slate-600">{email}</p>
-                    <p class="font-bold text-slate-600">Phone: </p>
+                    <p class="font-extrabold text-slate-700">Email: </p>
+                    {email ? (
+                      <p class="text-slate-600">{email}</p>
+                    ) : (
+                      <p class="text-slate-600">-</p>
+                    )}
+
+                    <p class="font-extrabold text-slate-700">Phone: </p>
                     <p class="text-slate-600">{phoneNum}</p>
-                    <p class="font-bold text-slate-600">Active: </p>
-                    <p class="text-slate-600">{activityStatus}</p>
-                    <p class="font-bold text-slate-600">Suspended: </p>
-                    <p class="text-slate-600">{suspendedStatus}</p>
+                    <p class="font-extrabold text-slate-700">
+                      Validated User:{" "}
+                    </p>
+                    {validStatus === "validated" ? (
+                      <p class="text-green-500">{validStatus}</p>
+                    ) : (
+                      <p class="text-red-500">{validStatus}</p>
+                    )}
+                    <p class="font-extrabold text-slate-700">Active: </p>
+                    {activityStatus === "active" ? (
+                      <p class="text-green-500">{activityStatus}</p>
+                    ) : (
+                      <p class="text-red-500">{activityStatus}</p>
+                    )}
+
+                    <p class="font-extrabold text-slate-700">Suspended: </p>
+                    {suspendedStatus === "not suspended" ? (
+                      <p class="text-green-500">{suspendedStatus}</p>
+                    ) : (
+                      <p class="text-red-500">{suspendedStatus}</p>
+                    )}
+
                     <Link
                       href={`/sysAdmnComponents/users/EditUser/${id}`}
                       //   href={`/EditUser?id=u64574dc5f132becf123ddcf7`}
