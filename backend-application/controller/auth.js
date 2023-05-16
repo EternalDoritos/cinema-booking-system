@@ -47,6 +47,8 @@ exports.register = async (req, res) => {
   });
 };
 //@desc     Create unvalidated user
+//@Route   POST/createUnvalidatedUser
+//@access   public
 exports.createUnvalidatedUser = async (req, res) => {
   const userName = req.body.userName;
   //check if user exist
@@ -75,6 +77,59 @@ exports.createUnvalidatedUser = async (req, res) => {
         error: err.message,
       })
     );
+};
+
+//@desc     Validate user account
+//@Route   POST/validateUserAccount
+//@access   public
+exports.userValidateAccount = async (req, res) => {
+  const userName = req.body.userName;
+
+  //check if user exist
+  if (req.body.password.length < 6)
+    return res.status(400).json({ message: "Password less than 6 characters" });
+
+  const userExist = await User.findOne({ username: userName });
+
+  if (userExist)
+    return res.status(400).json({ message: "Username already taken" });
+
+  bcrypt.hash(req.body.password, 10).then(async (hash) => {
+    await User.create({
+      username: userName,
+      password: hash,
+      userType: req.body.userType,
+      customerType: req.body.customerType,
+      loyaltyPoints: 0,
+      isActive: true,
+      isValidated: true,
+    })
+      .then((user) =>
+        res.status(200).json({
+          message: "User created successfully",
+          user,
+        })
+      )
+      .catch((err) =>
+        res.status(400).json({
+          message: "User not created",
+          error: err.message,
+        })
+      );
+  });
+};
+
+//@desc     Get user by username
+//@route    PUT/getUserByUsername
+//@access   public
+
+exports.getUserByUsername = async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ username: username }).exec();
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
 };
 
 //@desc     Get all users
