@@ -41,6 +41,7 @@ exports.getListingByID = asyncHandler(async (req, res) => {
   arr = [];
   const listing = await Listing.find({ movie: req.params.id })
     .populate("cinema")
+    .populate("seating")
     .populate("movie");
   console.log(listing);
   for (ele of listing) {

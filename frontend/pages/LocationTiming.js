@@ -68,6 +68,7 @@ const MovieBookingPage = ({ id }) => {
                 {currentUser && (
                   <Link
                     href={`/SeatingScreen?listId=${ele.listId}`}
+                  
                     className="bg-cyan-900"
                   >
                     Book Now
