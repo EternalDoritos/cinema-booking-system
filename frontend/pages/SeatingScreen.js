@@ -157,30 +157,65 @@ const CinemaSeatingPlan = ({ id }) => {
     fetch(`http://localhost:5000/listing/listingById/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("hi");
         console.log(data[0].seating);
-        setSeats(data[0].seating); // Assuming seating is an array of booleans
+        setSeats(data[0].seating);
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
 
+  // const renderSeats = () => {
+  //   return (
+  //     <div className="grid grid-cols-5 gap-4">
+  //       {seats.map((seat, index) => (
+  //         <div
+  //           key={index}
+  //           className={`p-2 rounded-md ${
+  //             seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-600 hover:bg-blue-500 cursor-pointer"
+  //           }`}
+  //           // Add any additional styling or onClick handlers here
+  //           onClick={() => {
+  //             if (!seat) {
+  //               // Handle seat selection logic here
+  //               // For example, setCurrentUser or update the seat availability
+  //             }
+  //           }}
+  //         >
+  //           {seat ? "Seat Taken" : index + 1}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   );
+  // };
+
   const renderSeats = () => {
+    const seatPrices = [10, 15, 20, 25, 30]; // Example seat prices
+  
+    const handleSeatClick = (index) => {
+      if (!seats[index]) {
+        //Check Customer Type and display the price for them and Seats chosen
+      }
+    };
+  
     return (
       <div className="grid grid-cols-5 gap-4">
         {seats.map((seat, index) => (
           <div
             key={index}
-            className={`p-2 rounded-md ${seat ? "bg-gray-500" : "bg-gray-600"}`}
+            className={`p-3 rounded-md ${
+              seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
+            }`}
             // Add any additional styling or onClick handlers here
+            onClick={() => handleSeatClick(index)}
           >
-            {index + 1}
+            {seat ? "Reserved" : "Available"}
           </div>
         ))}
       </div>
     );
   };
+  
   
 
   return (
@@ -195,7 +230,20 @@ const CinemaSeatingPlan = ({ id }) => {
         <div className="flex flex-wrap justify-center">
           {renderSeats()}
         </div>
-      </div>
+        <span>
+        <Link href = {"PurchaseScreen"}>
+        <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                  Make Payment
+                </button>
+                </Link>
+                {/* redirect to food purchasing page */}
+                <Link href={"/purchaseFood"}>
+                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
+                    add food and drink
+                  </button>
+                </Link>
+        </span>
+        </div>
     </main>
   );
 };
