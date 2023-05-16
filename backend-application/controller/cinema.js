@@ -53,6 +53,11 @@ exports.getOneCinema = asyncHandler(async (req, res) => {
 //@route    POST/cinema
 //@access   private
 exports.postCinema = asyncHandler(async (req, res) => {
+  const exist = await Cinema.findOne({ location: req.body.location });
+  if (exist) {
+    res.status(400);
+    throw new Error("Location already exist");
+  }
   const cinema = await Cinema.create({
     location: req.body.location,
     maxSeating: req.body.seating,

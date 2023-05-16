@@ -27,6 +27,11 @@ const MovieBookingPage = ({ id }) => {
       </Head>
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold">Movie Showtimes</h1>
+        {!currentUser && (
+          <h1 className="text-center font-bold font-3xl text-red-600">
+            Please log in to book a ticket
+          </h1>
+        )}
       </div>
       {timing.length < 1 ? (
         <h1 className="text-center m-4 text-3xl text-bold">
@@ -59,11 +64,7 @@ const MovieBookingPage = ({ id }) => {
                 <div>
                   <h4>{ele.time}</h4>
                 </div>
-                {!currentUser && (
-                  <Link href={`/UserLogInScreen`} className="bg-cyan-900">
-                    Log In to book
-                  </Link>
-                )}
+                {!currentUser && <> </>}
                 {currentUser && (
                   <Link
                     href={`/SeatingScreen?listId=${ele.listId}`}
