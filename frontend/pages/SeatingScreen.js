@@ -139,7 +139,6 @@
 // // missing food and drinks, ticket type (e.g student), photo id verification
 
 
-
 import Head from "next/head";
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
@@ -177,6 +176,18 @@ const CinemaSeatingPlan = ({ id }) => {
     }
   };
 
+  const calculatePrice = () => {
+    const pricePerSeat = currentUser.customerType === 'adult' ? 12 : 10;
+    return selectedSeats.length * pricePerSeat;
+  };
+
+  const getSeatLabel = (index) => {
+    const rowNumber = Math.floor(index / 5) + 1;
+    const columnNumber = (index % 5) + 1;
+    const rowLabel = String.fromCharCode(65 + rowNumber - 1); // A = 65 in ASCII
+    return `${rowLabel}${columnNumber}`;
+  };
+
   const renderSeats = () => {
     return (
       <div className="grid grid-cols-5 gap-4">
@@ -196,16 +207,11 @@ const CinemaSeatingPlan = ({ id }) => {
               ? "Reserved"
               : selectedSeats.includes(index)
               ? "Selected"
-              : "Available"}
+              : getSeatLabel(index)}
           </div>
         ))}
       </div>
     );
-  };
-
-  const calculatePrice = () => {
-    const pricePerSeat = currentUser.customerType === 'adult' ? 12 : 10;
-    return selectedSeats.length * pricePerSeat;
   };
 
   return (
@@ -218,31 +224,31 @@ const CinemaSeatingPlan = ({ id }) => {
           Screen
         </div>
         <div className="flex flex-wrap justify-center">{renderSeats()}</div>
-        <div>
-          {selectedSeats.length > 0 && (
-            <p className="mt-4">
-              You have selected: {selectedSeats.join(", ")}
-              <p>
-              Price: $${calculatePrice()}
-              </p>
+        {selectedSeats.length > 0 && (
+          <div className="mt-4">
+            <p>
+              You have selected: {selectedSeats.map((seatIndex) => getSeatLabel(seatIndex)).join(", ")}
             </p>
-          )}
-        </div>
+            <p>
+              Price: ${calculatePrice()}
+            </p>
+          </div>
+        )}
         <span>
           <Link href="/PurchaseScreen">
             <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-              Make Payment
+            Make Payment
             </button>
-          </Link>
-          <Link href="/purchaseFood">
+            </Link>
+            <Link href="/purchaseFood">
             <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-              Add Food and Drink
+            Add Food and Drink
             </button>
-          </Link>
-        </span>
-      </div>
-    </main>
-  );
-};
+            </Link>
+            </span>
+            </div>
+            </main>
+          ); 
+          };
 
 export default CinemaSeatingPlan;
