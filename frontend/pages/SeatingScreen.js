@@ -139,6 +139,95 @@
 // // missing food and drinks, ticket type (e.g student), photo id verification
 
 
+// import Head from "next/head";
+// import React, { useState, useEffect, useContext } from "react";
+// import { useRouter } from "next/router";
+// import Link from "next/link";
+// import { Context } from "../store/context";
+
+// const CinemaSeatingPlan = ({ id }) => {
+//   const router = useRouter();
+//   const [currentUser, setCurrentUser] = useContext(Context);
+//   const [seats, setSeats] = useState([]);
+
+//   useEffect(() => {
+//     const id = router.query.listId;
+
+//     console.log('id', id);
+//     fetch(`http://localhost:5000/listing/listingById/${id}`)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         console.log(data[0].seating);
+//         setSeats(data[0].seating);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   }, [id]);
+
+
+//   const renderSeats = () => {
+//       const handleSeatClick = (index) => {
+//       if (!seats[index]) {
+//         //Check Customer Type and display the price for them and Seats chosen
+
+//       }
+//     };
+  
+//     return (
+//       <div className="grid grid-cols-5 gap-4">
+//         {seats.map((seat, index) => (
+//           <div
+//             key={index}
+//             className={`p-3 rounded-md ${
+//               seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
+//             }`}
+//             // Add any additional styling or onClick handlers here
+//             onClick={() => handleSeatClick(index)}
+//           >
+//             {seat ? "Reserved" : "Available"}
+//           </div>
+//         ))}
+//       </div>
+//     );
+//   };
+
+  
+
+//   return (
+//     <main className="container mx-auto mt-4">
+//       <Head>
+//         <title>Seating Plan</title>
+//       </Head>
+//       <div className="flex flex-col items-center">
+//         <div className="h-20 w-full bg-gray-800 flex items-center justify-center text-white text-2xl font-bold mb-4">
+//           Screen
+//         </div>
+//         <div className="flex flex-wrap justify-center">
+//           {renderSeats()}
+//         </div>
+
+
+//         <span>
+//         <Link href = {"PurchaseScreen"}>
+//         <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+//                   Make Payment
+//                 </button>
+//                 </Link>
+//                 {/* redirect to food purchasing page */}
+//                 <Link href={"/purchaseFood"}>
+//                   <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
+//                     add food and drink
+//                   </button>
+//                 </Link>
+//         </span>
+//         </div>
+//     </main>
+//   );
+// };
+
+// export default CinemaSeatingPlan;
+
 import Head from "next/head";
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
@@ -149,6 +238,7 @@ const CinemaSeatingPlan = ({ id }) => {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useContext(Context);
   const [seats, setSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
   useEffect(() => {
     const id = router.query.listId;
@@ -165,58 +255,41 @@ const CinemaSeatingPlan = ({ id }) => {
       });
   }, [id]);
 
-  // const renderSeats = () => {
-  //   return (
-  //     <div className="grid grid-cols-5 gap-4">
-  //       {seats.map((seat, index) => (
-  //         <div
-  //           key={index}
-  //           className={`p-2 rounded-md ${
-  //             seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-600 hover:bg-blue-500 cursor-pointer"
-  //           }`}
-  //           // Add any additional styling or onClick handlers here
-  //           onClick={() => {
-  //             if (!seat) {
-  //               // Handle seat selection logic here
-  //               // For example, setCurrentUser or update the seat availability
-  //             }
-  //           }}
-  //         >
-  //           {seat ? "Seat Taken" : index + 1}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-  // };
+  const handleSeatClick = (index) => {
+    if (!seats[index]) {
+      if (selectedSeats.includes(index)) {
+        setSelectedSeats(selectedSeats.filter((seatIndex) => seatIndex !== index));
+      } else {
+        setSelectedSeats([...selectedSeats, index]);
+      }
+    }
+  };
 
   const renderSeats = () => {
-    const seatPrices = [10, 15, 20, 25, 30]; // Example seat prices
-  
-    const handleSeatClick = (index) => {
-      if (!seats[index]) {
-        //Check Customer Type and display the price for them and Seats chosen
-      }
-    };
-  
     return (
       <div className="grid grid-cols-5 gap-4">
         {seats.map((seat, index) => (
           <div
             key={index}
             className={`p-3 rounded-md ${
-              seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
+              seat
+                ? "bg-gray-400 cursor-not-allowed"
+                : selectedSeats.includes(index)
+                ? "bg-blue-500 cursor-pointer"
+                : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
             }`}
-            // Add any additional styling or onClick handlers here
             onClick={() => handleSeatClick(index)}
           >
-            {seat ? "Reserved" : "Available"}
+            {seat
+              ? "Reserved"
+              : selectedSeats.includes(index)
+              ? "Selected"
+              : "Available"}
           </div>
         ))}
       </div>
     );
   };
-  
-  
 
   return (
     <main className="container mx-auto mt-4">
@@ -227,23 +300,27 @@ const CinemaSeatingPlan = ({ id }) => {
         <div className="h-20 w-full bg-gray-800 flex items-center justify-center text-white text-2xl font-bold mb-4">
           Screen
         </div>
-        <div className="flex flex-wrap justify-center">
-          {renderSeats()}
+        <div className="flex flex-wrap justify-center">{renderSeats()}</div>
+        <div>
+          {selectedSeats.length > 0 && (
+            <p className="mt-4">
+              You have selected: {selectedSeats.join(", ")}
+            </p>
+          )}
         </div>
         <span>
-        <Link href = {"PurchaseScreen"}>
-        <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                  Make Payment
-                </button>
-                </Link>
-                {/* redirect to food purchasing page */}
-                <Link href={"/purchaseFood"}>
-                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
-                    add food and drink
-                  </button>
-                </Link>
+          <Link href="/PurchaseScreen">
+            <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+              Make Payment
+            </button>
+          </Link>
+          <Link href="/purchaseFood">
+            <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+              Add Food and Drink
+            </button>
+          </Link>
         </span>
-        </div>
+      </div>
     </main>
   );
 };
