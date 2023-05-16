@@ -49,6 +49,19 @@ const CinemaSeatingPlan = ({ id }) => {
     return `${rowLabel}${columnNumber}`;
   };
 
+  const handleWalkin = (e) => {
+    e.preventDefault();
+    if (currentUser == null) {
+      router.push("/PurchaseScreen")
+    }
+    else if (currentUser.userType == "staff") {
+      router.push("/staffComponents/ChoosePayment");
+    }
+    else {
+      router.push("/PurchaseScreen")
+    }
+  };
+
   const renderSeats = () => {
     return (
       <div className="grid grid-cols-5 gap-4">
@@ -95,11 +108,10 @@ const CinemaSeatingPlan = ({ id }) => {
             </p>
             <p>Price: ${calculatePrice()}</p>
             <span>
-              <Link href="/PurchaseScreen">
-                <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                  Make Payment
-                </button>
-              </Link>
+              <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                onClick={handleWalkin}>
+                Make Payment
+              </button>
               <Link href="/purchaseFood">
                 <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
                   Add Food and Drink
