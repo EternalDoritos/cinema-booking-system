@@ -12,6 +12,8 @@ function NavLink({ to, children }) {
 }
 
 function MobileNav({ open, setOpen }) {
+  const [currentUser] = useContext(Context);
+
   return (
     <div
       className={`absolute top-0 left-0 h-screen w-screen bg-black transform ${
@@ -48,17 +50,32 @@ function MobileNav({ open, setOpen }) {
         >
           Log in
         </a> */}
-        <a
-          className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
-          href="/UserLogInScreen"
-          onClick={() =>
-            setTimeout(() => {
-              setOpen(!open);
-            }, 100)
-          }
-        >
-          Log in
-        </a>
+        {!currentUser && (
+          <a
+            className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
+            href="/UserLogInScreen"
+            onClick={() =>
+              setTimeout(() => {
+                setOpen(!open);
+              }, 100)
+            }
+          >
+            Log in
+          </a>
+        )}
+        {currentUser && (
+          <a
+            className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
+            href="/UserProfileScreen"
+            onClick={() =>
+              setTimeout(() => {
+                setOpen(!open);
+              }, 100)
+            }
+          >
+            Profile
+          </a>
+        )}
       </div>
     </div>
   );
