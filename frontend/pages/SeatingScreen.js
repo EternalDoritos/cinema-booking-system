@@ -144,6 +144,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Context } from "../store/context";
+import AddLoyaltyPoints from "./addLoyaltyPts";
 
 const CinemaSeatingPlan = ({ id }) => {
   const router = useRouter();
@@ -164,7 +165,7 @@ const CinemaSeatingPlan = ({ id }) => {
         console.error(error);
       });
   }, [id]);
-  
+
   const renderSeats = () => {
     return (
       <div className="grid grid-cols-5 gap-4">
@@ -203,7 +204,20 @@ const CinemaSeatingPlan = ({ id }) => {
         <div className="flex flex-wrap justify-center">
           {renderSeats()}
         </div>
-      </div>
+        <span>
+        <Link href = {"PurchaseScreen"}>
+        <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                  Make Payment
+                </button>
+                </Link>
+                {/* redirect to food purchasing page */}
+                <Link href={"/purchaseFood"}>
+                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
+                    add food and drink
+                  </button>
+                </Link>
+        </span>
+        </div>
     </main>
   );
 };
