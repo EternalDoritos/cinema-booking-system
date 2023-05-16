@@ -134,8 +134,8 @@ const CinemaSeatingPlan = ({ id, foods }) => {
     if (newCounters[index] > 0) {
       newCounters[index] -= 1;
       setCounters(newCounters);
+      setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
     }
-    setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
   };
 
   const handleSubmit = (e) => {
