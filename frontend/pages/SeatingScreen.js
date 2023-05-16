@@ -300,6 +300,8 @@ export default function CinemaSeatingPlan() {
   ]);
   const router = useRouter();
 
+  const [currentUser, setCurrentUser] = useContext(Context);
+
   const handleClick = (seatId) => {
     const newSeats = seats.map((seat) => {
       if (seat.id === seatId) {
@@ -316,13 +318,11 @@ export default function CinemaSeatingPlan() {
   const handleWalkin = (e) => {
     e.preventDefault();
     if (currentUser == null) {
-      router.push("/PurchaseScreen")
-    }
-    else if (currentUser.userType == "staff") {
+      router.push("/PurchaseScreen");
+    } else if (currentUser.userType == "staff") {
       router.push("/staffComponents/ChoosePayment");
-    }
-    else {
-      router.push("/PurchaseScreen")
+    } else {
+      router.push("/PurchaseScreen");
     }
   };
 
@@ -390,14 +390,22 @@ export default function CinemaSeatingPlan() {
                 Total price: ${" "}
                 {seats.filter((seat) => seat.status === "selected").length * 10}
               </p>
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-                  onClick={handleWalkin}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <button
+                  class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                  onClick={handleWalkin}
+                >
                   Make Payment
                 </button>
                 {/* redirect to food purchasing page */}
                 <Link href={"/purchaseFood"}>
-                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded" >
+                  <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
                     add food and drink
                   </button>
                 </Link>
