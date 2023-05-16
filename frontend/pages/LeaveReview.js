@@ -45,6 +45,7 @@ const EditReview = () => {
         setReview("");
         setRating("");
         alert("Your review has been submitted!");
+        window.location.reload(); // force page to reload
       } else {
         console.log("Failed to update review");
       }

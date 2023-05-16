@@ -26,7 +26,7 @@ const DisplaySynopsis = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [router.isReady, router.query.movieId, movie]);
+  }, [router.isReady, router.query.movieId]);
 
   if (!movie)
     return (
