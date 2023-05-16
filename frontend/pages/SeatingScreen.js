@@ -157,30 +157,38 @@ const CinemaSeatingPlan = ({ id }) => {
     fetch(`http://localhost:5000/listing/listingById/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("hi");
         console.log(data[0].seating);
-        setSeats(data[0].seating); // Assuming seating is an array of booleans
+        setSeats(data[0].seating);
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
-
+  
   const renderSeats = () => {
     return (
       <div className="grid grid-cols-5 gap-4">
         {seats.map((seat, index) => (
           <div
             key={index}
-            className={`p-2 rounded-md ${seat ? "bg-gray-500" : "bg-gray-600"}`}
+            className={`p-2 rounded-md ${
+              seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-600 hover:bg-blue-500 cursor-pointer"
+            }`}
             // Add any additional styling or onClick handlers here
+            onClick={() => {
+              if (!seat) {
+                // Handle seat selection logic here
+                // For example, setCurrentUser or update the seat availability
+              }
+            }}
           >
-            {index + 1}
+            {seat ? "Seat Taken" : index + 1}
           </div>
         ))}
       </div>
     );
   };
+  
   
 
   return (
