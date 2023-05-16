@@ -58,7 +58,7 @@ const CinemaSeatingPlan = ({ id, foods }) => {
       });
   }, [router.query.listId, id]);
 
-  const calculatePrice = () => {
+  const calculatePrice = (selectedSeats) => {
     const pricePerSeat =
       currentUser.customerType === "student" ||
       currentUser.customerType === "senior"
