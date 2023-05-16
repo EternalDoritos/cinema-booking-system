@@ -28,6 +28,7 @@ exports.register = async (req, res) => {
       customerType: req.body.customerType,
       loyaltyPoints: 0,
       isActive: true,
+      isValidated: true,
     })
       .then((user) =>
         res.status(200).json({
@@ -42,6 +43,36 @@ exports.register = async (req, res) => {
         })
       );
   });
+};
+//@desc     Create unvalidated user
+exports.createUnvalidatedUser = async (req, res) => {
+  const userName = req.body.userName;
+  //check if user exist
+  const userExist = await User.findOne({ username: userName });
+  if (userExist)
+    return res.status(400).json({ message: "Username already taken" });
+  await User.create({
+    username: userName,
+    email: req.body.email,
+    password: "P@$$w0rd1234",
+    userType: req.body.userType,
+    customerType: req.body.customerType,
+    isValidated: false,
+    hasAccess: false,
+    isActive: false,
+  })
+    .then((user) =>
+      res.status(200).json({
+        message: "User account created successfully, get user to validate",
+        user,
+      })
+    )
+    .catch((err) =>
+      res.status(400).json({
+        message: "User not created.",
+        error: err.message,
+      })
+    );
 };
 
 //@desc     Get all users
@@ -60,12 +91,12 @@ exports.getUsers = async (req, res) => {
 
 exports.editUser = async (req, res) => {
   const { id } = req.params;
-  const { username, userType, customerType, email, loyaltyPoints} = req.body;
+  const { username, userType, customerType, email, loyaltyPoints } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { username, userType, customerType, email, loyaltyPoints},
+      { username, userType, customerType, email, loyaltyPoints },
       { new: true, runValidators: true, context: "query" }
     );
     if (!updatedUser) {
@@ -78,7 +109,6 @@ exports.editUser = async (req, res) => {
     res.status(500).json({ message: "Error updating user", error });
   }
 };
-
 
 //@desc     Get user by ID
 //@route    PUT/getUserById
