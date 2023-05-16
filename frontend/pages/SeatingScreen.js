@@ -4,11 +4,23 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Context } from "../store/context";
 
-const CinemaSeatingPlan = ({ id }) => {
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5000/food");
+  const data = await res.json();
+
+  return {
+    props: { foods: data },
+  };
+};
+
+const CinemaSeatingPlan = ({ id, foods }) => {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useContext(Context);
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [showFood, setShowFood] = useState(false);
+  const [totalCost, setTotalCost] = useState(0);
+  const [counters, setCounters] = useState(new Array(foods.length).fill(0));
 
   const purchaseTicket = async () => {
     const bookTicket = await fetch("http://localhost:5000/listing/seat", {
@@ -46,25 +58,24 @@ const CinemaSeatingPlan = ({ id }) => {
       });
   }, [router.query.listId, id]);
 
-  const handleSeatClick = (index) => {
-    if (!seats[index]) {
-      if (selectedSeats.includes(index)) {
-        setSelectedSeats(
-          selectedSeats.filter((seatIndex) => seatIndex !== index)
-        );
-      } else {
-        setSelectedSeats([...selectedSeats, index]);
-      }
-    }
-  };
-
   const calculatePrice = () => {
     const pricePerSeat =
       currentUser.customerType === "student" ||
       currentUser.customerType === "senior"
         ? 10
         : 12;
-    return selectedSeats.length * pricePerSeat;
+    const cost = selectedSeats.length * pricePerSeat;
+    setTotalCost(cost);
+  };
+
+  const handleSeatClick = (index) => {
+    if (!seats[index]) {
+      const updatedSelectedSeats = selectedSeats.includes(index)
+        ? selectedSeats.filter((seatIndex) => seatIndex !== index)
+        : [...selectedSeats, index];
+      setSelectedSeats(updatedSelectedSeats);
+      calculatePrice(updatedSelectedSeats); // Recalculate the total cost with the updated selected seats
+    }
   };
 
   const getSeatLabel = (index) => {
@@ -111,6 +122,37 @@ const CinemaSeatingPlan = ({ id }) => {
     );
   };
 
+  const handleIncrement = (index) => {
+    const newCounters = [...counters];
+    newCounters[index] += 1;
+    setCounters(newCounters);
+    setTotalCost((prevTotalCost) => prevTotalCost + foods[index].price);
+  };
+
+  const handleDecrement = (index) => {
+    const newCounters = [...counters];
+    if (newCounters[index] > 0) {
+      newCounters[index] -= 1;
+      setCounters(newCounters);
+    }
+    setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (currentUser == null) {
+      router.push("/PurchaseScreen");
+    } else if (currentUser.userType == "staff") {
+      router.push("/staffComponents/ChoosePayment");
+    } else {
+      router.push("/PurchaseScreen");
+    }
+  };
+
+  const handleFood = ()=> {
+    setShowFood(true);
+  }
+
   return (
     <main className="container mx-auto mt-4">
       <Head>
@@ -129,19 +171,71 @@ const CinemaSeatingPlan = ({ id }) => {
                 .map((seatIndex) => getSeatLabel(seatIndex))
                 .join(", ")}
             </p>
-            <p>Price: ${calculatePrice()}</p>
+            {!showFood && (<p>Price: ${totalCost}</p>)}
             <span>
-              <button
-                class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-                onClick={handleWalkin}
-              >
+            {!showFood && (<button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                onClick={handleWalkin}>
                 Make Payment
-              </button>
-              <Link href="/purchaseFood">
-                <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                  Add Food and Drink
+              </button>)}
+              <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+              onClick={handleFood}>
+                {!showFood && ("Add Food And Drink")}
+                {showFood && 
+                (<div className="flex flex-col items-center">
+                <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+                  Food and Beverage
+                </h1>
+                <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
+                  {foods.map((food, index) => (
+                    <div
+                      key={food.id}
+                      className="bg-gray-800 rounded-lg p-4 cursor-pointer"
+                    >
+                      <div className="card relative">
+                        <div className="bg-black-300 flex items-center justify-center">
+                          <img
+                            className="object-cover h-400 w-450 lg:h-70 xl:w-96"
+                            src={food.image}
+                            alt={food.name}
+                          />
+                        </div>
+                        <div className="m-4">
+                          <h3 className="text-lg font-bold mb-2 text-white">
+                            {food.name}
+                          </h3>
+                          <p className="text-sm text-gray-400">{food.price}</p>
+                          <div className="flex items-center justify-center">
+                            <button
+                              onClick={() => handleDecrement(index)}
+                              className="bg-yellow text-black font-bold py-2 px-4 rounded"
+                            >
+                              -
+                            </button>
+                            <span>{counters[index]}</span>
+                            <button
+                              onClick={() => handleIncrement(index)}
+                              className="bg-yellow text-black font-bold py-2 px-4 rounded"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-white">
+                  <p>Total Cost: ${Math.ceil(totalCost * 100) / 100}</p>
+                </div>
+                <button
+                  onClick={handleSubmit}
+                  className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded"
+                >
+                  Proceed to Payment
                 </button>
-              </Link>
+              </div>)
+                }
+              </button>
             </span>
           </div>
         )}
