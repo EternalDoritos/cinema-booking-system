@@ -23,6 +23,10 @@ exports.summaryReportMovie = async (req, res) => {
     movies.seating.forEach((element) => {
       if (element) revenue += 12;
     });
+    revenue =
+      !movies.discountedPriceBooked || movies.discountedPriceBooked === 0
+        ? revenue
+        : revenue - 2 * discountedPriceBooked;
     grandTotalMovie += revenue;
 
     const updatedDate = `${movies.date.getDate()}-${
@@ -62,6 +66,11 @@ exports.summaryReportDate = async (req, res) => {
     movies.seating.forEach((element) => {
       if (element) revenue += 12;
     });
+    revenue =
+      !movies.discountedPriceBooked || movies.discountedPriceBooked === 0
+        ? revenue
+        : revenue - 2 * discountedPriceBooked;
+
     grandTotalDate += revenue;
 
     const movieDetail = {

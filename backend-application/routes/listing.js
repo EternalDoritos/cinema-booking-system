@@ -7,8 +7,8 @@ const listingController = require("../controller/listing");
 //listing -> GET
 router.get("/", listingController.getListing);
 router.get("/:id", listingController.getListingByID);
-
-//listing -> POST 
+router.get("/listingById/:id", listingController.getListingByListId);
+//listing -> POST
 router.post("/", listingController.postListing);
 
 //listing -> PATCH
