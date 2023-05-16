@@ -144,7 +144,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Context } from "../store/context";
-import AddLoyaltyPoints from "./addLoyaltyPts";
 
 const CinemaSeatingPlan = ({ id }) => {
   const router = useRouter();
@@ -166,24 +165,51 @@ const CinemaSeatingPlan = ({ id }) => {
       });
   }, [id]);
 
+  // const renderSeats = () => {
+  //   return (
+  //     <div className="grid grid-cols-5 gap-4">
+  //       {seats.map((seat, index) => (
+  //         <div
+  //           key={index}
+  //           className={`p-2 rounded-md ${
+  //             seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-600 hover:bg-blue-500 cursor-pointer"
+  //           }`}
+  //           // Add any additional styling or onClick handlers here
+  //           onClick={() => {
+  //             if (!seat) {
+  //               // Handle seat selection logic here
+  //               // For example, setCurrentUser or update the seat availability
+  //             }
+  //           }}
+  //         >
+  //           {seat ? "Seat Taken" : index + 1}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   );
+  // };
+
   const renderSeats = () => {
+    const seatPrices = [10, 15, 20, 25, 30]; // Example seat prices
+  
+    const handleSeatClick = (index) => {
+      if (!seats[index]) {
+        //Check Customer Type and display the price for them and Seats chosen
+      }
+    };
+  
     return (
       <div className="grid grid-cols-5 gap-4">
         {seats.map((seat, index) => (
           <div
             key={index}
-            className={`p-2 rounded-md ${
-              seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-600 hover:bg-blue-500 cursor-pointer"
+            className={`p-3 rounded-md ${
+              seat ? "bg-gray-400 cursor-not-allowed" : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
             }`}
             // Add any additional styling or onClick handlers here
-            onClick={() => {
-              if (!seat) {
-                // Handle seat selection logic here
-                // For example, setCurrentUser or update the seat availability
-              }
-            }}
+            onClick={() => handleSeatClick(index)}
           >
-            {seat ? "Seat Taken" : index + 1}
+            {seat ? "Reserved" : "Available"}
           </div>
         ))}
       </div>
