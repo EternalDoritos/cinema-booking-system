@@ -37,7 +37,7 @@ function MobileNav({ open, setOpen }) {
             }, 100)
           }
         >
-          Gallery
+          GALLERY
         </a>
         {/* <a
           className="text-xl font-medium my-4"
@@ -60,7 +60,7 @@ function MobileNav({ open, setOpen }) {
               }, 100)
             }
           >
-            Log in
+            LOG IN
           </a>
         )}
         {currentUser && (
@@ -73,7 +73,7 @@ function MobileNav({ open, setOpen }) {
               }, 100)
             }
           >
-            Profile
+            PROFILE
           </a>
         )}
       </div>
@@ -110,7 +110,10 @@ export default function Navbar() {
     <nav className="flex filter drop-shadow-md bg-black px-4 py-4 h-20 items-center border-b-2 border-amber-300">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
-        <button className="text-2xl font-semibold" onClick={index}>
+        <button
+          className="text-2xl font-semibold text-amber-300"
+          onClick={index}
+        >
           GOLDENRIZZ
         </button>
       </div>
@@ -140,7 +143,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex">
-          <button onClick={gallery} className="m-2">
+          <button onClick={gallery} className="m-2 text-amber-300">
             GALLERY
           </button>
           {/* {isLoggedIn ? (
@@ -149,12 +152,12 @@ export default function Navbar() {
             <button onClick={handleLogin}>Log In</button>
           )} */}
           {currentUser && (
-            <button onClick={userProfile} className="m-2">
+            <button onClick={userProfile} className="m-2 text-amber-300">
               PROFILE
             </button>
           )}
           {!currentUser && (
-            <button onClick={login} className="m-2">
+            <button onClick={login} className="m-2 text-amber-300">
               LOG IN
             </button>
           )}
