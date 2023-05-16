@@ -203,6 +203,11 @@ const CinemaSeatingPlan = ({ id }) => {
     );
   };
 
+  const calculatePrice = () => {
+    const pricePerSeat = currentUser.customerType === 'adult' ? 12 : 10;
+    return selectedSeats.length * pricePerSeat;
+  };
+
   return (
     <main className="container mx-auto mt-4">
       <Head>
@@ -217,6 +222,9 @@ const CinemaSeatingPlan = ({ id }) => {
           {selectedSeats.length > 0 && (
             <p className="mt-4">
               You have selected: {selectedSeats.join(", ")}
+              <p>
+              Price: $${calculatePrice()}
+              </p>
             </p>
           )}
         </div>
