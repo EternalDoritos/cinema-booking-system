@@ -18,7 +18,7 @@ router.get(
   "/getInvalidatedUserByUsername/:username",
   authController.getInvalidatedUserByUsername
 );
-router.put("/validateUserAccount/:id", authController.validateUserAccount);
+router.post("/validateUserAccount", authController.validateUserAccount);
 router.put("/suspendUserAccess/:id", authController.suspendUserAccess);
 router.put("/resumeUserAccess/:id", authController.resumeUserAccess);
 router.put("/grantUserAccess/:id", authController.grantUserAccess);

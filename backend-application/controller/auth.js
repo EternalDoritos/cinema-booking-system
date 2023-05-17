@@ -47,9 +47,11 @@ exports.register = async (req, res) => {
       );
   });
 };
-//@desc     Create unvalidated user
+
+//@desc     Create invalidated user
 //@Route   POST/createInvalidatedUser
 //@access   public
+
 exports.createInvalidatedUser = async (req, res) => {
   const userName = req.body.userName;
   //check if user exist
@@ -86,42 +88,33 @@ exports.createInvalidatedUser = async (req, res) => {
 exports.validateUserAccount = async (req, res) => {
   const username = req.body.userName;
 
-  //check if user exist
-  // if (req.body.password.length < 6)
-  //   return res.status(400).json({ message: "Password less than 6 characters" });
-  const user = await InvalidatedUser.findOne({ userName: username }).exec();
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  res.status(200).json(user);
-  // if (user) {
-  //   bcrypt.hash(req.body.password, 10).then(async (hash) => {
-  //     await User.create({
-  //       username: user.userName,
-  //       password: hash,
-  //       userType: user.userType,
-  //       isActive: true,
-  //       isValidated: true,
-  //       hasAccess: true,
-  //     })
-  //       .then((user) =>
-  //         res.status(200).json({
-  //           message: "User created successfully",
-  //           user,
-  //         })
-  //       )
-  //       .catch((err) =>
-  //         res.status(400).json({
-  //           message: "User not created",
-  //           error: err.message,
-  //         })
-  //       );
-  //   });
-  //   //remove user from invalidated user
-  //   InvalidatedUser.findOneAndDelete({ userName: username }).exec();
-  // } else {
-  //   res.status(404).json({ message: "User not found" });
-  // }
+  if (req.body.password.length < 6)
+    return res.status(400).json({ message: "Password less than 6 characters" });
+
+  bcrypt.hash(req.body.password, 10).then(async (hash) => {
+    await User.create({
+      username: username,
+      password: hash,
+      userType: req.body.userType,
+      email: req.body.email,
+      isActive: true,
+      isValidated: true,
+      hasAccess: true,
+    })
+      .then(await InvalidatedUser.findOneAndDelete({ userName: username }))
+      .then((user) =>
+        res.status(200).json({
+          message: "User validated successfully",
+          user,
+        })
+      )
+      .catch((err) =>
+        res.status(400).json({
+          message: "User not validated",
+          error: err.message,
+        })
+      );
+  });
 };
 
 //@desc     Get user by email
