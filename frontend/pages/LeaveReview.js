@@ -58,8 +58,8 @@ const EditReview = () => {
     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       {/* {isSubmitted && <p>Your review has been submitted!</p>} */}
       {!currentUser && (
-        <h1 className="text-white text-center text-bold text-4xl">
-          Please Log in to leave review
+        <h1 className="text-red-500 text-center text-bold text-3xl">
+          Please log in to leave review
         </h1>
       )}
       {currentUser && (

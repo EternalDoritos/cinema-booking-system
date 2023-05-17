@@ -113,8 +113,8 @@ const MovieBookingPage = ({ id }) => {
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold">Movie Showtimes</h1>
         {!currentUser && (
-          <h1 className="text-center font-bold font-3xl text-red-600">
-            Please log in to book a ticket
+          <h1 className="text-red-500 text-center text-bold text-3xl mt-6">
+            Please log in to book movie ticket
           </h1>
         )}
       </div>

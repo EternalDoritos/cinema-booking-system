@@ -76,13 +76,15 @@ const DisplayLoyalty = () => {
             View loyalty points
           </label>
           <div className="mt-10 font-bold text-2xl underline"> User Name</div>
-          <div className="text-2xl text-white">{currentUser.username}</div>
+          <div className="text-2xl text-amber-300">{currentUser.username}</div>
           <div className="mt-6 font-bold text-2xl underline"> User Type</div>
-          <div className="text-2xl text-white">{currentUser.userType}</div>
+          <div className="text-2xl text-amber-300">{currentUser.userType}</div>
           <div className="mt-6 font-bold text-2xl underline">
             Loyalty Points
           </div>
-          <div className="text-2xl text-white">{currentUser.loyaltyPoints}</div>
+          <div className="text-2xl text-amber-300">
+            {currentUser.loyaltyPoints}
+          </div>
         </div>
       )}
       <div className="flex justify-center items-center mt-6">
