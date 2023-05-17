@@ -21,6 +21,15 @@ const EditReview = () => {
 
   const updateReview = async () => {
     try {
+      if (!review || !rating) {
+        alert("Please fill in all the required fields.");
+        return;
+      }
+      if (rating < 0 || rating > 5) {
+        alert("Rating must be between 0 and 5.");
+        return;
+      }
+
       const response = await fetch(`http://localhost:5000/movie/reviews`, {
         method: "POST",
         headers: {
