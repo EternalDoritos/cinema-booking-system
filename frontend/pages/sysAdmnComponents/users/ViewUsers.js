@@ -49,14 +49,6 @@ const ViewUsers = ({ users }) => {
         Header: "Email",
         accessor: "col3", // accessor is the "key" in the data
       },
-      // {
-      //   Header: "Phone",
-      //   accessor: "col4",
-      // },
-      // {
-      //   Header: "Valid",
-      //   accessor: "col5", // accessor is the "key" in the data
-      // },
       {
         Header: "Active",
         accessor: "col4", // accessor is the "key" in the data
@@ -132,6 +124,7 @@ const ViewUsers = ({ users }) => {
       <p class="text-white text-center text-base pt-2 pb-10  tracking-wider">
         Functions: View Users, Search Users, Update Users
       </p>
+
       <table class="table w-full overflow-hidden" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (

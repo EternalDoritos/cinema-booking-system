@@ -2,17 +2,6 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Head from "next/head";
 import { useRouter } from "next/router";
-// Configure dotenv to load environment variables from .env file
-// require("dotenv").config();
-// console.log(process.env);
-
-// Retrieve environment variables
-// const userId = process.env.USER_ID;
-// const serviceId = process.env.SERVICE_ID;
-// const templateId = process.env.TEMPLATE_ID;
-// console.log("userId", userId);
-// console.log("serviceId", serviceId);
-// console.log("templateId", templateId);
 const CreateUser = () => {
   const router = useRouter();
   const form = useRef();
@@ -33,9 +22,7 @@ const CreateUser = () => {
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
   };
-  // const handleCustomerTypeChange = (e) => {
-  //   setCustomerType(e.target.value);
-  // };
+
   const createInvalidatedUser = async (e) => {
     e.preventDefault();
     const createUser = await fetch(
@@ -87,7 +74,7 @@ const CreateUser = () => {
         Cinema Booking System Users
       </h1>
       <p class="text-white text-center text-base pt-2 pb-8  tracking-wider">
-        Functions: Create new user(manager, staff, customer)
+        {`Functions: Create new user(manager & staff)`}
       </p>
       <div>
         <div className="mb-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -170,7 +157,7 @@ const CreateUser = () => {
                     name="userType"
                     type="text"
                     onChange={handleUserTypeChange}
-                    placeholder="User Type (Manager/ Staff/ Customer)"
+                    placeholder="User Type (Manager/ Staff)"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                   />

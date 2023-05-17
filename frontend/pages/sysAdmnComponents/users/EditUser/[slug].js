@@ -166,5 +166,5 @@ const EditUser = ({ user }) => {
     </>
   );
 };
-1;
 export default EditUser;
+//Edit User -> getUserById -> getUserById
