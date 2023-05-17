@@ -14,9 +14,8 @@ export const getStaticProps = async () => {
   };
 };
 
-const purchaseFood = ({ foods }) => {
+const purchaseFood = ({ foods, totalCost, setTotalCost }) => {
   const [counters, setCounters] = useState(new Array(foods.length).fill(0));
-  const [totalCost, setTotalCost] = useState(0);
   const [currentUser, setCurrentUser] = useContext(Context);
   const router = useRouter();
 
@@ -34,17 +33,6 @@ const purchaseFood = ({ foods }) => {
       setCounters(newCounters);
     }
     setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (currentUser == null) {
-      router.push("/PurchaseScreen");
-    } else if (currentUser.userType == "staff") {
-      router.push("/staffComponents/ChoosePayment");
-    } else {
-      router.push("/PurchaseScreen");
-    }
   };
 
   return (
@@ -97,12 +85,6 @@ const purchaseFood = ({ foods }) => {
       <div className="text-white">
         <p>Total Cost: ${Math.ceil(totalCost * 100) / 100}</p>
       </div>
-      <button
-        onClick={handleSubmit}
-        className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded"
-      >
-        Proceed to Payment
-      </button>
     </div>
   );
 };
