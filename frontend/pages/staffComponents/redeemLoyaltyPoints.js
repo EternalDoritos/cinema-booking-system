@@ -3,9 +3,48 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 const RedeemLoyaltyPoints = () => {
-
-  const redeemLoyaltyPoints = async () => {
-    
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [currLoyaltyPoints, setCurrLoyaltyPoints] = useState(0);
+  const getUserByEmail = async () => {
+    const getUser = await fetch(
+      `http://localhost:5000/auth/getUserByEmail/${email}`
+    );
+    const data = await getUser.json();
+    setId(data?._id);
+    setCurrLoyaltyPoints(data?.loyaltyPoints);
+  };
+  const deductPoints = () => {
+    getUserByEmail();
+    console.log(currLoyaltyPoints);
+    console.log(id);
+    currLoyaltyPoints -= 200;
+    console.log("Loyalty points after - 200", currLoyaltyPoints);
+    if (currLoyaltyPoints >= 0) {
+      // Get the user's ID from the currentUser object
+      // Make a PATCH request to update the loyalty points on the server
+      fetch(`http://localhost:5000/auth/editUser/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ loyaltyPoints: currLoyaltyPoints }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          window.alert("200 points redeemed!");
+          console.log(data);
+        })
+        .catch((error) => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        });
+    } else {
+      window.alert("You do not have enough points to redeem a ticket!");
+    }
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -23,6 +62,7 @@ const RedeemLoyaltyPoints = () => {
             <input
               type="text"
               size={40}
+              onChange={handleEmailChange}
               className="text-black"
             ></input>
           </div>
@@ -30,7 +70,7 @@ const RedeemLoyaltyPoints = () => {
 
         <button
           className="rounded-full bg-cyan-900 m-4 p-2 px-5 text-2xl"
-          onClick={redeemLoyaltyPoints}
+          onClick={deductPoints}
         >
           Redeem
         </button>
