@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Context } from "../../store/context";
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 
 const DisplayLoyalty = () => {
   const [currentUser, setCurrentUser] = useContext(Context);
@@ -34,6 +35,16 @@ const DisplayLoyalty = () => {
           <div className="text-2xl">{currentUser.loyaltyPoints}</div>
         </div>
       )}
+      <div className="flex justify-center items-center mt-6">
+        <div className="w-94">
+          <Image
+            src="/poster.png"
+            alt="GoldenRizz Poster"
+            width={400}
+            height={500}
+          />
+        </div>
+      </div>
     </div>
   );
 };
