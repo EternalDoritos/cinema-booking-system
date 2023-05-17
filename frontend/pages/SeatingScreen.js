@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Food from "./purchaseFood";
 import { Context } from "../store/context";
-import purchaseFood from "./purchaseFood";
 
 export const getStaticProps = async () => {
   const res = await fetch("http://localhost:5000/food");
@@ -44,23 +43,18 @@ const CinemaSeatingPlan = ({ id, foods }) => {
     });
     if (bookTicket.status === 200) {
       window.alert("Booking successful");
-      if (currentUser == null) {
+      if (!currentUser || currentUser.userType !== "staff") {
         router.push("/PurchaseScreen");
-      } else if (currentUser.userType == "staff") {
-        router.push("/staffComponents/ChoosePayment");
       } else {
-        router.push("/PurchaseScreen");
+        router.push("/staffComponents/ChoosePayment");
       }
     } else window.alert("Error");
   };
   useEffect(() => {
     const id = router.query.listId;
-
-    console.log("id", id);
     fetch(`http://localhost:5000/listing/listingById/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[0].seating);
         setSeats(data[0].seating);
       })
       .catch((error) => {
