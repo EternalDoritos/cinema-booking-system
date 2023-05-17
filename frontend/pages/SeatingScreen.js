@@ -155,17 +155,19 @@ const CinemaSeatingPlan = ({ id, foods }) => {
             </span>
           </div>
         )}
-        <div className="text-center">
-          <h2 className="text-center text-3xl m-4">
-            {`Grand Total: ${foodCost + totalCost}`}
-          </h2>
-          <button
-            class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-            onClick={purchaseTicket}
-          >
-            Make Payment
-          </button>
-        </div>
+        {selectedSeats.length > 0 && (
+          <div className="text-center">
+            <h2 className="text-center text-3xl m-4">
+              {`Grand Total: $ ${foodCost + totalCost}`}
+            </h2>
+            <button
+              class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+              onClick={purchaseTicket}
+            >
+              Make Payment
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
