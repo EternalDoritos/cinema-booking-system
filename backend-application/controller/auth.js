@@ -123,6 +123,20 @@ exports.validateUserAccount = async (req, res) => {
   //   res.status(404).json({ message: "User not found" });
   // }
 };
+
+//@desc     Get user by email
+//@route    GET/getUserByEmail
+//@access   public
+
+exports.getUserByEmail = async (req, res) => {
+  const { email } = req.params;
+  const user = await User.findOne({ email: email }).exec();
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+};
+
 //@desc     Get user by username
 //@route    GET/getUserByUsername
 //@access   public

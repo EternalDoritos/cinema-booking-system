@@ -12,6 +12,7 @@ router.get("/getUsers", authController.getUsers);
 router.get("/getInvalidUsers", authController.getInvalidUsers);
 router.put("/editUser/:id", authController.editUser);
 router.get("/getUserById/:id", authController.getUserById);
+router.get("/getUserByEmail/:email", authController.getUserByEmail);
 router.get("/getUserByUsername/:username", authController.getUserByUsername);
 router.get(
   "/getInvalidatedUserByUsername/:username",
