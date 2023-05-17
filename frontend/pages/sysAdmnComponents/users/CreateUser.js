@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Head from "next/head";
+import { useRouter } from "next/router";
 // Configure dotenv to load environment variables from .env file
 // require("dotenv").config();
 // console.log(process.env);
@@ -13,6 +14,7 @@ import Head from "next/head";
 // console.log("serviceId", serviceId);
 // console.log("templateId", templateId);
 const CreateUser = () => {
+  const router = useRouter();
   const form = useRef();
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
@@ -54,12 +56,11 @@ const CreateUser = () => {
     );
     if (createUser.status === 200) {
       window.alert("User created successfully.");
-      // router.push("/UserLogInScreen");
-      // sendEmail();
+      sendEmail();
+      router.push("/UserProfileScreen");
     } else window.alert("Error creating account");
   };
   const sendEmail = (e) => {
-    e.preventDefault();
     emailjs
       .sendForm(
         "goldenrizz",
@@ -111,7 +112,7 @@ const CreateUser = () => {
                     name="name"
                     type="text"
                     onChange={handleNameChange}
-                    placeholder="name"
+                    placeholder="Full name"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                   />

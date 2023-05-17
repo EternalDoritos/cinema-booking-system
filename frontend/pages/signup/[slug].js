@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // import Link from "next/link";
 export async function getServerSideProps(context) {
   const userName = context.params.slug;
   const res = await fetch(
-    `http://localhost:5000/auth/getUserByUsername/${userName}`
+    `http://localhost:5000/auth/getInvalidatedUserByUsername/${userName}`
   );
   const data = await res.json();
   return {
@@ -13,19 +13,20 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
 const Signup = ({ user }) => {
-  const [username, setUsername] = useState("");
+  const router = useRouter();
+  const userName = user.userName;
+  const userType = user.userType;
   const [password, setPassword] = useState("");
-  console.log("User ID: ", user?._id);
-  const handleUserNameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  // console.log("User ID: ", user?._id);
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   const validateUserAccount = async (e) => {
     e.preventDefault();
+    console.log("User Name: ", userName);
+    console.log("User Type: ", userType);
     const validateUser = await fetch(
       "http://localhost:5000/auth/validateUserAccount",
       {
@@ -34,22 +35,27 @@ const Signup = ({ user }) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userName: username, password: password }),
+        body: JSON.stringify({
+          userName: userName,
+          password: password,
+          userType: userType,
+          email: user.email,
+        }),
       }
     );
     if (validateUser.status === 200) {
-      window.alert("User account validated successfully");
+      window.alert("User account validated successfully. Proceed to log in.");
       router.push("/UserLogInScreen");
-    } else window.alert("Error validating user account");
+    } else
+      window.alert(`Error validating user account. ${validateUser.status}`);
   };
-
   return (
     <>
-      <h1 class="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
+      <h1 className="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
         Cinema Booking System Users
       </h1>
-      <p class="text-white text-center text-base pt-2 pb-8  tracking-wider">
-        Validate your account by filling up the details below!
+      <p className="text-white text-center text-base pt-2 pb-8  tracking-wider">
+        Validate your account by filling your password below!
       </p>
       <div>
         <div className="mb-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -63,27 +69,15 @@ const Signup = ({ user }) => {
               <div>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium text-gray-400"
+                  className="block text-md font-medium text-white"
                 >
-                  Username
+                  Username: {userName}
                 </label>
-                <div className="mt-1">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={username}
-                    placeholder={user?.username}
-                    onChange={handleUserNameChange}
-                    required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-                  />
-                </div>
               </div>
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-400"
+                  className="block text-md font-medium text-white"
                 >
                   Password
                 </label>

@@ -29,10 +29,8 @@ const ViewUsers = ({ users }) => {
       col1: user.username ? user.username : "",
       col2: user.userType ? user.userType : "",
       col3: user.email ? user.email : "",
-      col4: user.phoneNum ? user.phoneNum : "87654321",
-      col5: user.isValidated ? "validated" : "not validated",
-      col6: user.isActive ? "active" : "not active",
-      col7: user.hasAccess ? "not suspended" : "suspended",
+      col4: user.isActive ? "active" : "not active",
+      col5: user.hasAccess ? "not suspended" : "suspended",
       id: user._id,
     }));
     setData(mappedData);
@@ -51,21 +49,21 @@ const ViewUsers = ({ users }) => {
         Header: "Email",
         accessor: "col3", // accessor is the "key" in the data
       },
-      {
-        Header: "Phone",
-        accessor: "col4",
-      },
-      {
-        Header: "Valid",
-        accessor: "col5", // accessor is the "key" in the data
-      },
+      // {
+      //   Header: "Phone",
+      //   accessor: "col4",
+      // },
+      // {
+      //   Header: "Valid",
+      //   accessor: "col5", // accessor is the "key" in the data
+      // },
       {
         Header: "Active",
-        accessor: "col6", // accessor is the "key" in the data
+        accessor: "col4", // accessor is the "key" in the data
       },
       {
         Header: "Suspended",
-        accessor: "col7",
+        accessor: "col5",
       },
     ],
     []
@@ -176,10 +174,8 @@ const ViewUsers = ({ users }) => {
             const name = row.original.col1;
             const userType = row.original.col2;
             const email = row.original.col3;
-            const phoneNum = row.original.col4;
-            const validStatus = row.original.col5;
-            const activityStatus = row.original.col6;
-            const suspendedStatus = row.original.col7;
+            const activityStatus = row.original.col4;
+            const suspendedStatus = row.original.col5;
             const id = row.original.id;
             const SuspendUser = async (id) => {
               const suspendUser = await fetch(
@@ -227,12 +223,10 @@ const ViewUsers = ({ users }) => {
                         {...cell.getCellProps()}
                         style={{
                           color:
-                            cell.value === "not validated" ||
                             cell.value === "not active" ||
                             cell.value === "suspended"
                               ? "rgb(220 38 38)"
-                              : cell.value === "validated" ||
-                                cell.value === "active" ||
+                              : cell.value === "active" ||
                                 cell.value === "not suspended"
                               ? "rgb(74 222 128)"
                               : "rgb(30 41 59)",
@@ -267,31 +261,18 @@ const ViewUsers = ({ users }) => {
                     ) : (
                       <p class="text-slate-600">-</p>
                     )}
-
-                    <p class="font-extrabold text-slate-700">Phone: </p>
-                    <p class="text-slate-600">{phoneNum}</p>
-                    <p class="font-extrabold text-slate-700">
-                      Validated User:{" "}
-                    </p>
-                    {validStatus === "validated" ? (
-                      <p class="text-green-500">{validStatus}</p>
-                    ) : (
-                      <p class="text-red-500">{validStatus}</p>
-                    )}
                     <p class="font-extrabold text-slate-700">Active: </p>
                     {activityStatus === "active" ? (
                       <p class="text-green-500">{activityStatus}</p>
                     ) : (
                       <p class="text-red-500">{activityStatus}</p>
                     )}
-
                     <p class="font-extrabold text-slate-700">Suspended: </p>
                     {suspendedStatus === "not suspended" ? (
                       <p class="text-green-500">{suspendedStatus}</p>
                     ) : (
                       <p class="text-red-500">{suspendedStatus}</p>
                     )}
-
                     <Link
                       href={`/sysAdmnComponents/users/EditUser/${id}`}
                       //   href={`/EditUser?id=u64574dc5f132becf123ddcf7`}
