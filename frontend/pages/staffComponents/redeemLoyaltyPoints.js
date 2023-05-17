@@ -18,11 +18,9 @@ const RedeemLoyaltyPoints = () => {
     getUserByEmail();
     console.log(currLoyaltyPoints);
     console.log(id);
-    currLoyaltyPoints -= 200;
-    console.log("Loyalty points after - 200", currLoyaltyPoints);
+    currLoyaltyPoints -= 1000;
+    console.log("Loyalty points after - 1000", currLoyaltyPoints);
     if (currLoyaltyPoints >= 0) {
-      // Get the user's ID from the currentUser object
-      // Make a PATCH request to update the loyalty points on the server
       fetch(`http://localhost:5000/auth/editUser/${id}`, {
         method: "PUT",
         headers: {
@@ -32,11 +30,10 @@ const RedeemLoyaltyPoints = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          window.alert("200 points redeemed!");
+          window.alert("1000 points redeemed!");
           console.log(data);
         })
         .catch((error) => {
-          // Handle any errors that occur during the request
           console.error(error);
         });
     } else {
