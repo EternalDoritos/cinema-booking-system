@@ -33,8 +33,8 @@ const CinemaSeatingPlan = ({ id, foods }) => {
         booked: selectedSeats,
         id: router.query.listId,
         discountedPriceBooked:
-          currentUser.userType === "student" ||
-          currentUser.userType === "senior"
+          currentUser.customerType === "student" ||
+          currentUser.customerType === "senior"
             ? selectedSeats.length
             : 0,
         userId: currentUser._id,
@@ -149,9 +149,9 @@ const CinemaSeatingPlan = ({ id, foods }) => {
     }
   };
 
-  const handleFood = ()=> {
+  const handleFood = () => {
     setShowFood(true);
-  }
+  };
 
   return (
     <main className="container mx-auto mt-4">
@@ -171,70 +171,78 @@ const CinemaSeatingPlan = ({ id, foods }) => {
                 .map((seatIndex) => getSeatLabel(seatIndex))
                 .join(", ")}
             </p>
-            {!showFood && (<p>Price: ${totalCost}</p>)}
+            {!showFood && <p>Price: ${totalCost}</p>}
             <span>
-            {!showFood && (<button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-                onClick={handleWalkin}>
-                Make Payment
-              </button>)}
-              <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
-              onClick={handleFood}>
-                {!showFood && ("Add Food And Drink")}
-                {showFood && 
-                (<div className="flex flex-col items-center">
-                <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
-                  Food and Beverage
-                </h1>
-                <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
-                  {foods.map((food, index) => (
-                    <div
-                      key={food.id}
-                      className="bg-gray-800 rounded-lg p-4 cursor-pointer"
-                    >
-                      <div className="card relative">
-                        <div className="bg-black-300 flex items-center justify-center">
-                          <img
-                            className="object-cover h-400 w-450 lg:h-70 xl:w-96"
-                            src={food.image}
-                            alt={food.name}
-                          />
-                        </div>
-                        <div className="m-4">
-                          <h3 className="text-lg font-bold mb-2 text-white">
-                            {food.name}
-                          </h3>
-                          <p className="text-sm text-gray-400">{food.price}</p>
-                          <div className="flex items-center justify-center">
-                            <button
-                              onClick={() => handleDecrement(index)}
-                              className="bg-yellow text-black font-bold py-2 px-4 rounded"
-                            >
-                              -
-                            </button>
-                            <span>{counters[index]}</span>
-                            <button
-                              onClick={() => handleIncrement(index)}
-                              className="bg-yellow text-black font-bold py-2 px-4 rounded"
-                            >
-                              +
-                            </button>
+              {!showFood && (
+                <button
+                  class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                  onClick={handleWalkin}
+                >
+                  Make Payment
+                </button>
+              )}
+              <button
+                className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                onClick={handleFood}
+              >
+                {!showFood && "Add Food And Drink"}
+                {showFood && (
+                  <div className="flex flex-col items-center">
+                    <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+                      Food and Beverage
+                    </h1>
+                    <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
+                      {foods.map((food, index) => (
+                        <div
+                          key={food.id}
+                          className="bg-gray-800 rounded-lg p-4 cursor-pointer"
+                        >
+                          <div className="card relative">
+                            <div className="bg-black-300 flex items-center justify-center">
+                              <img
+                                className="object-cover h-400 w-450 lg:h-70 xl:w-96"
+                                src={food.image}
+                                alt={food.name}
+                              />
+                            </div>
+                            <div className="m-4">
+                              <h3 className="text-lg font-bold mb-2 text-white">
+                                {food.name}
+                              </h3>
+                              <p className="text-sm text-gray-400">
+                                {food.price}
+                              </p>
+                              <div className="flex items-center justify-center">
+                                <button
+                                  onClick={() => handleDecrement(index)}
+                                  className="bg-yellow text-black font-bold py-2 px-4 rounded"
+                                >
+                                  -
+                                </button>
+                                <span>{counters[index]}</span>
+                                <button
+                                  onClick={() => handleIncrement(index)}
+                                  className="bg-yellow text-black font-bold py-2 px-4 rounded"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="text-white">
-                  <p>Total Cost: ${Math.ceil(totalCost * 100) / 100}</p>
-                </div>
-                <button
-                  onClick={handleSubmit}
-                  className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded"
-                >
-                  Proceed to Payment
-                </button>
-              </div>)
-                }
+                    <div className="text-white">
+                      <p>Total Cost: ${Math.ceil(totalCost * 100) / 100}</p>
+                    </div>
+                    <button
+                      onClick={handleSubmit}
+                      className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded"
+                    >
+                      Proceed to Payment
+                    </button>
+                  </div>
+                )}
               </button>
             </span>
           </div>

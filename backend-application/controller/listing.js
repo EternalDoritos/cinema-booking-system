@@ -69,6 +69,7 @@ exports.postListing = asyncHandler(async (req, res) => {
     cinema: req.body.cinema,
     time: req.body.time,
     date: req.body.date,
+    discountedPriceBooked: 0,
   });
 
   if (exist) {
