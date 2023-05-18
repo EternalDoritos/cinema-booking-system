@@ -73,7 +73,7 @@ const DisplayLoyalty = () => {
       {currentUser && (
         <div className="text-center">
           <label className="text-white text-4xl py-10 font-bold uppercase tracking-wider">
-            View loyalty points
+            loyalty points
           </label>
           <div className="mt-10 font-bold text-2xl underline"> User Name</div>
           <div className="text-2xl text-amber-300">{currentUser.username}</div>
