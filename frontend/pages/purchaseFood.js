@@ -31,8 +31,8 @@ const purchaseFood = ({ foods, totalCost, setTotalCost }) => {
     if (newCounters[index] > 0) {
       newCounters[index] -= 1;
       setCounters(newCounters);
+      setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
     }
-    setTotalCost((prevTotalCost) => prevTotalCost - foods[index].price);
   };
 
   return (
