@@ -73,7 +73,7 @@ const DisplayBooking = () => {
                   key={info.movieList?._id}
                   className="my-4 border border-gray-300 p-4 ml-6 mr-6"
                 >
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-lg font-semibold">Title:</p>
                       <p>{info.movieList?.movie?.title}</p>
