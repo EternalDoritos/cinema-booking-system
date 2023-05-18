@@ -6,6 +6,17 @@ import Head from "next/head";
 
 const DisplayBooking = () => {
   const [currentUser, setCurrentUser] = useContext(Context);
+  const [seats, setSeats] = useState([]);
+  useEffect(() => {
+    const listing = async () => {
+      await fetch(`http://localhost:5000/auth/getUserById/${currentUser._id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSeats(data.seatsBooked);
+        });
+    };
+    currentUser && listing();
+  }, [currentUser]);
   return (
     <div>
       <Head>
@@ -24,6 +35,7 @@ const DisplayBooking = () => {
           </label>
           <div className="mt-10 font-bold text-2xl underline"> Movie title</div>
           <div className="text-2xl"> still in progress </div>
+          {console.log(seats)}
         </div>
       )}
     </div>

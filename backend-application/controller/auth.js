@@ -205,7 +205,12 @@ exports.editUser = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate([
+    {
+      path: "seatsBooked.movieList",
+      populate: ["movie", "cinema"],
+    },
+  ]);
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
@@ -288,7 +293,10 @@ exports.grantUserAccess = async (req, res) => {
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ username: username }).populate(
+      "seatsBooked.movieList"
+    );
+
     if (!user) {
       res.status(400).json({
         message: "Login not successful",
