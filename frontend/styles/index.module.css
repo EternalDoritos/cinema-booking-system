@@ -11,3 +11,30 @@
   padding: 0;
   margin: 0;
 }
+
+
+.slideForward {
+  animation: slideForwardAnimation 0.5s forwards;
+}
+
+.slideBackward {
+  animation: slideBackwardAnimation 0.5s forwards;
+}
+
+@keyframes slideForwardAnimation {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideBackwardAnimation {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
