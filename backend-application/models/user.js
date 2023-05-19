@@ -14,11 +14,42 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
   },
+  email: {
+    type: String,
+  },
   userType: {
     type: String,
     required: true,
   },
+  customerType: {
+    type: String,
+  },
+  isActive: {
+    type: Boolean,
+    required: true,
+  },
+  isValidated: {
+    type: Boolean,
+    required: true,
+  },
+  hasAccess: {
+    type: Boolean,
+    required: true,
+  },
   loyaltyPoints: Number,
+  seatsBooked: [
+    {
+      movieList: {
+        type: mongoose.Types.ObjectId,
+        ref: "Listing",
+      },
+      seating: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

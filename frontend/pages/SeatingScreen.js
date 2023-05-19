@@ -1,312 +1,122 @@
-// const DisplaySeating = () => {
-//   return <div>SeatingScreen</div>;
-// };
-
-// export default DisplaySeating;
-// import Head from "next/head";
-
-// export default function DisplaySeating() {
-//   return (
-//     <div>
-//       <Head>
-//         <title>Cinema Seating Plan</title>
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
-
-//       <header className="bg-gray-900 py-4">
-//         <h1 className="text-white text-center text-2xl font-bold">
-//           Cinema Seating Plan
-//         </h1>
-//       </header>
-
-//       <main className="container mx-auto mt-4">
-//         <div className="grid grid-cols-5 gap-2">
-//           {/* Row 1 */}
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             1A
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             1B
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             1C
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             1D
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             1E
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             2A
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             2B
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             2C
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             2D
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             2E
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             3A
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-gray-200 p-2 border border-gray-300">
-//             3B
-//             <span className="block text-sm text-gray-400">Reserved</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             3C
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             3D
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             3E
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           {/* Rows 2-9 */}
-//           {/* ... */}
-//           {/* Row 10 */}
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             4A
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             4B
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-yellow-400 p-2 border border-gray-300">
-//             4C
-//             <span className="block text-sm text-gray-800">Wheelchair</span>
-//           </div>
-//           <div className="bg-yellow-400 p-2 border border-gray-300">
-//             4D
-//             <span className="block text-sm text-gray-800">Wheelchair</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             4E
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             5A
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             5B
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//           <div className="bg-yellow-400 p-2 border border-gray-300">
-//             5C
-//             <span className="block text-sm text-gray-800">Wheelchair</span>
-//           </div>
-//           <div className="bg-yellow-400 p-2 border border-gray-300">
-//             5D
-//             <span className="block text-sm text-gray-800">Wheelchair</span>
-//           </div>
-//           <div className="bg-green-400 p-2 border border-gray-300">
-//             5E
-//             <span className="block text-sm text-gray-800">Available</span>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// }
-// import { useState } from "react";
-
-// export default function CinemaSeatingPlan() {
-//   const [seats, setSeats] = useState([
-//     { id: "1A", status: "reserved" },
-//     { id: "1B", status: "reserved" },
-//     { id: "1C", status: "available" },
-//     { id: "1D", status: "available" },
-//     { id: "1E", status: "available" },
-//     { id: "2A", status: "available" },
-//     { id: "2B", status: "available" },
-//     { id: "2C", status: "available" },
-//     { id: "2D", status: "available" },
-//     { id: "2E", status: "available" },
-//     // ...
-//   ]);
-
-//   const handleClick = (seatId) => {
-//     const newSeats = seats.map((seat) => {
-//       if (seat.id === seatId) {
-//         return { ...seat, status: "selected" };
-//       }
-//       return seat;
-//     });
-//     setSeats(newSeats);
-//   };
-
-//   return (
-//     <main className="container mx-auto mt-4">
-//       <div className="grid grid-cols-10 gap-2">
-//         {/* Rows 1-10 */}
-//         {seats.map((seat) => (
-//           <div
-//             key={seat.id}
-//             className={`p-2 border border-gray-300 ${
-//               seat.status === "reserved"
-//                 ? "bg-gray-200 text-gray-400"
-//                 : seat.status === "selected"
-//                 ? "bg-blue-500 text-white"
-//                 : "bg-green-400"
-//             }`}
-//             onClick={() => {
-//               if (seat.status === "available") {
-//                 handleClick(seat.id);
-//               }
-//             }}
-//           >
-//             {seat.id}
-//             <span className="block text-sm">
-//               {seat.status === "reserved" && "Reserved"}
-//               {seat.status === "available" && "Available"}
-//               {seat.status === "selected" && "Selected"}
-//             </span>
-//           </div>
-//         ))}
-//       </div>
-//     </main>
-//   );
-// }
-
-// current code
-// import { useState } from "react";
-
-// export default function CinemaSeatingPlan() {
-//   const [seats, setSeats] = useState([
-//     { id: "1A", status: "reserved" },
-//     { id: "1B", status: "reserved" },
-//     { id: "1C", status: "available" },
-//     { id: "1D", status: "available" },
-//     { id: "1E", status: "available" },
-//     { id: "2A", status: "available" },
-//     { id: "2B", status: "available" },
-//     { id: "2C", status: "available" },
-//     { id: "2D", status: "available" },
-//     { id: "2E", status: "available" },
-//     { id: "3A", status: "available", type: "wheelchair" },
-//     { id: "3B", status: "available", type: "wheelchair" },
-//     { id: "3C", status: "available", type: "wheelchair" },
-//     { id: "3D", status: "available", type: "wheelchair" },
-//     { id: "3E", status: "available", type: "wheelchair" },
-//     // ...
-//   ]);
-
-//   const handleClick = (seatId) => {
-//     const newSeats = seats.map((seat) => {
-//       if (seat.id === seatId) {
-//         return {
-//           ...seat,
-//           status: seat.status === "available" ? "selected" : "available",
-//         };
-//       }
-//       return seat;
-//     });
-//     setSeats(newSeats);
-//   };
-
-//   return (
-//     <main className="container mx-auto mt-4">
-//       <div className="flex flex-col items-center">
-//         <div className="h-20 w-full bg-gray-800 flex items-center justify-center text-white text-2xl font-bold mb-4">
-//           Screen
-//         </div>
-//         <div className="grid grid-cols-5 gap-2">
-//           {/* Rows 1-10 */}
-//           {seats.map((seat) => (
-//             <div
-//               key={seat.id}
-//               className={`p-2 border border-gray-300 ${
-//                 seat.status === "reserved"
-//                   ? "bg-gray-200 text-gray-400"
-//                   : seat.status === "selected"
-//                   ? "bg-blue-500 text-white"
-//                   : seat.type === "wheelchair"
-//                   ? "bg-yellow-500 text-white"
-//                   : "bg-green-400"
-//               }`}
-//               onClick={() => {
-//                 if (seat.status === "available" || seat.status === "selected") {
-//                   handleClick(seat.id);
-//                 }
-//               }}
-//             >
-//               {seat.id}
-//               {seat.type === "wheelchair" && (
-//                 <span className="block text-sm">Wheelchair</span>
-//               )}
-//               <span className="block text-sm">
-//                 {seat.status === "reserved" && "Reserved"}
-//                 {seat.status === "available" && "Available"}
-//                 {seat.status === "selected" &&
-//                   (seat.type === "wheelchair" ? "Selected" : "Selected")}
-//               </span>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
-//////////////////
-
-// another test
-import { useState } from "react";
-import Link from "next/link";
 import Head from "next/head";
+import React, { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
+import Food from "./purchaseFood";
+import { Context } from "../store/context";
 
-export default function CinemaSeatingPlan() {
-  const [seats, setSeats] = useState([
-    { id: "1A", status: "reserved" },
-    { id: "1B", status: "reserved" },
-    { id: "1C", status: "available" },
-    { id: "1D", status: "available" },
-    { id: "1E", status: "available" },
-    { id: "2A", status: "available" },
-    { id: "2B", status: "available" },
-    { id: "2C", status: "available" },
-    { id: "2D", status: "available" },
-    { id: "2E", status: "available" },
-    { id: "3A", status: "available", type: "wheelchair" },
-    { id: "3B", status: "available", type: "wheelchair" },
-    { id: "3C", status: "available", type: "wheelchair" },
-    { id: "3D", status: "available", type: "wheelchair" },
-    { id: "3E", status: "available", type: "wheelchair" },
-    // ...
-  ]);
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5000/food");
+  const data = await res.json();
 
-  const handleClick = (seatId) => {
-    const newSeats = seats.map((seat) => {
-      if (seat.id === seatId) {
-        return {
-          ...seat,
-          status: seat.status === "available" ? "selected" : "available",
-        };
-      }
-      return seat;
+  return {
+    props: { foods: data },
+  };
+};
+
+const CinemaSeatingPlan = ({ id, foods }) => {
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useContext(Context);
+  const [seats, setSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [showFood, setShowFood] = useState(false);
+  const [totalCost, setTotalCost] = useState(0);
+  const [foodCost, setFoodCost] = useState(0);
+
+  const purchaseTicket = async (e) => {
+    e.preventDefault;
+    const bookTicket = await fetch("http://localhost:5000/listing/seat", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booked: selectedSeats,
+        id: router.query.listId,
+        discountedPriceBooked:
+          currentUser.customerType === "student" ||
+          currentUser.customerType === "senior"
+            ? selectedSeats.length
+            : 0,
+        userId: currentUser._id,
+      }),
     });
-    setSeats(newSeats);
+    if (bookTicket.status === 200) {
+      window.alert("Booking successful");
+      if (!currentUser || currentUser.userType !== "staff") {
+        router.push("/PurchaseScreen");
+      } else {
+        router.push("/staffComponents/ChoosePayment");
+      }
+    } else window.alert("Error");
+  };
+  useEffect(() => {
+    const id = router.query.listId;
+    fetch(`http://localhost:5000/listing/listingById/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSeats(data[0].seating);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [router.query.listId, id]);
+
+  const calculatePrice = (selectedSeats) => {
+    const pricePerSeat =
+      currentUser.customerType === "student" ||
+      currentUser.customerType === "senior"
+        ? 10
+        : 12;
+    const cost = selectedSeats.length * pricePerSeat;
+    setTotalCost(cost);
+  };
+
+  const handleSeatClick = (index) => {
+    if (!seats[index]) {
+      const updatedSelectedSeats = selectedSeats.includes(index)
+        ? selectedSeats.filter((seatIndex) => seatIndex !== index)
+        : [...selectedSeats, index];
+      setSelectedSeats(updatedSelectedSeats);
+      calculatePrice(updatedSelectedSeats); // Recalculate the total cost with the updated selected seats
+    }
+  };
+
+  const getSeatLabel = (index) => {
+    const rowNumber = Math.floor(index / 5) + 1;
+    const columnNumber = (index % 5) + 1;
+    const rowLabel = String.fromCharCode(65 + rowNumber - 1); // A = 65 in ASCII
+    return `${rowLabel}${columnNumber}`;
+  };
+
+  const renderSeats = () => {
+    return (
+      <div className="grid grid-cols-5 gap-4">
+        {seats.map((seat, index) => (
+          <div
+            key={index}
+            className={`p-3 rounded-md ${
+              seat
+                ? "bg-gray-400 cursor-not-allowed"
+                : selectedSeats.includes(index)
+                ? "bg-blue-500 cursor-pointer"
+                : "bg-gray-700 hover:bg-blue-500 cursor-pointer"
+            }`}
+            onClick={() => handleSeatClick(index)}
+          >
+            {seat
+              ? "Reserved"
+              : selectedSeats.includes(index)
+              ? "Selected"
+              : getSeatLabel(index)}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const handleFood = () => {
+    setShowFood(true);
   };
 
   return (
@@ -318,71 +128,49 @@ export default function CinemaSeatingPlan() {
         <div className="h-20 w-full bg-gray-800 flex items-center justify-center text-white text-2xl font-bold mb-4">
           Screen
         </div>
-        <div className="grid grid-cols-5 gap-2">
-          {/* Rows 1-10 */}
-          {seats.map((seat) => (
-            <div
-              key={seat.id}
-              className={`p-2 border border-gray-300 rounded-md cursor-pointer ${
-                seat.status === "reserved"
-                  ? "bg-gray-200 text-gray-400"
-                  : seat.status === "selected"
-                  ? "bg-blue-500 text-white"
-                  : seat.type === "wheelchair"
-                  ? "bg-yellow-500 text-white"
-                  : "bg-green-400"
-              }`}
-              onClick={() => {
-                if (seat.status === "available" || seat.status === "selected") {
-                  handleClick(seat.id);
-                }
-              }}
-            >
-              <div className="flex justify-between items-center">
-                <div>{seat.id}</div>
-                {seat.type === "wheelchair" && (
-                  <span className="bg-yellow-400 text-white text-xs py-1 px-2 rounded">
-                    Wheelchair
-                  </span>
+        <div className="flex flex-wrap justify-center">{renderSeats()}</div>
+        {selectedSeats.length > 0 && (
+          <div className="mt-4">
+            <p className="text-center">
+              You have selected:{" "}
+              {selectedSeats
+                .map((seatIndex) => getSeatLabel(seatIndex))
+                .join(", ")}
+            </p>
+            <p className="text-center">Price: ${totalCost}</p>
+            <span>
+              <button
+                className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+                onClick={handleFood}
+              >
+                {!showFood && "Add Food And Drink"}
+                {showFood && (
+                  <Food
+                    foods={foods}
+                    totalCost={foodCost}
+                    setTotalCost={setFoodCost}
+                  />
                 )}
-              </div>
-              <div className="text-xs mt-1">
-                {seat.status === "reserved" && "Reserved"}
-                {seat.status === "available" && "Available"}
-                {seat.status === "selected" && "Selected"}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4">
-          {seats.filter((seat) => seat.status === "selected").length > 0 && (
-            <div>
-              <p>
-                You have selected{" "}
-                {seats.filter((seat) => seat.status === "selected").length}{" "}
-                seats:
-              </p>
-              <ul>
-                {seats
-                  .filter((seat) => seat.status === "selected")
-                  .map((seat) => (
-                    <li key={seat.id}>{seat.id}</li>
-                  ))}
-              </ul>
-              <p>
-                Total price: ${" "}
-                {seats.filter((seat) => seat.status === "selected").length * 10}
-              </p>
-              <Link href={"/PurchaseScreen"}>
-                <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
-                  Make Payment
-                </button>
-              </Link>
-            </div>
-          )}
-        </div>
+              </button>
+            </span>
+          </div>
+        )}
+        {selectedSeats.length > 0 && (
+          <div className="text-center">
+            <h2 className="text-center text-3xl m-4">
+              {`Grand Total: $ ${(foodCost + totalCost).toFixed(2)}`}
+            </h2>
+            <button
+              class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+              onClick={purchaseTicket}
+            >
+              Make Payment
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
-}
-// missing food and drinks, ticket type (e.g student), photo id verification
+};
+
+export default CinemaSeatingPlan;

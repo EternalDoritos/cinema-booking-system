@@ -1,7 +1,48 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function DisplayUserSignUp() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [customer, setCustomer] = useState("");
+  const router = useRouter();
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleCustomerChange = (e) => {
+    setCustomer(e.target.value);
+  };
+
+  const createUser = async (e) => {
+    e.preventDefault();
+    console.log(username);
+    console.log(password);
+    console.log(customer);
+    const createUser = await fetch("http://localhost:5000/auth/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: username,
+        password: password,
+        userType: "customer",
+        customerType: customer,
+      }),
+    });
+    if (createUser.status === 200) {
+      window.alert("User created successfully, redirecting to log in page");
+      router.push("/UserLogInScreen");
+    } else window.alert("Error creating account");
+  };
   return (
     <div className=" bg-black flex flex-col justify-center py-6 sm:px-6 lg:px-8">
       <Head>
@@ -20,24 +61,25 @@ export default function DisplayUserSignUp() {
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-sm font-medium text-gray-400"
               >
-                Name
+                Username
               </label>
               <div className="mt-1">
                 <input
                   id="name"
                   name="name"
                   type="text"
-                  autoComplete="name"
+                  value={username}
+                  onChange={handleUsernameChange}
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                 />
               </div>
             </div>
 
-            <div>
+            {/* <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-400"
@@ -54,7 +96,7 @@ export default function DisplayUserSignUp() {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                 />
               </div>
-            </div>
+            </div> */}
 
             <div>
               <label
@@ -68,10 +110,33 @@ export default function DisplayUserSignUp() {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="new-password"
+                  value={password}
+                  onChange={handlePasswordChange}
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                 />
+              </div>
+              <div className="">
+                <label
+                  htmlFor="userType"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  User Type
+                </label>
+                <select
+                  name="userType"
+                  id="userType"
+                  value={customer}
+                  onChange={handleCustomerChange}
+                  className="text-black"
+                >
+                  <option disabled selected value className="text-center">
+                    Select User Type
+                  </option>
+                  <option value="student">Student</option>
+                  <option value="adult">Adult</option>
+                  <option value="senior">Senior</option>
+                </select>
               </div>
             </div>
 
@@ -79,6 +144,7 @@ export default function DisplayUserSignUp() {
               <button
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent  shadow-sm text-sm  bg-amber-300 hover:bg-amber-500 text-black font-bold rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={createUser}
               >
                 Sign up
               </button>

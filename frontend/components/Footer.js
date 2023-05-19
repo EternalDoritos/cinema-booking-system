@@ -1,28 +1,7 @@
 import styles from "../styles//Footer.module.css";
+import Link from "next/link";
 import Image from "next/image";
-
-// function Footer() {
-//   return (
-//     <footer className={styles.footer}>
-//       <div className={styles.container}>
-//         <div className={styles.logo}>
-//           <Image src="/logo.png" alt="Cinema Logo" width={200} height={110} />
-//           <h3>GoldenRizz Copyright 2023</h3>
-//         </div>
-//         <div className={styles.menu}>
-//           <ul>
-//             <li>Home</li>
-//             <li>Movies</li>
-//             <li>About Us</li>
-//             <li>Contact Us</li>
-//           </ul>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// }
-
-// export default Footer;
+import aboutUs from "../pages/footerComponents/aboutUs";
 
 function Footer() {
   return (
@@ -32,36 +11,82 @@ function Footer() {
           <div className={styles.column}>
             <h4>About GoldenRizz</h4>
             <ul>
-              <li>About Us</li>
-              <li>Careers</li>
-              <li>Corporate Sales</li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/aboutUs">
+                  <a className="text-amber-300">About Us</a>
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/faq">
+                  <a className="text-amber-300">FAQ</a>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className={styles.column}>
             <h4>Connect with us</h4>
             <ul>
-              <li>Contact Us</li>
-              <li>Feedback</li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/contactUs">
+                  <a className="text-amber-300">Contact Us</a>
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/feedback">
+                  <a className="text-amber-300">Feedback</a>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className={styles.column}>
-            <h4>GoldenRizz Movie Extras</h4>
+            <h4>Social Media</h4>
             <ul>
-              <li>Gift Vouchers</li>
-              <li>Promotions</li>
+              <li>
+                {" "}
+                <Link href="https://www.instagram.com/gvmovieclub/">
+                  <a className="text-amber-300">Instagram</a>
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="https://www.facebook.com/gvmovieclub">
+                  <a className="text-amber-300">Facebook</a>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className={styles.column}>
             <h4>Useful Links</h4>
             <ul>
-              <li>Terms of Use</li>
-              <li>Privacy Policy</li>
-              <li>Sitemap</li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/termsOfUse">
+                  <a className="text-amber-300">Terms of Use</a>
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="/footerComponents/privacyPolicy">
+                  <a className="text-amber-300">Privacy Policy</a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="GV Logo" width={200} height={110} />
+          <Image
+            src="/logo.png"
+            alt="GoldenRizz Logo"
+            width={200}
+            height={110}
+          />
+          <p className="text-gray-400 text-sm">
+            © 2023 GoldenRizz Site. All rights reserved.
+          </p>{" "}
         </div>
       </div>
     </footer>

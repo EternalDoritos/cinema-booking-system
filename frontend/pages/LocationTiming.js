@@ -1,63 +1,89 @@
 import Head from "next/head";
 import React from "react";
+import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
 import Link from "next/link";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../store/context";
 
-const locations = ["Bishan", "Tampines", "Bedok", "Pasir Ris"];
-const timings = ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"];
+const MovieBookingPage = ({ id }) => {
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useContext(Context);
+  const [timing, setTiming] = useState([]);
 
-const MovieBookingPage = () => {
+  useEffect(() => {
+    async function getData() {
+      const id = router.query.movieId;
+      const res = await fetch(`http://localhost:5000/listing/${id}`);
+      setTiming(await res.json());
+    }
+    getData();
+  }, []);
   return (
-    <div className="min-h-screen ">
+    // <div className="min-h-screen ">
+    <div>
       <Head>
         <title>Movie Booking</title>
       </Head>
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold">Movie Showtimes</h1>
+        {!currentUser && (
+          <h1 className="text-red-500 text-center text-bold text-3xl mt-6">
+            Please log in to book movie ticket
+          </h1>
+        )}
       </div>
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 bg-gray-800">
-        <div className="overflow-x-auto">
-          <table className="w-full divide-y">
-            <thead>
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-                >
-                  Locations
-                </th>
-                {timings.map((timing) => (
-                  <th
-                    key={timing}
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+      {timing.length < 1 ? (
+        <h1 className="text-center m-4 text-3xl text-bold">
+          No timing available
+        </h1>
+      ) : (
+        <>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-gray-800 py-4 px-4 shadow sm:rounded-lg sm:px-0">
+              <div className="grid grid-cols-4 text-center">
+                <div>
+                  <h4 className="text-bold text-xl underline">Location</h4>
+                </div>
+                <div>
+                  <h4 className="text-bold text-xl underline">Date</h4>
+                </div>
+                <h4 className="text-bold text-xl underline">Time</h4>
+                <h4></h4>
+              </div>
+              {timing.map((ele) => {
+                return (
+                  <div
+                    className="grid grid-cols-4 text-center m-4"
+                    key={Math.random()}
                   >
-                    {timing}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {locations.map((location) => (
-                <tr key={location}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    {location}
-                  </td>
-                  {timings.map((timing) => (
-                    <td key={timing} className="px-6 py-4 whitespace-nowrap">
-                      <Link href={"/SeatingScreen"}>
-                        <button className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    <div>
+                      <h4>{ele.cinema.location}</h4>
+                    </div>
+                    <div>
+                      <h4>{ele.date}</h4>
+                    </div>
+                    <div>
+                      <h4>{ele.time}</h4>
+                    </div>
+                    {!currentUser && <> </>}
+                    {currentUser && (
+                      <Link
+                        href={`/SeatingScreen?listId=${ele.listId}`}
+                        passHref
+                      >
+                        <a className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-1 px-2 rounded-lg text-sm transition-colors duration-300">
                           Book Now
-                        </button>
+                        </a>
                       </Link>
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

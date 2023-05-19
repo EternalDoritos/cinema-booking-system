@@ -26,7 +26,7 @@ const DisplayPurchaseSuccess = () => {
         </h1>
 
         <h2 className="text-amber-500 text-center mt-4 mb-2">
-          Your payment has been accepted. You have earned __ loyalty points!
+          Your payment has been accepted. You have earned 200 loyalty points!
         </h2>
         <p className="text-gray-400 text-center mt-4 mb-2">
           Redirecting to the home page in a couple of seconds.

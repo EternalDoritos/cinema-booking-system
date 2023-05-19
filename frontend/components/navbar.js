@@ -1,5 +1,8 @@
 import { useState } from "react";
-
+import { useContext } from "react";
+import { Context } from "../store/context";
+import UserProfile from "../pages/UserProfileScreen";
+import { useRouter } from "next/router";
 function NavLink({ to, children }) {
   return (
     <a href={to} className={`mx-4`}>
@@ -9,6 +12,8 @@ function NavLink({ to, children }) {
 }
 
 function MobileNav({ open, setOpen }) {
+  const [currentUser] = useContext(Context);
+
   return (
     <div
       className={`absolute top-0 left-0 h-screen w-screen bg-black transform ${
@@ -32,7 +37,7 @@ function MobileNav({ open, setOpen }) {
             }, 100)
           }
         >
-          Gallery
+          GALLERY
         </a>
         {/* <a
           className="text-xl font-medium my-4"
@@ -45,17 +50,32 @@ function MobileNav({ open, setOpen }) {
         >
           Log in
         </a> */}
-        <a
-          className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
-          href="/UserLogInScreen"
-          onClick={() =>
-            setTimeout(() => {
-              setOpen(!open);
-            }, 100)
-          }
-        >
-          Log in
-        </a>
+        {!currentUser && (
+          <a
+            className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
+            href="/UserLogInScreen"
+            onClick={() =>
+              setTimeout(() => {
+                setOpen(!open);
+              }, 100)
+            }
+          >
+            LOG IN
+          </a>
+        )}
+        {currentUser && (
+          <a
+            className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
+            href="/UserProfileScreen"
+            onClick={() =>
+              setTimeout(() => {
+                setOpen(!open);
+              }, 100)
+            }
+          >
+            PROFILE
+          </a>
+        )}
       </div>
     </div>
   );
@@ -63,19 +83,39 @@ function MobileNav({ open, setOpen }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [currentUser] = useContext(Context);
+  const router = useRouter();
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  //const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   // function handleLogin() {
   //   // perform login logic
   //   setIsLoggedIn(true);
   // }
+  const userProfile = () => {
+    router.push("/UserProfileScreen");
+  };
+
+  const gallery = () => {
+    router.push("/GalleryScreen");
+  };
+
+  const index = () => {
+    router.push("/");
+  };
+
+  const login = () => {
+    router.push("/UserLogInScreen");
+  };
   return (
     <nav className="flex filter drop-shadow-md bg-black px-4 py-4 h-20 items-center border-b-2 border-amber-300">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
-        <a className="text-2xl font-semibold" href="/">
+        <button
+          className="text-2xl font-semibold text-amber-300"
+          onClick={index}
+        >
           GOLDENRIZZ
-        </a>
+        </button>
       </div>
       <div className="w-9/12 flex justify-end items-center">
         <div
@@ -103,13 +143,24 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex">
-          <NavLink to="/GalleryScreen">GALLERY</NavLink>
+          <button onClick={gallery} className="m-2 text-amber-300">
+            GALLERY
+          </button>
           {/* {isLoggedIn ? (
             <img src="/user-icon.png" alt="User Icon" />
           ) : (
             <button onClick={handleLogin}>Log In</button>
           )} */}
-          <NavLink to="/UserLogInScreen">LOG IN</NavLink>
+          {currentUser && (
+            <button onClick={userProfile} className="m-2 text-amber-300">
+              PROFILE
+            </button>
+          )}
+          {!currentUser && (
+            <button onClick={login} className="m-2 text-amber-300">
+              LOG IN
+            </button>
+          )}
         </div>
       </div>
     </nav>

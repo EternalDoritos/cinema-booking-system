@@ -6,6 +6,7 @@ const cinemaController = require("../controller/cinema");
 
 //cinema -> GET
 router.get("/", cinemaController.getCinema);
+router.get("/:cinemaId", cinemaController.getOneCinema);
 
 //cinema -> POST
 router.post("/", cinemaController.postCinema);

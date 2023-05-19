@@ -3,15 +3,62 @@ const asyncHandler = require("express-async-handler");
 
 const Listing = require("../models/listing");
 const Cinema = require("../models/cinema");
+const User = require("../models/user");
+exports.getListing = asyncHandler(async (req, res) => {
+  const listings = await Listing.find();
+  res.status(200).json(listings);
+});
 
+//@desc   GET listing by id
+//@route  GET listingById/:id
+//access  private
+exports.getListingByListId = asyncHandler(async (req, res) => {
+  arr = [];
+  const listing = await Listing.find({ _id: req.params.id })
+    .populate("cinema")
+    .populate("movie");
+  console.log(listing);
+  for (ele of listing) {
+    const day = ele.date.getDate();
+    const month = ele.date.getMonth() + 1;
+    const year = ele.date.getFullYear();
+    newDate = `${day} - ${month} - ${year}`;
+    arr.push({
+      movie: ele.movie,
+      cinema: ele.cinema,
+      seating: ele.seating,
+      date: newDate,
+      time: ele.time,
+      listId: ele._id,
+    });
+  }
+  res.status(200).json(arr);
+});
 //@desc     GET all the current listings of the movie
 //@route    GET/listing/:id
 //@access   private
-exports.getListing = asyncHandler(async (req, res) => {
+exports.getListingByID = asyncHandler(async (req, res) => {
+  arr = [];
   const listing = await Listing.find({ movie: req.params.id })
     .populate("cinema")
+    .populate("seating")
     .populate("movie");
-  res.status(200).json(listing);
+  console.log(listing);
+  for (ele of listing) {
+    const day = ele.date.getDate();
+    const month = ele.date.getMonth() + 1;
+    const year = ele.date.getFullYear();
+    newDate = `${day} - ${month} - ${year}`;
+    arr.push({
+      movie: ele.movie,
+      cinema: ele.cinema,
+      seating: ele.seating,
+      date: newDate,
+      time: ele.time,
+      listId: ele._id,
+    });
+  }
+  res.status(200).json(arr);
 });
 
 //@desc     POST a new listing of a movie
@@ -22,6 +69,7 @@ exports.postListing = asyncHandler(async (req, res) => {
     cinema: req.body.cinema,
     time: req.body.time,
     date: req.body.date,
+    discountedPriceBooked: 0,
   });
 
   if (exist) {
@@ -33,7 +81,6 @@ exports.postListing = asyncHandler(async (req, res) => {
     { _id: 0, maxSeating: 1 }
   );
 
-  console.log(maxSeat);
   const seating = new Array(maxSeat[0].maxSeating).fill(false); //change 15 to cinema quantity
   const listing = await Listing.create({
     movie: req.body.movie,
@@ -58,10 +105,28 @@ exports.patchListing = asyncHandler(async (req, res) => {
     existingSeat.seating[ele] = true;
   }
 
+  const prevValue = await Listing.find({ _id: req.body.id }).select({
+    _id: 0,
+    discountedPriceBooked: 1,
+  });
+  console.log(prevValue[0].discountedPriceBooked);
   const listing = await Listing.findByIdAndUpdate(
     { _id: req.body.id },
     {
       seating: existingSeat.seating,
+      discountedPriceBooked:
+        prevValue[0].discountedPriceBooked + req.body.discountedPriceBooked,
+    }
+  );
+  const user = await User.findByIdAndUpdate(
+    { _id: req.body.userId },
+    {
+      $push: {
+        seatsBooked: {
+          movieList: req.body.id,
+          seating: req.body.booked,
+        },
+      },
     }
   );
   res.status(200).json(listing);
@@ -80,6 +145,7 @@ exports.patchListingAll = asyncHandler(async (req, res) => {
       seating: req.body.seating,
       date: req.body.date,
       time: req.body.time,
+      discountedPriceBooked: req.body.discountedPriceBooked,
     }
   );
 

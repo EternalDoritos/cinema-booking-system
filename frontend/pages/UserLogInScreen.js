@@ -1,7 +1,46 @@
 import Head from "next/head";
 import Link from "next/link";
+import ManagerScreen from "./ManagerScreen";
+import { useState } from "react";
+import { Context } from "../store/context";
+import { useRouter } from "next/router";
+import { useContext } from "react";
 
 export default function DisplayUserLogIn() {
+  const [currentUser, setCurrentUser] = useContext(Context);
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUserChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePassChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const logIn = async (e) => {
+    e.preventDefault();
+
+    const login = await fetch("http://localhost:5000/auth/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+    const data = await login.json();
+    if (login.status === 200) {
+      sessionStorage.setItem("userId", JSON.stringify(data.user));
+      setCurrentUser(data.user);
+      router.push("/");
+    } else window.alert("Invalid");
+  };
   return (
     <div className=" bg-black flex flex-col justify-center py-6 sm:px-6 lg:px-8">
       <Head>
@@ -20,19 +59,19 @@ export default function DisplayUserLogIn() {
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="username"
                 className="block text-sm font-medium text-gray-400"
               >
-                Email address
+                Username
               </label>
               <div className="mt-1">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  id="username"
+                  name="username"
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+                  value={username}
+                  onChange={handleUserChange}
                 />
               </div>
             </div>
@@ -52,6 +91,8 @@ export default function DisplayUserLogIn() {
                   autoComplete="current-password"
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+                  value={password}
+                  onChange={handlePassChange}
                 />
               </div>
             </div>
@@ -85,23 +126,8 @@ export default function DisplayUserLogIn() {
             <div>
               <button
                 type="submit"
-                onClick={() => {
-                  //send a post request, inside body that holds username and pw,
-                  //send over, be does check and return result,
-                  //Declare context
-                  /*if(400){
-                    display error messgae on log in (either pw/email)
-                  }
-                  else if(200){
-                    -receive user object and save it as a context,
-                    -if null, redirect to log in, else
-                    -check userType from context,
-                    -route to home page.
-                    -route over to relevant user pages.
-                  }
-                  */
-                }}
                 className="w-full flex justify-center py-2 px-4 border border-transparent  shadow-sm text-sm  bg-amber-300 hover:bg-amber-500 text-black font-bold rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={logIn}
               >
                 Log in
               </button>
@@ -122,72 +148,3 @@ export default function DisplayUserLogIn() {
     </div>
   );
 }
-// import Head from "next/head";
-// import Link from "next/link";
-
-// export default function Login() {
-//   return (
-//     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-//       <Head>
-//         <title>Login | GoldenRizz</title>
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
-
-//       <div className="max-w-md w-full space-y-8">
-//         <div>
-//           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-//             Log in to your account
-//           </h2>
-//         </div>
-//         <form className="mt-8 space-y-6">
-//           <div>
-//             <label htmlFor="email" className="sr-only">
-//               Email address
-//             </label>
-//             <input
-//               id="email"
-//               name="email"
-//               type="email"
-//               autoComplete="email"
-//               required
-//               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//               placeholder="Email address"
-//             />
-//           </div>
-//           <div>
-//             <label htmlFor="password" className="sr-only">
-//               Password
-//             </label>
-//             <input
-//               id="password"
-//               name="password"
-//               type="password"
-//               autoComplete="current-password"
-//               required
-//               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//               placeholder="Password"
-//             />
-//           </div>
-//           <div>
-//             <button
-//               type="submit"
-//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-//             >
-//               Log in
-//             </button>
-//           </div>
-//         </form>
-//         <div className="flex items-center justify-between">
-//           <div className="text-sm">
-//             <Link
-//               href="/signup"
-//               className="font-medium text-indigo-600 hover:text-indigo-500"
-//             >
-//               Don't have an account? Sign up
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

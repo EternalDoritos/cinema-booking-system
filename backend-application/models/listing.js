@@ -19,13 +19,19 @@ const listingSchema = new Schema({
     },
   ],
   date: {
-    type: String,
+    type: Date,
     required: true,
   },
   time: {
     type: Number,
     required: true,
   },
+  discountedPriceBooked: {
+    type: Number,
+  },
+  /*student:{
+    []
+  }*/
 });
 
 module.exports = mongoose.model("Listing", listingSchema);
