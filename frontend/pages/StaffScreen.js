@@ -25,13 +25,6 @@ const StaffScreen = () => {
             </Link>
           </li>
           <li>
-            <Link legacyBehavior href="../purchaseFood">
-              <a className="text-center font-bold text-2xl  p-2 rounded">
-                {" "}Purchase Food & Drinks{" "}
-              </a>
-            </Link>
-          </li>
-          <li>
             <Link legacyBehavior href="/staffComponents/redeemLoyaltyPoints">
               <a className="text-center font-bold text-2xl  p-2 rounded">
                 {" "}Redeem Loyalty Points{" "}

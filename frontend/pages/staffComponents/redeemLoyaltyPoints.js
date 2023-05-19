@@ -7,12 +7,17 @@ const RedeemLoyaltyPoints = () => {
   const [id, setId] = useState("");
   const [currLoyaltyPoints, setCurrLoyaltyPoints] = useState(0);
   const getUserByEmail = async () => {
-    const getUser = await fetch(
-      `http://localhost:5000/auth/getUserByEmail/${email}`
-    );
-    const data = await getUser.json();
-    setId(data?._id);
-    setCurrLoyaltyPoints(data?.loyaltyPoints);
+    try {
+      const getUser = await fetch(
+        `http://localhost:5000/auth/getUserByEmail/${email}`
+      );
+      const data = await getUser.json();
+      setId(data?._id);
+      setCurrLoyaltyPoints(data?.loyaltyPoints);
+    } catch (error) {
+      console.log("Invalid email address")
+    }
+    
   };
   const deductPoints = () => {
     getUserByEmail();
@@ -47,7 +52,7 @@ const RedeemLoyaltyPoints = () => {
   return (
     <>
       <Head>
-        <title>Create Movie</title>
+        <title>Redeem Royalty Points</title>
       </Head>
       <h1 className="text-center text-4xl text-bold m-4">
         Loyalty Point Redemption
