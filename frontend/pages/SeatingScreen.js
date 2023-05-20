@@ -91,11 +91,11 @@ const CinemaSeatingPlan = ({ id, foods }) => {
 
   const renderSeats = () => {
     return (
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-5 gap-4 mb-7">
         {seats.map((seat, index) => (
           <div
             key={index}
-            className={`p-3 rounded-md ${
+            className={`p-6 md:p-8 md:py-6 lg:p-10 lg:py-6 xl:p-12 xl:py-8 2xl:p-14 2xl:py-10 rounded-md ${
               seat
                 ? "bg-gray-400 cursor-not-allowed"
                 : selectedSeats.includes(index)
