@@ -26,12 +26,11 @@ exports.summaryReportMovie = async (req, res) => {
     revenue =
       !movies.discountedPriceBooked || movies.discountedPriceBooked === 0
         ? revenue
-        : revenue - 2 * discountedPriceBooked;
+        : revenue - 2 * movies.discountedPriceBooked;
     grandTotalMovie += revenue;
 
-    const updatedDate = `${movies.date.getDate()}-${
-      movies.date.getMonth() + 1
-    }-${movies.date.getFullYear()}`;
+    const dateArr = movies.date.toString().split(" ");
+    const updatedDate = `${dateArr[2]} - ${dateArr[1]} - ${dateArr[3]}`;
     const movieDetail = {
       movieName: movies.movie.name,
       movieDate: updatedDate,
@@ -69,7 +68,7 @@ exports.summaryReportDate = async (req, res) => {
     revenue =
       !movies.discountedPriceBooked || movies.discountedPriceBooked === 0
         ? revenue
-        : revenue - 2 * discountedPriceBooked;
+        : revenue - 2 * movies.discountedPriceBooked;
 
     grandTotalDate += revenue;
 
