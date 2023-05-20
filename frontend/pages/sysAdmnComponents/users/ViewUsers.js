@@ -139,7 +139,7 @@ const ViewUsers = ({ users }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  {column.render("Header")}
+                  {column.render("H eader")}
                   <span>
                     <MdArrowDropDown />
                   </span>
