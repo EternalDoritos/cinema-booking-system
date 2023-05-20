@@ -26,7 +26,7 @@ const DisplayUserProfile = () => {
       {currentUser && currentUser.userType === "systemAdmin" && (
         <SystemAdminScreen />
       )}
-      <div className="text-right m-4">
+      <div className="text-center m-4">
         <button className="m-4 p-2 bg-cyan-900" onClick={logOut}>
           Log Out
         </button>
