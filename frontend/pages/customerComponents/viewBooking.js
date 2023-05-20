@@ -10,7 +10,7 @@ const DisplayBooking = () => {
     const fetchUser = async () => {
       if (currentUser) {
         const response = await fetch(
-          `http://localhost:5000/auth/getUserById/${currentUser._id}`
+          `http://localhost:5000/auth/getCustomerById/${currentUser._id}`
         );
         const data = await response.json();
         setSeats(data.seatsBooked);
@@ -118,4 +118,3 @@ const DisplayBooking = () => {
 };
 
 export default DisplayBooking;
-

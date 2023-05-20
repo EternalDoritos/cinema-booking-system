@@ -200,10 +200,10 @@ exports.editUser = async (req, res) => {
 };
 
 //@desc     Get user by ID
-//@route    PUT/getUserById
+//@route    PUT/getCustomerById
 //@access   public
 
-exports.getUserById = async (req, res) => {
+exports.getCustomerById = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).populate([
     {
@@ -211,6 +211,31 @@ exports.getUserById = async (req, res) => {
       populate: ["movie", "cinema"],
     },
   ]);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+};
+//@desc     Get user by ID
+//@route    PUT/getUserById
+//@access   public
+
+exports.getUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json(user);
+};
+
+//@desc     Get account by ID
+//@route    PUT/getAccountById
+//@access   public
+
+exports.getAccountById = async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ username: username }).exec();
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
