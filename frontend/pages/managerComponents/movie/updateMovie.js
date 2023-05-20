@@ -110,6 +110,7 @@ const UpdateMovie = () => {
                   cols={50}
                   className="text-black"
                   onChange={descChange}
+                  value={desc}
                 >
                   {desc}
                 </textarea>
