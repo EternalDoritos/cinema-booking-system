@@ -32,7 +32,7 @@ Ticket booking and purchase functionality. Customers should be able to browse th
 
 ## Brief
 
-Cinema booking system for Users and System admin.
+Cinema booking system for Users, Managers, Staff & System admin.
 
 ## Database
 
