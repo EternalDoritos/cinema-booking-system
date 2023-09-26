@@ -15,7 +15,6 @@ export const getStaticProps = async () => {
 };
 
 const DisplayGallery = ({ movies }) => {
-  //const user = useGlobalStore((state) => state.userProfile);
   return (
     <div>
       <Head>
@@ -25,14 +24,13 @@ const DisplayGallery = ({ movies }) => {
         Movie List
       </h1>
       <div className="mb-8 ml-12 mr-12 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 bg-black border-8 border-black">
-        {movies.map((movie) => {
-          console.log(movie.image);
+        {movies.map((movie, index) => {
           return (
             <div
-              key={movie.id}
+              key={index}
               className="bg-gray-800 rounded-lg p-4 cursor-pointer"
             >
-              <Link href={`/SynopsisScreen?movieId=${movie._id}`}>
+              <Link passHref href={`/SynopsisScreen?movieId=${movie._id}`}>
                 <div className="card relative">
                   <div className="bg-black-300 flex items-center justify-center">
                     <Image
@@ -42,7 +40,7 @@ const DisplayGallery = ({ movies }) => {
                       width={300}
                       height={400}
                       // layout="fill"
-                      style={{ objectFit: "cover" }} // Add this line
+                      // style={{ objectFit: "cover" }} // Add this line
                     />
                   </div>
                   <div className="m-4">
