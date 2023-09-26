@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install Dependencies for backend
         run: |
           cd backend
