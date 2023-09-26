@@ -25,19 +25,22 @@ export default function DisplayUserSignUp() {
     console.log(username);
     console.log(password);
     console.log(customer);
-    const createUser = await fetch("http://localhost:5000/auth/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: username,
-        password: password,
-        userType: "customer",
-        customerType: customer,
-      }),
-    });
+    const createUser = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: username,
+          password: password,
+          userType: "customer",
+          customerType: customer,
+        }),
+      }
+    );
     if (createUser.status === 200) {
       window.alert("User created successfully, redirecting to log in page");
       router.push("/UserLogInScreen");

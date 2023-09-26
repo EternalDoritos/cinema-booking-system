@@ -21,7 +21,7 @@ const CreateFood = () => {
   };
 
   const createFood = async () => {
-    const createFood = await fetch("http://localhost:5000/food", {
+    const createFood = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food`, {
       method: "POST",
       headers: {
         Accept: "application/json",

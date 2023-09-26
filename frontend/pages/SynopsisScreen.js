@@ -11,14 +11,14 @@ const DisplaySynopsis = () => {
 
   // async function getData() {
   //   const id = router.query.movieId;
-  //   const res = await fetch(`http://localhost:5000/listing/${id}`);
+  //   const res = await fetch(``${process.env.NEXT_PUBLIC_API_URL}/listing/${id}`);
   //   setTiming(await res.json());
   // }
   useEffect(() => {
     if (!router.isReady) return;
 
     const movieId = router.query.movieId;
-    fetch(`http://localhost:5000/movie/${movieId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie/${movieId}`)
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);

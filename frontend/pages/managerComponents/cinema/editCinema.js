@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/cinema");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cinema`);
   const data = await res.json();
 
   return {
@@ -39,16 +39,19 @@ const EditCinema = ({ cinema }) => {
   };
 
   const deleteCinema = async () => {
-    const deleteCinema = await fetch("http://localhost:5000/cinema", {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: cinemaIdDelete,
-      }),
-    });
+    const deleteCinema = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/cinema`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: cinemaIdDelete,
+        }),
+      }
+    );
     if (deleteCinema.status === 200) {
       window.alert("Cinema has been deleted");
       router.push("/");

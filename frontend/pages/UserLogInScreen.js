@@ -23,7 +23,7 @@ export default function DisplayUserLogIn() {
   const logIn = async (e) => {
     e.preventDefault();
 
-    const login = await fetch("http://localhost:5000/auth/login", {
+    const login = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",

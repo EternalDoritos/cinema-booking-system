@@ -6,7 +6,7 @@ import { Context } from "../store/context";
 //import Counter from '../components/Counter';
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/food");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food`);
   const data = await res.json();
 
   return {

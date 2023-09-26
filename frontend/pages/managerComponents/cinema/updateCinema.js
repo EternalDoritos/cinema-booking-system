@@ -11,7 +11,7 @@ const UpdateCinema = () => {
     if (!router.isReady) return;
 
     const cinemaId = router.query.cinemaId;
-    fetch(`http://localhost:5000/cinema/${cinemaId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/cinema/${cinemaId}`)
       .then((res) => res.json())
       .then((data) => {
         setLocation(data.location);
@@ -29,18 +29,21 @@ const UpdateCinema = () => {
 
   const update = async () => {
     const maxSeating = +seating;
-    const updateCinema = await fetch("http://localhost:5000/cinema", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: router.query.cinemaId,
-        location,
-        seating: maxSeating,
-      }),
-    });
+    const updateCinema = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/cinema`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: router.query.cinemaId,
+          location,
+          seating: maxSeating,
+        }),
+      }
+    );
     if (updateCinema.status === 200) {
       window.alert("Cinema updated successfully");
       router.push("/");

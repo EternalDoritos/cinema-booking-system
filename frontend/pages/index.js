@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "../styles//index.module.css";
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/movie");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
   const data = await res.json();
 
   return {
@@ -80,7 +80,7 @@ const DisplayHome = ({ movies }) => {
           <Slideshow images={movieImages} />
         </div>
         <Link href="/GalleryScreen">
-          <button class="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+          <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
             View all Movies
           </button>
         </Link>
@@ -100,7 +100,7 @@ export default DisplayHome;
 // import { useEffect, useState } from "react";
 
 // export const getStaticProps = async () => {
-//   const res = await fetch("http://localhost:5000/movie");
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
 //   const data = await res.json();
 
 //   return {

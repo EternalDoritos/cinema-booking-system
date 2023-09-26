@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/movie");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
   const data = await res.json();
 
   return {
@@ -36,16 +36,19 @@ const EditMove = ({ movies }) => {
   };
 
   const deleteMovie = async () => {
-    const deleteMovie = await fetch("http://localhost:5000/movie", {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: movieIdDelete,
-      }),
-    });
+    const deleteMovie = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/movie`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: movieIdDelete,
+        }),
+      }
+    );
     if (deleteMovie.status === 200) {
       window.alert("Movie deleted");
       router.push("/");

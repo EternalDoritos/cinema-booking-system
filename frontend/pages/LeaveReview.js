@@ -30,19 +30,22 @@ const EditReview = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/movie/reviews`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: router.query.movieId,
-          name: currentUser._id,
-          reviews: review,
-          ratings: rating,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/movie/reviews`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: router.query.movieId,
+            name: currentUser._id,
+            reviews: review,
+            ratings: rating,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log(data); // For debugging purposes only

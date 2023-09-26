@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export async function getServerSideProps(context) {
   const userName = context.params.slug;
   const res = await fetch(
-    `http://localhost:5000/auth/getInvalidatedUserByUsername/${userName}`
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/getInvalidatedUserByUsername/${userName}`
   );
   const data = await res.json();
   return {
@@ -28,7 +28,7 @@ const Signup = ({ user }) => {
     console.log("User Name: ", userName);
     console.log("User Type: ", userType);
     const validateUser = await fetch(
-      "http://localhost:5000/auth/validateUserAccount",
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/validateUserAccount`,
       {
         method: "POST",
         headers: {

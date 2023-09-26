@@ -10,7 +10,7 @@ const DisplayBooking = () => {
     const fetchUser = async () => {
       if (currentUser) {
         const response = await fetch(
-          `http://localhost:5000/auth/getCustomerById/${currentUser._id}`
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/getCustomerById/${currentUser._id}`
         );
         const data = await response.json();
         setSeats(data.seatsBooked);

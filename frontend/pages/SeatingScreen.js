@@ -5,7 +5,7 @@ import Food from "./purchaseFood";
 import { Context } from "../store/context";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/food");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food`);
   const data = await res.json();
 
   return {
@@ -24,23 +24,26 @@ const CinemaSeatingPlan = ({ id, foods }) => {
 
   const purchaseTicket = async (e) => {
     e.preventDefault;
-    const bookTicket = await fetch("http://localhost:5000/listing/seat", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        booked: selectedSeats,
-        id: router.query.listId,
-        discountedPriceBooked:
-          currentUser.customerType === "student" ||
-          currentUser.customerType === "senior"
-            ? selectedSeats.length
-            : 0,
-        userId: currentUser._id,
-      }),
-    });
+    const bookTicket = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/listing/seat`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          booked: selectedSeats,
+          id: router.query.listId,
+          discountedPriceBooked:
+            currentUser.customerType === "student" ||
+            currentUser.customerType === "senior"
+              ? selectedSeats.length
+              : 0,
+          userId: currentUser._id,
+        }),
+      }
+    );
     if (bookTicket.status === 200) {
       window.alert("Booking successful");
       if (!currentUser || currentUser.userType !== "staff") {
@@ -52,7 +55,7 @@ const CinemaSeatingPlan = ({ id, foods }) => {
   };
   useEffect(() => {
     const id = router.query.listId;
-    fetch(`http://localhost:5000/listing/listingById/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/listing/listingById/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setSeats(data[0].seating);
@@ -161,7 +164,7 @@ const CinemaSeatingPlan = ({ id, foods }) => {
               {`Grand Total: $ ${(foodCost + totalCost).toFixed(2)}`}
             </h2>
             <button
-              class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
+              className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded"
               onClick={purchaseTicket}
             >
               Make Payment

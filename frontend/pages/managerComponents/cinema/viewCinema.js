@@ -3,7 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/cinema");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cinema`);
   const data = await res.json();
 
   return {

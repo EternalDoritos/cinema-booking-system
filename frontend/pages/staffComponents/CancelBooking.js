@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 
 export const getStaticProps = async () => {
   const [moviesRes, bookingsRes] = await Promise.all([
-    fetch("http://localhost:5000/movie"),
-    fetch("http://localhost:5000/listing"),
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`),
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/listing`),
   ]);
   const [movies, bookings] = await Promise.all([
     moviesRes.json(),
@@ -37,16 +37,19 @@ const CancelBooking = ({ movies, bookings }) => {
 
   const handleCancel = async (e) => {
     try {
-      const response = await fetch("http://localhost:5000/listing", {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: selectedBooking,
-        }),
-      });
+      const response = await fetch(
+        "${process.env.NEXT_PUBLIC_API_URL}/listing",
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: selectedBooking,
+          }),
+        }
+      );
 
       if (response.status == 200) {
         window.alert("Booking cancelled successfully");

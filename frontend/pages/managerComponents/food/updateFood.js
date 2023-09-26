@@ -12,7 +12,7 @@ const UpdateFood = () => {
     if (!router.isReady) return;
 
     const foodId = router.query.foodId;
-    fetch(`http://localhost:5000/food/${foodId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/food/${foodId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -38,7 +38,7 @@ const UpdateFood = () => {
   };
 
   const updateFood = async () => {
-    const createFood = await fetch("http://localhost:5000/food/", {
+    const createFood = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food/`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

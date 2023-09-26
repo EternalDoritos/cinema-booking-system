@@ -5,10 +5,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/movie");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
   const data = await res.json();
 
-  const cinema = await fetch("http://localhost:5000/cinema");
+  const cinema = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cinema`);
   const cinemaData = await cinema.json();
   return {
     props: { movies: data, cinemas: cinemaData },
@@ -43,7 +43,7 @@ const DisplayGallery = ({ movies, cinemas }) => {
   };
 
   const addListing = async () => {
-    const add = await fetch("http://localhost:5000/listing", {
+    const add = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/listing`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

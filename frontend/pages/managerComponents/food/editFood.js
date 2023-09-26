@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/food");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food`);
   const data = await res.json();
 
   return {
@@ -34,7 +34,7 @@ const EditFood = ({ food }) => {
   };
 
   const deleteFood = async () => {
-    const deleteFood = await fetch("http://localhost:5000/food", {
+    const deleteFood = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/food`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

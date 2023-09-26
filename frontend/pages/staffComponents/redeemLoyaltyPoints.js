@@ -9,15 +9,14 @@ const RedeemLoyaltyPoints = () => {
   const getUserByEmail = async () => {
     try {
       const getUser = await fetch(
-        `http://localhost:5000/auth/getUserByEmail/${email}`
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/getUserByEmail/${email}`
       );
       const data = await getUser.json();
       setId(data?._id);
       setCurrLoyaltyPoints(data?.loyaltyPoints);
     } catch (error) {
-      console.log("Invalid email address")
+      console.log("Invalid email address");
     }
-    
   };
   const deductPoints = () => {
     getUserByEmail();
@@ -26,7 +25,7 @@ const RedeemLoyaltyPoints = () => {
     currLoyaltyPoints -= 1000;
     console.log("Loyalty points after - 1000", currLoyaltyPoints);
     if (currLoyaltyPoints >= 0) {
-      fetch(`http://localhost:5000/auth/editUser/${id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/editUser/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

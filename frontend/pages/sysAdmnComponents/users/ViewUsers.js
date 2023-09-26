@@ -15,7 +15,7 @@ import Link from "next/link";
 import { MdArrowDropDown } from "react-icons/md";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/auth/getUsers");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/getUsers`);
   const data = await res.json();
   return {
     props: { users: data },
@@ -118,14 +118,14 @@ const ViewUsers = ({ users }) => {
       <Head>
         <title>View Users</title>
       </Head>
-      <h1 class="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
+      <h1 className="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
         Cinema Booking System Users
       </h1>
-      <p class="text-white text-center text-base pt-2 pb-10  tracking-wider">
+      <p className="text-white text-center text-base pt-2 pb-10  tracking-wider">
         Functions: View Users, Search Users, Update Users
       </p>
 
-      <table class="table w-full overflow-hidden" {...getTableProps()}>
+      <table className="table w-full overflow-hidden" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -172,7 +172,7 @@ const ViewUsers = ({ users }) => {
             const id = row.original.id;
             const SuspendUser = async (id) => {
               const suspendUser = await fetch(
-                `http://localhost:5000/auth/suspendUserAccess/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/auth/suspendUserAccess/${id}`,
                 {
                   method: "PUT",
                   headers: {
@@ -188,7 +188,7 @@ const ViewUsers = ({ users }) => {
 
             const ResumeUserAccess = async (id) => {
               const resumeUser = await fetch(
-                `http://localhost:5000/auth/resumeUserAccess/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/auth/resumeUserAccess/${id}`,
                 {
                   method: "PUT",
                   headers: {
@@ -227,7 +227,7 @@ const ViewUsers = ({ users }) => {
                           border: "solid 1px gray",
                           background: "#FFF7D4",
                         }}
-                        class="font-normal "
+                        className="font-normal "
                       >
                         {cell.render("Cell")}
                       </td>
@@ -241,37 +241,39 @@ const ViewUsers = ({ users }) => {
                     onClose={() => setOpenModalIndex(null)}
                     center
                   >
-                    <h2 class="font-bold text-xl text-slate-800 uppercase">
+                    <h2 className="font-bold text-xl text-slate-800 uppercase">
                       {userType}
                     </h2>
-                    <p class="font-extrabold text-slate-700">User name: </p>
-                    <p class="text-slate-600">{name}</p>
-                    <p class="font-extrabold text-slate-700">Employee type: </p>
-                    <p class="text-slate-600">{userType}</p>
-                    <p class="font-extrabold text-slate-700">Email: </p>
+                    <p className="font-extrabold text-slate-700">User name: </p>
+                    <p className="text-slate-600">{name}</p>
+                    <p className="font-extrabold text-slate-700">
+                      Employee type:{" "}
+                    </p>
+                    <p className="text-slate-600">{userType}</p>
+                    <p className="font-extrabold text-slate-700">Email: </p>
                     {email ? (
-                      <p class="text-slate-600">{email}</p>
+                      <p className="text-slate-600">{email}</p>
                     ) : (
-                      <p class="text-slate-600">-</p>
+                      <p className="text-slate-600">-</p>
                     )}
-                    <p class="font-extrabold text-slate-700">Active: </p>
+                    <p className="font-extrabold text-slate-700">Active: </p>
                     {activityStatus === "active" ? (
-                      <p class="text-green-500">{activityStatus}</p>
+                      <p className="text-green-500">{activityStatus}</p>
                     ) : (
-                      <p class="text-red-500">{activityStatus}</p>
+                      <p className="text-red-500">{activityStatus}</p>
                     )}
-                    <p class="font-extrabold text-slate-700">Suspended: </p>
+                    <p className="font-extrabold text-slate-700">Suspended: </p>
                     {suspendedStatus === "not suspended" ? (
-                      <p class="text-green-500">{suspendedStatus}</p>
+                      <p className="text-green-500">{suspendedStatus}</p>
                     ) : (
-                      <p class="text-red-500">{suspendedStatus}</p>
+                      <p className="text-red-500">{suspendedStatus}</p>
                     )}
                     <Link
                       href={`/sysAdmnComponents/users/EditUser/${id}`}
                       //   href={`/EditUser?id=u64574dc5f132becf123ddcf7`}
                       legacyBehavior
                     >
-                      <button class="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
+                      <button className="mt-6 mb-6 mr-2 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
                         Edit Profile
                       </button>
                     </Link>
@@ -285,7 +287,7 @@ const ViewUsers = ({ users }) => {
                             window.location.reload();
                           }
                         }}
-                        class="mt-6 mb-6 mr-2 bg-red-400 hover:bg-red-500 text-black font-bold py-2 px-4 rounded"
+                        className="mt-6 mb-6 mr-2 bg-red-400 hover:bg-red-500 text-black font-bold py-2 px-4 rounded"
                       >
                         Suspend User
                       </button>
@@ -298,7 +300,7 @@ const ViewUsers = ({ users }) => {
                             window.location.reload();
                           }
                         }}
-                        class="mt-6 mb-6 mr-2 bg-green-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded"
+                        className="mt-6 mb-6 mr-2 bg-green-400 hover:bg-green-500 text-black font-bold py-2 px-4 rounded"
                       >
                         Un-suspend User
                       </button>

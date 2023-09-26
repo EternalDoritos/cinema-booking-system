@@ -13,7 +13,7 @@ const UpdateMovie = () => {
     if (!router.isReady) return;
 
     const movieId = router.query.movieId;
-    fetch(`http://localhost:5000/movie/${movieId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie/${movieId}`)
       .then((response) => response.json())
       .then((data) => {
         setTitle(data[0].title);
@@ -47,21 +47,24 @@ const UpdateMovie = () => {
   };
 
   const updateMovie = async () => {
-    const updateMovie = await fetch("http://localhost:5000/movie", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        image: image,
-        description: desc,
-        poster: poster,
-        id: router.query.movieId,
-        trailer: trailer,
-      }),
-    });
+    const updateMovie = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/movie`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          image: image,
+          description: desc,
+          poster: poster,
+          id: router.query.movieId,
+          trailer: trailer,
+        }),
+      }
+    );
     if (updateMovie.status === 200) {
       window.alert("Movie updated!");
       router.push("/");

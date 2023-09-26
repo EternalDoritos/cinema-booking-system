@@ -17,17 +17,20 @@ const CreateCinema = () => {
 
   const CreateCinema = async () => {
     const maxSeating = +seating;
-    const CreateCinema = await fetch("http://localhost:5000/cinema", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        location,
-        seating: maxSeating,
-      }),
-    });
+    const CreateCinema = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/cinema`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          location,
+          seating: maxSeating,
+        }),
+      }
+    );
     if (CreateCinema.status === 200) {
       window.alert("Cinema created successfully");
       router.push("/");

@@ -26,7 +26,7 @@ const CreateUser = () => {
   const createInvalidatedUser = async (e) => {
     e.preventDefault();
     const createUser = await fetch(
-      "http://localhost:5000/auth/createInvalidatedUser",
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/createInvalidatedUser`,
       {
         method: "POST",
         headers: {
@@ -70,10 +70,10 @@ const CreateUser = () => {
       <Head>
         <title>Create User</title>
       </Head>
-      <h1 class="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
+      <h1 className="text-white text-center text-4xl pt-10 font-bold uppercase tracking-wider">
         Cinema Booking System Users
       </h1>
-      <p class="text-white text-center text-base pt-2 pb-8  tracking-wider">
+      <p className="text-white text-center text-base pt-2 pb-8  tracking-wider">
         {`Functions: Create new user(manager & staff)`}
       </p>
       <div>

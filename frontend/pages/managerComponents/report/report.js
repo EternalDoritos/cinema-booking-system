@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import MovieReport from "./movieReport";
 import DateReport from "./dateReport";
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/movie");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
   const data = await res.json();
 
   return {
@@ -19,28 +19,34 @@ const Report = ({ movies }) => {
   const [date, setDate] = useState("2023-01-01");
 
   async function generateReportMovie() {
-    const res = await fetch("http://localhost:5000/admin/reportMovie", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        movie: movieId,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/admin/reportMovie`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          movie: movieId,
+        }),
+      }
+    );
     setReportMovie(await res.json());
   }
 
   async function generateReportDate() {
-    const res = await fetch("http://localhost:5000/admin/reportDate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: date,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/admin/reportDate`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: date,
+        }),
+      }
+    );
     setReportDate(await res.json());
   }
 

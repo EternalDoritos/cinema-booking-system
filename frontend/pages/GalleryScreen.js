@@ -6,7 +6,7 @@ import { Context } from "../store/context";
 //import useGlobalStore from "../store/store";
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/movie");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
   const data = await res.json();
 
   return {

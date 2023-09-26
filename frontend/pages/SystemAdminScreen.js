@@ -20,7 +20,7 @@ const SystemAdminScreen = ({ users }) => {
       <Head>
         <title>SystemAdminScreen</title>
       </Head>
-      <h1 class="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
+      <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wider">
         System Admin Profile
       </h1>
       <div>

@@ -31,20 +31,23 @@ const CreateMovie = () => {
 
   const createMovie = async () => {
     //title, image, description,poster
-    const createMovie = await fetch("http://localhost:5000/movie", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        image: image,
-        description: desc,
-        poster: poster,
-        trailer: trailer,
-      }),
-    });
+    const createMovie = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/movie`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          image: image,
+          description: desc,
+          poster: poster,
+          trailer: trailer,
+        }),
+      }
+    );
     if (createMovie.status === 200) {
       window.alert("Movie successfully created");
       router.push("/");

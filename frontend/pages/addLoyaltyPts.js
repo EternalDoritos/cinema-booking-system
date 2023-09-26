@@ -14,7 +14,7 @@ const AddLoyaltyPoints = () => {
     const userId = updatedUser._id;
 
     // Make a PATCH request to update the loyalty points on the server
-    fetch(`http://localhost:5000/auth/editUser/${userId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/editUser/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
