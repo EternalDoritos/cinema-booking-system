@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import Image from "next/image";
 const About = () => {
   return (
     <div className="bg-black ">
@@ -33,12 +33,8 @@ const About = () => {
               SHOCK WAVE series, etc.
             </p>
           </div>
-          <div className="md:w-1/2 md:order-last">
-            <img
-              src="/cinema.jpg"
-              className="w-full h-auto md:h-full object-cover rounded-md md:rounded-none"
-              alt="Image"
-            />
+          <div className="relative md:w-1/2 md:order-last w-full h-auto md:h-full object-cover rounded-md md:rounded-none">
+            <Image src="/cinema.jpg" layout="fill" alt="Image" />
           </div>
         </div>
       </div>

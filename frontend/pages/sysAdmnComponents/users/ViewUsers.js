@@ -129,7 +129,7 @@ const ViewUsers = ({ users }) => {
         <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={index}>
-              {headerGroup.headers.map((column) => (
+              {headerGroup.headers.map((column, index) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   style={{
@@ -138,6 +138,7 @@ const ViewUsers = ({ users }) => {
                     color: "#FFFFFF",
                     fontWeight: "bold",
                   }}
+                  key={index}
                 >
                   {column.render("Header")}
                   <span>

@@ -54,7 +54,7 @@ const DisplayBooking = () => {
         {console.log(seats)}
         {!currentUser && (
           <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wide">
-            There's no user bookings to display
+            There&apos;s no user bookings to display
           </h1>
         )}
         {currentUser && (

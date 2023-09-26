@@ -81,7 +81,7 @@ const DisplayHome = ({ movies }) => {
         <div className="mt-6 2xl:h-4/6 2xl:w-4/6 xl:w-5/6 sm:w-full object-cover uppercase tracking-wider">
           <Slideshow images={movieImages} />
         </div>
-        <Link href="/GalleryScreen">
+        <Link href="/GalleryScreen" passHref>
           <button className="mt-6 mb-6 bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">
             View all Movies
           </button>

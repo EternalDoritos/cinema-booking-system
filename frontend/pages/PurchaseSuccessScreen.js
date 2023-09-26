@@ -12,7 +12,7 @@ const DisplayPurchaseSuccess = () => {
       // router.go(1)
       router.push("/");
     }, 3000);
-  }, []);
+  }, [router]);
 
   return (
     <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -20,7 +20,12 @@ const DisplayPurchaseSuccess = () => {
         <title>Purchase Success</title>
       </Head>
       <div className="flex flex-col items-center ">
-        <Image src="/404-tick.png" width={128} height={94} />
+        <Image
+          src="/404-tick.png"
+          width={128}
+          height={94}
+          alt="Payment photo"
+        />
         <h1 className="mt-6 text-center text-3xl font-extrabold text-white uppercase">
           Payment successful
         </h1>

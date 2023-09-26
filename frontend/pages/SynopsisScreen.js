@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MovieBookingPage from "./LocationTiming";
 import EditReview from "./LeaveReview";
-
+import Image from "next/image";
 const DisplaySynopsis = () => {
   const router = useRouter();
   let [movie, setMovie] = useState(null);
@@ -41,8 +41,8 @@ const DisplaySynopsis = () => {
           {/* <div className = "object-contain xl:h-4/6 xl:w-4/6 lg:h-auto lg:w-96 md:w-3/4">
         <img src={movie[0].image}></img>
         </div> */}
-          <div className="object-contain xl:h-auto xl:w-4/6 lg:h-auto lg:w-96 md:w-3/4 mx-auto my-auto">
-            <img src={movie[0].image} />
+          <div className="relative object-contain xl:h-auto xl:w-4/6 lg:h-auto lg:w-96 md:w-3/4 mx-auto my-auto">
+            <Image src={movie[0].image} layout="fill" alt="Image Synopsis" />
           </div>
           <div>
             <h1 className="mb-5 xl:text-5xl sm:text-4xl font-semibold text-gray-200">
