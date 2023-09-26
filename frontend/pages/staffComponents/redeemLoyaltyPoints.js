@@ -59,7 +59,7 @@ const RedeemLoyaltyPoints = () => {
       <div className="m-4 text-center">
         <form className="flex flex-col">
           <div className="m-4 text-xl">
-            <label for="title">Customer Email: </label>
+            <label htmlFor="title">Customer Email: </label>
             <input
               type="text"
               size={40}

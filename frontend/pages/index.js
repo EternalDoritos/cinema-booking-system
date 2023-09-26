@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import styles from "../styles//index.module.css";
 export const getStaticProps = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie`);
@@ -40,11 +41,12 @@ const Slideshow = ({ images }) => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="border-4 border-amber-300">
-        <img
+      <div className="relative w-full h-[90vh] border-4 border-amber-300">
+        <Image
           className={imageClass} // Apply the class to the <img> tag
           src={images[currentSlide]}
           alt="slideshow"
+          layout="fill"
         />
       </div>
       <button

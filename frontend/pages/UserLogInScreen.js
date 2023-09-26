@@ -139,7 +139,7 @@ export default function DisplayUserLogIn() {
                 href="/UserSignUpScreen"
                 className="font-medium text-gold-600 hover:text-amber-500"
               >
-                Don't have an account? Sign up
+                Don&apos;t have an account? Sign up
               </Link>
             </div>
           </div>

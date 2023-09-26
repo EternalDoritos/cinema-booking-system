@@ -15,7 +15,7 @@ const DisplayLoyalty = () => {
       </Head>
       {!currentUser && (
         <h1 className="text-white text-center text-4xl py-10 font-bold uppercase tracking-wide">
-          There's no user information to display
+          There&apos;s no user information to display
         </h1>
       )}
       {currentUser && (
@@ -23,10 +23,20 @@ const DisplayLoyalty = () => {
           <label className="text-white text-4xl py-10 font-bold uppercase tracking-wider">
             loyalty points
           </label>
-          <div className="mt-10 font-bold text-3xl sm:text-4xl underline"> User Name</div>
-          <div className="text-3xl sm:text-3xl text-amber-300">{currentUser.username}</div>
-          <div className="mt-6 font-bold text-3xl sm:text-4xl underline"> User Type</div>
-          <div className="text-3xl sm:text-3xl text-amber-300">{currentUser.userType}</div>
+          <div className="mt-10 font-bold text-3xl sm:text-4xl underline">
+            {" "}
+            User Name
+          </div>
+          <div className="text-3xl sm:text-3xl text-amber-300">
+            {currentUser.username}
+          </div>
+          <div className="mt-6 font-bold text-3xl sm:text-4xl underline">
+            {" "}
+            User Type
+          </div>
+          <div className="text-3xl sm:text-3xl text-amber-300">
+            {currentUser.userType}
+          </div>
           <div className="mt-6 font-bold text-3xl sm:text-4xl underline">
             Loyalty Points
           </div>
@@ -50,4 +60,3 @@ const DisplayLoyalty = () => {
 };
 
 export default DisplayLoyalty;
-

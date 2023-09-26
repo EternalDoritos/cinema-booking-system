@@ -3,11 +3,13 @@ import { useContext } from "react";
 import { Context } from "../store/context";
 import UserProfile from "../pages/UserProfileScreen";
 import { useRouter } from "next/router";
+import Link from "next/link";
+
 function NavLink({ to, children }) {
   return (
-    <a href={to} className={`mx-4`}>
+    <Link href={to} className={`mx-4`}>
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -23,12 +25,12 @@ function MobileNav({ open, setOpen }) {
       <div className="flex items-center justify-center filter drop-shadow-md bg-black h-20">
         {" "}
         {/*logo container*/}
-        <a className="text-xl font-semibold" href="/">
+        <Link className="text-xl font-semibold" href="/">
           GOLDENRIZZ
-        </a>
+        </Link>
       </div>
       <div className="flex flex-col ml-4">
-        <a
+        <Link
           className="text-xl font-medium my-4"
           href="/GalleryScreen"
           onClick={() =>
@@ -38,7 +40,7 @@ function MobileNav({ open, setOpen }) {
           }
         >
           GALLERY
-        </a>
+        </Link>
         {/* <a
           className="text-xl font-medium my-4"
           href="/UserLogInScreen"
@@ -51,7 +53,7 @@ function MobileNav({ open, setOpen }) {
           Log in
         </a> */}
         {!currentUser && (
-          <a
+          <Link
             className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
             href="/UserLogInScreen"
             onClick={() =>
@@ -61,10 +63,10 @@ function MobileNav({ open, setOpen }) {
             }
           >
             LOG IN
-          </a>
+          </Link>
         )}
         {currentUser && (
-          <a
+          <Link
             className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 my-4"
             href="/UserProfileScreen"
             onClick={() =>
@@ -74,7 +76,7 @@ function MobileNav({ open, setOpen }) {
             }
           >
             PROFILE
-          </a>
+          </Link>
         )}
       </div>
     </div>

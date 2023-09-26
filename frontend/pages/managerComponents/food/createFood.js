@@ -49,7 +49,7 @@ const CreateFood = () => {
       <div className="m-4 text-center">
         <form className="flex flex-col">
           <div className="m-4 text-xl">
-            <label for="name">Food Name:</label>
+            <label htmlFor="name">Food Name:</label>
             <input
               type="text"
               size={20}
@@ -60,7 +60,7 @@ const CreateFood = () => {
           </div>
 
           <div className="m-4 text-xl">
-            <label for="name">Food Price:</label>
+            <label htmlFor="name">Food Price:</label>
             <input
               type="text"
               size={20}
@@ -71,7 +71,7 @@ const CreateFood = () => {
           </div>
 
           <div className="m-4 text-xl">
-            <label for="name">Food Image:</label>
+            <label htmlFor="name">Food Image:</label>
             <input
               type="text"
               size={40}

@@ -76,7 +76,7 @@ const EditFood = ({ food }) => {
           </button>
           {update && (
             <div>
-              <label for="food" className="m-2 text-2xl">
+              <label htmlFor="food" className="m-2 text-2xl">
                 Choose Food:{" "}
               </label>
               <select
@@ -115,7 +115,7 @@ const EditFood = ({ food }) => {
           </button>
           {deleteEle && (
             <div>
-              <label for="food" className="m-2 text-2xl">
+              <label htmlFor="food" className="m-2 text-2xl">
                 Choose Food:{" "}
               </label>
               <select

@@ -47,7 +47,7 @@ const CreateCinema = () => {
       <div className="m-4 text-center">
         <form className="flex flex-col">
           <div className="m-4 text-xl">
-            <label for="cinema">Cinema Location:</label>
+            <label htmlFor="cinema">Cinema Location:</label>
             <input
               type="text"
               size={20}
@@ -58,7 +58,7 @@ const CreateCinema = () => {
           </div>
 
           <div className="m-4 text-xl">
-            <label for="seating">Max Seating:</label>
+            <label htmlFor="seating">Max Seating:</label>
             <input
               type="number"
               value={seating}

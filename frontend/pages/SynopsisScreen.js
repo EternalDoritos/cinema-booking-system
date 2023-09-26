@@ -87,7 +87,7 @@ const DisplaySynopsis = () => {
         <div className="mt-8 border-t-2 border-gray-600 pt-8">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold">
-              GoldenRizz Club Member's Reviews
+              GoldenRizz Club Member&apos;s Reviews
             </h1>
           </div>
           <EditReview />

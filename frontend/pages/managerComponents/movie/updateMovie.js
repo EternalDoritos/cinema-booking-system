@@ -25,7 +25,7 @@ const UpdateMovie = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [router.isReady]);
+  }, [router.isReady, router.query.movieId]);
 
   const titleChange = (e) => {
     setTitle(e.target.value);
@@ -86,7 +86,7 @@ const UpdateMovie = () => {
         <div className="m-4 text-center">
           <form className="flex flex-col">
             <div className="m-4 text-xl">
-              <label for="title">Movie Title: </label>
+              <label htmlFor="title">Movie Title: </label>
               <input
                 type="text"
                 size={40}
@@ -96,7 +96,7 @@ const UpdateMovie = () => {
               ></input>
             </div>
             <div className="m-4 text-xl">
-              <label for="image">Movie Image: </label>
+              <label htmlFor="image">Movie Image: </label>
               <input
                 type="text"
                 size={40}
@@ -106,7 +106,7 @@ const UpdateMovie = () => {
               ></input>
             </div>
             <div className="m-4 text-xl">
-              <label for="description">Movie Description:</label>
+              <label htmlFor="description">Movie Description:</label>
               <div>
                 <textarea
                   rows={5}
@@ -120,7 +120,7 @@ const UpdateMovie = () => {
               </div>
             </div>
             <div className="m-4 text-xl ">
-              <label for="poster">Movie Poster: </label>
+              <label htmlFor="poster">Movie Poster: </label>
               <input
                 type="text"
                 size={40}
@@ -130,7 +130,7 @@ const UpdateMovie = () => {
               ></input>
             </div>
             <div className="m-4 text-xl ">
-              <label for="trailer">Movie Trailer: </label>
+              <label htmlFor="trailer">Movie Trailer: </label>
               <input
                 type="text"
                 size={40}

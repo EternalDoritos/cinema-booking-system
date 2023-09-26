@@ -71,7 +71,7 @@ const DisplayGallery = ({ movies, cinemas }) => {
       </h1>
       <div className="text-center m-2">
         <div>
-          <label for="movie" className="m-2 text-2xl">
+          <label htmlFor="movie" className="m-2 text-2xl">
             Choose movie:{" "}
           </label>
           <select
@@ -92,7 +92,7 @@ const DisplayGallery = ({ movies, cinemas }) => {
           </select>
         </div>
         <div>
-          <label for="cinema" className="m-2 text-2xl">
+          <label htmlFor="cinema" className="m-2 text-2xl">
             Choose Cinema:{" "}
           </label>
           <select
@@ -113,7 +113,7 @@ const DisplayGallery = ({ movies, cinemas }) => {
           </select>
         </div>
         <div>
-          <label for="date" className="m-2 text-2xl">
+          <label htmlFor="date" className="m-2 text-2xl">
             Choose Date:{" "}
           </label>
           <input
@@ -124,7 +124,7 @@ const DisplayGallery = ({ movies, cinemas }) => {
           ></input>
         </div>
         <div>
-          <label for="time" className="m-2 text-2xl">
+          <label htmlFor="time" className="m-2 text-2xl">
             Choose Time:{" "}
           </label>
           <input

@@ -30,9 +30,9 @@ export default function FAQPage() {
         <div className="border-t border-gray-300 pt-4">
           <h3 className="text-lg font-bold mb-2">How can I book a movie?</h3>
           <p className="text-gray-300 mb-4">
-            You can book a movie by logging in and then clicking on "Gallery" to
-            choose the movie that you want to watch. Click on a location and
-            timing and choose your seating arrangement.
+            You can book a movie by logging in and then clicking on
+            &quot;Gallery&quot; to choose the movie that you want to watch.
+            Click on a location and timing and choose your seating arrangement.
           </p>
         </div>
 
@@ -41,8 +41,8 @@ export default function FAQPage() {
             How do I contact GoldenRizz?
           </h3>
           <p className="text-gray-300 mb-4">
-            Feel free to click on "Contact Us" located at the bottom of the
-            screen.
+            Feel free to click on &quot;Contact Us&quot; located at the bottom
+            of the screen.
           </p>
         </div>
       </main>

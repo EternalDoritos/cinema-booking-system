@@ -80,7 +80,7 @@ const EditMove = ({ movies }) => {
           </button>
           {update && (
             <div>
-              <label for="movie" className="m-2 text-2xl">
+              <label htmlFor="movie" className="m-2 text-2xl">
                 Choose movie:{" "}
               </label>
               <select
@@ -119,7 +119,7 @@ const EditMove = ({ movies }) => {
           </button>
           {deleteEle && (
             <div>
-              <label for="movie" className="m-2 text-2xl">
+              <label htmlFor="movie" className="m-2 text-2xl">
                 Choose movie:{" "}
               </label>
               <select

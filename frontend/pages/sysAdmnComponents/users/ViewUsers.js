@@ -127,8 +127,8 @@ const ViewUsers = ({ users }) => {
 
       <table className="table w-full overflow-hidden" {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+          {headerGroups.map((headerGroup, index) => (
+            <tr {...headerGroup.getHeaderGroupProps()} key={index}>
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -209,11 +209,12 @@ const ViewUsers = ({ users }) => {
                     setOpenModalIndex(index);
                   }}
                 >
-                  {row.cells.map((cell) => {
+                  {row.cells.map((cell, index) => {
                     console.log(cell.value);
                     return (
                       <td
                         {...cell.getCellProps()}
+                        key={index}
                         style={{
                           color:
                             cell.value === "not active" ||
@@ -270,6 +271,7 @@ const ViewUsers = ({ users }) => {
                     )}
                     <Link
                       href={`/sysAdmnComponents/users/EditUser/${id}`}
+                      passHref
                       //   href={`/EditUser?id=u64574dc5f132becf123ddcf7`}
                       legacyBehavior
                     >

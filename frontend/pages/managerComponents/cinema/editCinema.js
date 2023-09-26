@@ -92,7 +92,7 @@ const EditCinema = ({ cinema }) => {
           </button>
           {update && (
             <div>
-              <label for="cinema" className="m-2 text-2xl">
+              <label htmlFor="cinema" className="m-2 text-2xl">
                 Choose cinema:{" "}
               </label>
               <select
@@ -131,7 +131,7 @@ const EditCinema = ({ cinema }) => {
           </button>
           {deleteEle && (
             <div>
-              <label for="cinema" className="m-2 text-2xl">
+              <label htmlFor="cinema" className="m-2 text-2xl">
                 Choose cinema:{" "}
               </label>
               <select

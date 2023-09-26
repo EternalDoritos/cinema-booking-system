@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { Context } from "../store/context";
+import Image from "next/image";
 //import Counter from '../components/Counter';
 
 export const getStaticProps = async () => {
@@ -14,7 +15,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const purchaseFood = ({ foods, totalCost, setTotalCost }) => {
+const PurchaseFood = ({ foods, totalCost, setTotalCost }) => {
   const [counters, setCounters] = useState(new Array(foods.length).fill(0));
   const [currentUser, setCurrentUser] = useContext(Context);
   const router = useRouter();
@@ -50,12 +51,8 @@ const purchaseFood = ({ foods, totalCost, setTotalCost }) => {
             className="bg-gray-800 rounded-lg p-4 cursor-pointer"
           >
             <div className="card relative">
-              <div className="bg-black-300 flex items-center justify-center">
-                <img
-                  className="object-cover h-400 w-450 lg:h-70 xl:w-96"
-                  src={food.image}
-                  alt={food.name}
-                />
+              <div className="relative bg-black-300 h-400 w-450 lg:h-70 xl:w-96 flex items-center justify-center">
+                <Image layout="fill" src={food.image} alt={food.name} />
               </div>
               <div className="m-4">
                 <h3 className="text-lg font-bold mb-2 text-white">
@@ -89,4 +86,4 @@ const purchaseFood = ({ foods, totalCost, setTotalCost }) => {
   );
 };
 
-export default purchaseFood;
+export default PurchaseFood;

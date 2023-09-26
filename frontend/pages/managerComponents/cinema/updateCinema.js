@@ -18,7 +18,7 @@ const UpdateCinema = () => {
         setSeating(data.maxSeating);
       })
       .catch((err) => console.log(err));
-  }, [router.isReady]);
+  }, [router.isReady, router.query.cinemaId]);
   const locationChange = (e) => {
     setLocation(e.target.value);
   };
@@ -60,7 +60,7 @@ const UpdateCinema = () => {
       <div className="m-4 text-center">
         <form className="flex flex-col">
           <div className="m-4 text-xl">
-            <label for="cinema">Cinema Location:</label>
+            <label htmlFor="cinema">Cinema Location:</label>
             <input
               type="text"
               size={20}
@@ -71,7 +71,7 @@ const UpdateCinema = () => {
           </div>
 
           <div className="m-4 text-xl">
-            <label for="seating">Max Seating:</label>
+            <label htmlFor="seating">Max Seating:</label>
             <input
               type="number"
               value={seating}

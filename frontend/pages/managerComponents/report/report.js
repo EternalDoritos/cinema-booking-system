@@ -73,7 +73,7 @@ const Report = ({ movies }) => {
       <div className="flex flex-col text-center">
         <form onSubmit={(event) => event.preventDefault()}>
           <div>
-            <label for="movie" className="m-2 text-2xl">
+            <label htmlFor="movie" className="m-2 text-2xl">
               Choose movie:{" "}
             </label>
             <select
@@ -101,7 +101,7 @@ const Report = ({ movies }) => {
 
           {reportMovie && <MovieReport report={reportMovie} />}
           <div className="m-5">
-            <label for="date" className="m-2 text-2xl">
+            <label htmlFor="date" className="m-2 text-2xl">
               Choose Date:{" "}
             </label>
             <input
