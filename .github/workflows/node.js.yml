@@ -21,14 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Install Dependencies for frontend
         run: |
           cd frontend
           npm ci
-
       - name: Build
         run: npm run build --if-present
