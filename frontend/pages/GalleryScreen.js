@@ -1,6 +1,6 @@
-import React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Images from "next/image";
 import { useContext } from "react";
 import { Context } from "../store/context";
 //import useGlobalStore from "../store/store";
@@ -30,10 +30,10 @@ const DisplayGallery = ({ movies }) => {
             key={movie.id}
             className="bg-gray-800 rounded-lg p-4 cursor-pointer"
           >
-            <Link href={`/SynopsisScreen?movieId=${movie._id}`}>
+            <Link passHref={`/SynopsisScreen?movieId=${movie._id}`}>
               <div className="card relative">
                 <div className="bg-black-300 flex items-center justify-center">
-                  <img
+                  <Image
                     className="object-cover h-full w-full lg:h-70 xl:w-96"
                     src={movie.image}
                     alt={movie.title}

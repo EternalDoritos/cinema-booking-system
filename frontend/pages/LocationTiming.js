@@ -18,7 +18,7 @@ const MovieBookingPage = ({ id }) => {
       setTiming(await res.json());
     }
     getData();
-  }, []);
+  });
   return (
     // <div className="min-h-screen ">
     <div>

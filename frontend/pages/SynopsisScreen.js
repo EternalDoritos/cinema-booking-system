@@ -104,7 +104,7 @@ const DisplaySynopsis = () => {
                 </p>
                 <p className="text-gray-200">
                   <span className="font-semibold">Rating:</span>{" "}
-                  {review.ratings}/5
+                  {review.ratings}
                 </p>
               </div>
             ))}

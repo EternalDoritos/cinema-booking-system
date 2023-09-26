@@ -69,7 +69,6 @@ exports.postListing = asyncHandler(async (req, res) => {
     cinema: req.body.cinema,
     time: req.body.time,
     date: req.body.date,
-    discountedPriceBooked: 0,
   });
 
   if (exist) {
@@ -88,6 +87,7 @@ exports.postListing = asyncHandler(async (req, res) => {
     seating: seating,
     date: req.body.date,
     time: req.body.time,
+    discountedPriceBooked: 0,
   });
   res.status(200).json(listing);
 });
