@@ -38,14 +38,6 @@ Cinema booking system for Users, Managers, Staff & System admin.
 
 - MongoDB
 
-## Instructions on running application:
-
-- Ensure you have .env files
-- npm i at the root folder
-- cd backend-application
-- npm run start
-- backend running on http://localhost:5000
-- open another terminal
-- cd frontend
-- npm run dev
-- frontend running on http://localhost:3000
+## Site is now live
+- Frontend is now hosted on vercel at https://cinema-booking-system-eternal-doritos.vercel.app/
+- Backend is containerise with docker and hosted on aws with elastic beanstalk
