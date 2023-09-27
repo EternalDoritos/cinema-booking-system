@@ -1,5 +1,8 @@
 # Cinema Booking System
 
+## Site is now live
+- Frontend is now hosted on vercel at https://cinema-booking-system-eternal-doritos.vercel.app/
+- Backend is containerise with docker and hosted on aws with elastic beanstalk
 ## Description
 
 The task given to our group is the development of a comprehensive cinema ticket booking system (System).
@@ -38,6 +41,4 @@ Cinema booking system for Users, Managers, Staff & System admin.
 
 - MongoDB
 
-## Site is now live
-- Frontend is now hosted on vercel at https://cinema-booking-system-eternal-doritos.vercel.app/
-- Backend is containerise with docker and hosted on aws with elastic beanstalk
+
